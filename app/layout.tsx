@@ -2,7 +2,7 @@ import React from "react"
 import type { Metadata, Viewport } from "next"
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
-import { ThemeProvider } from "@/components/theme-provider"
+import { Providers } from "@/components/providers"
 import "./globals.css"
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -69,12 +69,7 @@ export default function RootLayout({
       <body
         className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange={false}
-        >
+        <Providers>
           <a
             href="#main-content"
             className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-turquoise focus:text-white focus:rounded-lg"
@@ -82,7 +77,7 @@ export default function RootLayout({
             Skip to main content
           </a>
           {children}
-        </ThemeProvider>
+        </Providers>
         <Analytics />
       </body>
     </html>
