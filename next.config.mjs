@@ -3,12 +3,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   images: {
     unoptimized: true,
   },
+  allowedDevOrigins: ['*.replit.dev', '*.repl.co', '127.0.0.1', 'localhost'],
 }
 
 export default nextConfig
