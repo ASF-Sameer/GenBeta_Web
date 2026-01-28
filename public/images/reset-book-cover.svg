@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 450" fill="none">
+  <rect width="300" height="450" rx="8" fill="url(#bookGradient)"/>
+  <rect x="10" y="10" width="280" height="430" rx="6" fill="#1a1a2e" opacity="0.9"/>
+  <text x="150" y="180" text-anchor="middle" fill="#C3D534" font-family="Arial, sans-serif" font-size="48" font-weight="bold">RESET</text>
+  <text x="150" y="240" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16">How to Change What's</text>
+  <text x="150" y="265" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16">Not Working</text>
+  <line x1="80" y1="300" x2="220" y2="300" stroke="#00B5AD" stroke-width="2"/>
+  <text x="150" y="350" text-anchor="middle" fill="#00B5AD" font-family="Arial, sans-serif" font-size="20" font-weight="bold">Dan Heath</text>
+  <defs>
+    <linearGradient id="bookGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0057B8"/>
+      <stop offset="100%" stop-color="#1E1A5F"/>
+    </linearGradient>
+  </defs>
+</svg>

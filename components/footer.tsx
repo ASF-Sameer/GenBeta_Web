@@ -42,7 +42,7 @@ export function Footer() {
             {/* Column 1 - Brand */}
             <div>
               <Image
-                src="/images/zain-logo-white.png"
+                src="/images/zain-logo-white.svg"
                 alt="Zain Logo"
                 width={140}
                 height={50}

@@ -26,7 +26,7 @@ export function GenZLanding() {
         {/* Zain Pattern */}
         <div className="absolute -right-10 sm:-right-20 -top-10 sm:-top-20 w-[250px] sm:w-[400px] lg:w-[500px] h-[250px] sm:h-[400px] lg:h-[500px] opacity-20">
           <Image
-            src="/images/zain-pattern-bubbles.png"
+            src="/images/zain-pattern-bubbles.svg"
             alt=""
             fill
             className="object-contain"
@@ -47,7 +47,7 @@ export function GenZLanding() {
               )}
             >
               <Image
-                src="/images/genz-logo.png"
+                src="/images/genz-logo.svg"
                 alt="Gen Z Program"
                 width={120}
                 height={120}

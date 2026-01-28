@@ -58,7 +58,7 @@ export function Registration() {
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-white/60 text-xs sm:text-sm tracking-wider uppercase">Reframe at</span>
                 <Image
-                  src="/images/zain-logo-white.png"
+                  src="/images/zain-logo-white.svg"
                   alt="Zain"
                   width={60}
                   height={20}
