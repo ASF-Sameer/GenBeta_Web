@@ -127,7 +127,7 @@ export function AuroraBackground({
       {variant === "hero" && (
         <div className="absolute -right-10 sm:-right-20 -top-10 sm:-top-20 w-[250px] sm:w-[400px] lg:w-[500px] h-[250px] sm:h-[400px] lg:h-[500px] opacity-30 pointer-events-none" aria-hidden="true">
           <Image
-            src="/images/zain-pattern-bubbles.png"
+            src="/images/zain-pattern-bubbles.svg"
             alt=""
             fill
             className="object-contain"
@@ -140,7 +140,7 @@ export function AuroraBackground({
       {variant === "hero" && (
         <div className="absolute hidden sm:block -left-16 sm:-left-32 -bottom-16 sm:-bottom-32 w-[200px] sm:w-[300px] lg:w-[400px] h-[200px] sm:h-[300px] lg:h-[400px] opacity-15 pointer-events-none rotate-180" aria-hidden="true">
           <Image
-            src="/images/zain-pattern-1.png"
+            src="/images/zain-pattern-bubbles.svg"
             alt=""
             fill
             className="object-contain"
