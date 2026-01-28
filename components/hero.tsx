@@ -65,7 +65,7 @@ export function Hero() {
             <span className="flex items-end justify-center gap-2 sm:gap-3 lg:gap-4 text-3xl sm:text-4xl lg:text-6xl font-bold text-white" aria-hidden="true">
               <span>AT</span>
               <Image
-                src="/images/zain-logo-white.svg"
+                src="/images/ZN_LGO_PRM_ENG_WHITE_CMYK.png"
                 alt=""
                 width={300}
                 height={100}

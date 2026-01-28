@@ -75,7 +75,7 @@ export function Facilitators() {
           <p className="text-sm sm:text-lg text-foreground/70 max-w-2xl mx-auto flex items-center justify-center gap-1 sm:gap-2 flex-wrap">
             <span>The Generation Z team at</span>
             <Image
-              src="/images/zain-logo-white.svg"
+              src="/images/ZN_LGO_PRM_ENG_WHITE_CMYK.png"
               alt="Zain"
               width={80}
               height={28}
@@ -90,7 +90,7 @@ export function Facilitators() {
           <p className="text-center text-xs sm:text-sm lg:text-base text-foreground/80 leading-relaxed flex flex-wrap items-center justify-center gap-1">
             <span>We are participants in</span>
             <Image
-              src="/images/zain-logo-white.svg"
+              src="/images/ZN_LGO_PRM_ENG_WHITE_CMYK.png"
               alt="Zain"
               width={60}
               height={20}

@@ -29,7 +29,7 @@ const books: Book[] = [
       "How to find your way when you feel stuck. Learn frameworks for making successful changes.",
     status: "current",
     coverGradient: "from-[#F7E73F] to-[#C3D534]",
-    coverImage: "/images/reset-book-cover.svg",
+    coverImage: "/images/reset-book-cover.png",
     badgeColor: "bg-[#C3D534] text-black",
     badgeText: "NOW READING",
   },

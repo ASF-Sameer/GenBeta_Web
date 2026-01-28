@@ -277,7 +277,7 @@ export function GenZLanding() {
           >
             <p className="text-xs sm:text-sm text-white/50 mb-3 sm:mb-4">Powered by</p>
             <Image
-              src="/images/zain-logo-white.svg"
+              src="/images/ZN_LGO_PRM_ENG_WHITE_CMYK.png"
               alt="Zain"
               width={120}
               height={40}
