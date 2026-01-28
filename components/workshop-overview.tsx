@@ -101,7 +101,7 @@ export function WorkshopOverview() {
             <span>About</span>
             <span className="gradient-text">Reframe at</span>
             <Image
-              src="/images/ZN_LGO_PRM_ENG_WHITE_CMYK.png"
+              src="/images/zain-logo-white.png"
               alt="Zain"
               width={160}
               height={56}
