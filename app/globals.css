@@ -339,7 +339,36 @@
       opacity: 0.2;
     }
   }
-  
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
   .animate-aurora {
     animation: aurora 20s ease-in-out infinite;
   }
@@ -363,7 +392,22 @@
   .animate-bubble-drift {
     animation: bubble-drift 15s ease-in-out infinite;
   }
-  
+
+  .animate-pulse-slow {
+    animation: pulse-slow 4s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
+
   /* Reduced Motion */
   @media (prefers-reduced-motion: reduce) {
     .animate-aurora,

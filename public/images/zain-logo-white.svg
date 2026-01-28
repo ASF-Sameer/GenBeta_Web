@@ -1,4 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="none">
-  <rect width="200" height="60" fill="none"/>
-  <text x="100" y="40" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="32" font-weight="bold">ZAIN</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" fill="none">
+  <!-- Zain Logo - Stylized white version matching brand -->
+  <defs>
+    <linearGradient id="dotGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00B5AD"/>
+      <stop offset="100%" stop-color="#C3D534"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Main "zain" text - clean modern style -->
+  <text x="20" y="70" fill="white" font-family="'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif" font-size="68" font-weight="700" letter-spacing="-2">zain</text>
+
+  <!-- Signature dot above the 'i' with gradient -->
+  <circle cx="248" cy="22" r="10" fill="url(#dotGradient)"/>
 </svg>
