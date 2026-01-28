@@ -7,7 +7,7 @@ import { AgendaTimeline } from "@/components/agenda-timeline"
 import { Facilitators } from "@/components/facilitators"
 import { Registration } from "@/components/registration"
 import { Footer } from "@/components/footer"
-import { FloatingCta } from "@/components/floating-cta"
+import { FloatingCTA } from "@/components/floating-cta"
 
 export const metadata: Metadata = {
   title: "REFRAME | Gen Z 2026 Program - Zain Group",
@@ -39,7 +39,7 @@ export default function ReframePage() {
         <Registration />
       </main>
       <Footer />
-      <FloatingCta />
+      <FloatingCTA />
     </>
   )
 }
