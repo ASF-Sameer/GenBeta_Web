@@ -1,8 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Image from "next/image"
-import { Lightbulb, TrendingUp, Users, ChevronDown } from "lucide-react"
+import { Lightbulb, TrendingUp, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { AuroraBackground } from "@/components/aurora-background"
 import { cn } from "@/lib/utils"
@@ -21,13 +20,6 @@ const features = [
     description: "Tools for continuous improvement",
     accentClass: "glow-turquoise",
     gradientClass: "from-[#00B5AD] to-[#00B2E3]",
-  },
-  {
-    icon: Users,
-    title: "Team Momentum",
-    description: "Building collective energy",
-    accentClass: "glow-purple",
-    gradientClass: "from-[#9B4F96] to-[#F4A6C9]",
   },
 ]
 
@@ -62,16 +54,9 @@ export function Hero() {
             <span className="block text-5xl sm:text-6xl lg:text-8xl font-black tracking-tight mb-2" aria-hidden="true">
               <span className="bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#C3D534] bg-clip-text text-transparent">REFRAME</span>
             </span>
-            <span className="flex items-end justify-center gap-2 sm:gap-3 lg:gap-4 text-3xl sm:text-4xl lg:text-6xl font-bold text-white" aria-hidden="true">
+            <span className="flex items-center justify-center gap-2 sm:gap-3 text-3xl sm:text-4xl lg:text-6xl font-bold text-white" aria-hidden="true">
               <span>AT</span>
-              <Image
-                src="/images/zain-logo-white.png"
-                alt=""
-                width={300}
-                height={100}
-                className="h-10 sm:h-14 lg:h-20 w-auto object-contain -mb-[11px]"
-                priority
-              />
+              <span className="bg-gradient-to-r from-[#00B5AD] to-[#C3D534] bg-clip-text text-transparent">ZAIN</span>
             </span>
           </h1>
 

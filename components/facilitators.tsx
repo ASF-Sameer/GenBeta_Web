@@ -1,51 +1,66 @@
 "use client"
 
 import Image from "next/image"
-import { Linkedin, User } from "lucide-react"
+import { Linkedin, Mail } from "lucide-react"
+
 import { cn } from "@/lib/utils"
 
 interface Facilitator {
   id: number
   name: string
+  email: string
   linkedIn: string
+  image: string
   gradientClass: string
 }
 
 const facilitators: Facilitator[] = [
   {
     id: 1,
-    name: "Ayah Al-Manea",
-    linkedIn: "https://www.linkedin.com/in/ayah-al-manea-12130b1b1/",
+    name: "Abdulmohsen AlZenki",
+    email: "Abdulmohsen.AlZenki@zain.com",
+    linkedIn: "https://www.linkedin.com/in/abdulmohsen-alzenki",
+    image: "/images/team/abdulmohsen-alzenki.png",
     gradientClass: "from-[#C3D534] to-[#00B5AD]",
   },
   {
     id: 2,
-    name: "Ahmed Alonaizi",
-    linkedIn: "https://www.linkedin.com/in/ahmed-alonaizi-509585302/",
+    name: "Asail AlHeis",
+    email: "Asail.AlHeis@zain.com",
+    linkedIn: "https://www.linkedin.com/in/asail-alheis",
+    image: "/images/team/asail-alheis.png",
     gradientClass: "from-[#00B5AD] to-[#0057B8]",
   },
   {
     id: 3,
-    name: "Abdulmohsen Alzenki",
-    linkedIn: "https://www.linkedin.com/in/abdulmohsenalzenki/",
+    name: "Ayah AlFadhli",
+    email: "Ayah.AlFadhli@zain.com",
+    linkedIn: "https://www.linkedin.com/in/ayah-alfadhli",
+    image: "/images/team/ayah-alfadhli.png",
     gradientClass: "from-[#0057B8] to-[#9B4F96]",
   },
   {
     id: 4,
-    name: "Asail Alheis",
-    linkedIn: "https://www.linkedin.com/in/asail-alheis-11161b321/",
+    name: "Ahmed AlOnaizi",
+    email: "Ahmed.AlOnaizi@zain.com",
+    linkedIn: "https://www.linkedin.com/in/ahmed-alonaizi",
+    image: "/images/team/ahmed-alonaizi.png",
     gradientClass: "from-[#9B4F96] to-[#F4A6C9]",
   },
   {
     id: 5,
-    name: "Miteb Aloqab",
-    linkedIn: "https://www.linkedin.com/in/miteb-aloqab-a04a7b323/",
+    name: "Jana AlAbduljader",
+    email: "Jana.AlAbduljader@zain.com",
+    linkedIn: "https://www.linkedin.com/in/jana-alabduljader",
+    image: "/images/team/jana-alabduljader.png",
     gradientClass: "from-[#F4A6C9] to-[#FFF06B]",
   },
   {
     id: 6,
-    name: "Jana Alabduljader",
-    linkedIn: "https://www.linkedin.com/in/jana-alabduljader-34a89a31b/",
+    name: "Miteb AlOqab",
+    email: "Miteb.AlOqab@zain.com",
+    linkedIn: "https://www.linkedin.com/in/miteb-aloqab",
+    image: "/images/team/miteb-aloqab.png",
     gradientClass: "from-[#FFF06B] to-[#C3D534]",
   },
 ]
@@ -72,31 +87,15 @@ export function Facilitators() {
           >
             Your <span className="gradient-text-purple">Facilitators</span>
           </h2>
-          <p className="text-sm sm:text-lg text-foreground/70 max-w-2xl mx-auto flex items-center justify-center gap-1 sm:gap-2 flex-wrap">
-            <span>The Generation Z team at</span>
-            <Image
-              src="/images/zain-logo-white.png"
-              alt="Zain"
-              width={80}
-              height={28}
-              className="h-5 sm:h-6 w-auto invert dark:invert-0 inline-block relative top-[3px]"
-            />
-            <span>- driving innovation and growth</span>
+          <p className="text-sm sm:text-lg text-foreground/70 max-w-2xl mx-auto">
+            The Generation Z team at <span className="bg-gradient-to-r from-[#00B5AD] to-[#C3D534] bg-clip-text text-transparent font-semibold">Zain</span> - driving innovation and growth
           </p>
         </div>
 
         {/* Intro Text */}
         <div className="glass-card p-4 sm:p-6 lg:p-8 max-w-3xl mx-auto mb-8 sm:mb-12 lg:mb-16">
-          <p className="text-center text-xs sm:text-sm lg:text-base text-foreground/80 leading-relaxed flex flex-wrap items-center justify-center gap-1">
-            <span>We are participants in</span>
-            <Image
-              src="/images/zain-logo-white.png"
-              alt="Zain"
-              width={60}
-              height={20}
-              className="h-4 sm:h-5 w-auto invert dark:invert-0 inline-block mx-1 relative top-[3px]"
-            />
-            <span>Gen Z 2026 Program, passionate about creating spaces for learning, meaningful conversations, and collective growth. This series is our way of giving back to our family.</span>
+          <p className="text-center text-xs sm:text-sm lg:text-base text-foreground/80 leading-relaxed">
+            We are participants in <span className="bg-gradient-to-r from-[#00B5AD] to-[#C3D534] bg-clip-text text-transparent font-semibold">Zain</span> Gen Z 2026 Program, passionate about creating spaces for learning, meaningful conversations, and collective growth. This series is our way of giving back to our family.
           </p>
         </div>
 
@@ -110,15 +109,22 @@ export function Facilitators() {
                 animationDelay: `${index * 100}ms`,
               }}
             >
-              {/* Avatar */}
+              {/* Avatar with Photo */}
               <div
                 className={cn(
-                  "w-16 h-16 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full bg-gradient-to-br flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300",
+                  "w-16 h-16 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full p-1 bg-gradient-to-br mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300",
                   facilitator.gradientClass
                 )}
-                aria-hidden="true"
               >
-                <User className="w-7 h-7 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-white/80" />
+                <div className="w-full h-full rounded-full overflow-hidden">
+                  <Image
+                    src={facilitator.image}
+                    alt={`Portrait of ${facilitator.name}`}
+                    width={112}
+                    height={112}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
 
               {/* Name */}
@@ -129,17 +135,28 @@ export function Facilitators() {
                 Gen Z 2026 Program
               </p>
 
-              {/* LinkedIn Link */}
-              <a
-                href={facilitator.linkedIn}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 sm:gap-2 glass-button px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium text-foreground hover:glow-turquoise transition-all focus:outline-none focus:ring-2 focus:ring-turquoise focus:ring-offset-2"
-                aria-label={`Visit ${facilitator.name}'s LinkedIn profile (opens in new tab)`}
-              >
-                <Linkedin className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
-                <span>LinkedIn</span>
-              </a>
+              {/* Contact Links */}
+              <div className="flex flex-col items-center gap-1 sm:gap-2">
+                <a
+                  href={`mailto:${facilitator.email}`}
+                  className="inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-foreground/70 hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-turquoise focus:ring-offset-2 rounded"
+                  aria-label={`Send email to ${facilitator.name}`}
+                >
+                  <Mail className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
+                  <span className="hidden sm:inline">{facilitator.email}</span>
+                  <span className="sm:hidden">Email</span>
+                </a>
+                <a
+                  href={facilitator.linkedIn}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 glass-button px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium text-foreground hover:glow-turquoise transition-all focus:outline-none focus:ring-2 focus:ring-turquoise focus:ring-offset-2"
+                  aria-label={`Visit ${facilitator.name}'s LinkedIn profile (opens in new tab)`}
+                >
+                  <Linkedin className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
+                  <span>LinkedIn</span>
+                </a>
+              </div>
             </li>
           ))}
         </ul>

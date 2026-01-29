@@ -413,7 +413,7 @@ export function LandingPage() {
         <nav className="relative z-10 flex items-center justify-between px-6 py-4 lg:px-12" role="navigation" aria-label="Main navigation">
           <Link href="/" className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-lg" aria-label="Gen Z Home">
             <Image
-              src="/images/genz-logo.svg"
+              src="/images/genz-logo.png"
               alt="Gen Z Logo"
               width={48}
               height={48}
@@ -475,8 +475,8 @@ export function LandingPage() {
             >
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
                 <Image
-                  src="/images/gallery-new/gallery-1.jpg"
-                  alt="Generation Z 11th Edition Team - Day 1 Photoshoot"
+                  src="/images/team/group-photo.jpg"
+                  alt="Generation Z 11th Edition Team - Official Group Photo"
                   fill
                   className="object-cover"
                   priority
