@@ -408,11 +408,6 @@ export function LandingPage() {
         className="relative min-h-screen bg-gradient-to-b from-[#1C2951] via-[#1E1A5F] to-[#2A4365]"
         aria-labelledby="hero-heading"
       >
-        {isClient && (
-          <Suspense fallback={null}>
-            <ParticleField count={60} color="#00B5AD" className="opacity-40" />
-          </Suspense>
-        )}
         
         {/* Navigation */}
         <nav className="relative z-10 flex items-center justify-between px-6 py-4 lg:px-12" role="navigation" aria-label="Main navigation">
