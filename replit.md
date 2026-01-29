@@ -69,6 +69,21 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
 - Start command: `npm run start`
 
 ## Recent Changes
+- 2026-01-29: Updated design with 10th edition visual elements and new program theme
+  - New Program Theme Pillars (5 pillars):
+    - AI & Big Data (LLMs, Analytics, AI Ethics, Technological Literacy)
+    - Resilience, Flexibility & Agility (Neuroplasticity, Purpose, Mental Toughness)
+    - Creative Thinking (Problem-solving, Inclusion, Wellbeing, Collaboration)
+    - Leadership & Social Influence (Negotiation, Communication, Lifelong Learning)
+    - Systems Thinking (Lean Six Sigma, Big Picture, Systems Mapping)
+  - 10th Edition Visual Design Applied:
+    - Gradient text styling (lime-yellow-turquoise: #C3D534, #F7E73F, #00B5AD)
+    - Animated gradient orbs in background
+    - Glassmorphism pillar cards with gradient icons and glow effects
+    - Gradient CTA buttons with hover transitions
+  - Real Event Gallery: 12 photos from actual Gen Z program events
+  - Converted HEIC images to JPG for web compatibility
+
 - 2026-01-29: New landing page implementation with full Gen Z 11th Edition design
   - Created new LandingPage component with complete sections:
     - Hero section with team photo and block gradient background
