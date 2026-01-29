@@ -69,6 +69,14 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
 - Start command: `npm run start`
 
 ## Recent Changes
+- 2026-01-29: Continuous gradient landing page with program images
+  - Landing page now uses ONE continuous gradient background (no section breaks)
+  - Programs section includes book cover images
+  - "Learn More" link now scrolls to top of target page
+  - Reading Journey (book-carousel) uses header gradient color scheme (navy-blue)
+  - Facilitators section uses header gradient color scheme (blue-navy)
+  - Gradient styling: from-[#1C2951] via-[#1E1A5F] to-[#0057B8]
+
 - 2026-01-29: Text-based accessible design with unified gradient backgrounds
   - Removed all icons from pillar cards, team cards, workshop overview, agenda timeline, and registration sections
   - Converted to text-based design with colored left-border accents for visual hierarchy

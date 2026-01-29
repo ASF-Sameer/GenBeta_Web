@@ -69,7 +69,7 @@ export function Facilitators() {
   return (
     <section
       id="team"
-      className="py-20 lg:py-32 relative overflow-hidden"
+      className="py-20 lg:py-32 relative overflow-hidden bg-gradient-to-b from-[#0057B8] via-[#1E1A5F] to-[#1C2951]"
       aria-labelledby="team-heading"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -79,7 +79,7 @@ export function Facilitators() {
             id="team-heading"
             className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4"
           >
-            Your <span className="bg-gradient-to-r from-[#9B4F96] to-[#F4A6C9] bg-clip-text text-transparent">Facilitators</span>
+            Your <span className="bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">Facilitators</span>
           </h2>
           <p className="text-sm sm:text-lg text-white/80 max-w-2xl mx-auto">
             The Generation Z team at <span className="bg-gradient-to-r from-[#00B5AD] to-[#C3D534] bg-clip-text text-transparent font-semibold">Zain</span> - driving innovation and growth

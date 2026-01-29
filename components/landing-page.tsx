@@ -72,7 +72,8 @@ const ourPrograms = [
   {
     title: "Reframe",
     description: "A learning series empowering colleagues to rethink, reset, and drive meaningful change. Starting with Dan Heath's transformative book 'Reset'.",
-    link: "/reframe"
+    link: "/reframe",
+    image: "/images/reset-book-cover.png"
   }
 ]
 
@@ -170,31 +171,48 @@ function PillarCard({ title, description, gradientClass, glowClass }: {
   )
 }
 
-function ProgramCard({ title, description, link }: { title: string; description: string; link: string }) {
+function ProgramCard({ title, description, link, image }: { title: string; description: string; link: string; image?: string }) {
+  const handleClick = () => {
+    window.scrollTo(0, 0)
+  }
+  
   return (
     <motion.article
       variants={itemVariants}
-      className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl p-8 text-white hover:bg-[#1E1A5F]/90 transition-all duration-300"
+      className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl overflow-hidden text-white hover:bg-[#1E1A5F]/90 transition-all duration-300"
       role="article"
       aria-labelledby={`program-${title.replace(/\s+/g, '-').toLowerCase()}`}
     >
-      <div className="flex flex-col space-y-4">
-        <h3 
-          id={`program-${title.replace(/\s+/g, '-').toLowerCase()}`}
-          className="text-2xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
-        >
-          {title}
-        </h3>
-        <p className="text-white text-base leading-relaxed">
-          {description}
-        </p>
-        <Link 
-          href={link}
-          className="inline-flex items-center gap-2 text-[#C3D534] hover:text-[#F7E73F] transition-colors font-semibold focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-lg w-fit"
-        >
-          <span>Learn More</span>
-          <ArrowRight className="w-5 h-5" aria-hidden="true" />
-        </Link>
+      <div className="flex flex-col md:flex-row">
+        {image && (
+          <div className="relative w-full md:w-48 h-48 md:h-auto flex-shrink-0">
+            <Image
+              src={image}
+              alt={`${title} program cover`}
+              fill
+              className="object-cover"
+            />
+          </div>
+        )}
+        <div className="flex flex-col space-y-4 p-8">
+          <h3 
+            id={`program-${title.replace(/\s+/g, '-').toLowerCase()}`}
+            className="text-2xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
+          >
+            {title}
+          </h3>
+          <p className="text-white text-base leading-relaxed">
+            {description}
+          </p>
+          <Link 
+            href={link}
+            onClick={handleClick}
+            className="inline-flex items-center gap-2 text-[#C3D534] hover:text-[#F7E73F] transition-colors font-semibold focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-lg w-fit"
+          >
+            <span>Learn More</span>
+            <ArrowRight className="w-5 h-5" aria-hidden="true" />
+          </Link>
+        </div>
       </div>
     </motion.article>
   )
@@ -359,10 +377,10 @@ export function LandingPage() {
   }, [])
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section - Block Gradient */}
+    <div className="min-h-screen bg-gradient-to-b from-[#1C2951] via-[#1E1A5F] via-[#0057B8] via-[#1E1A5F] to-[#1C2951]">
+      {/* Hero Section */}
       <section 
-        className="relative min-h-screen bg-gradient-to-b from-[#1C2951] via-[#1E1A5F] to-[#2A4365]"
+        className="relative min-h-screen"
         aria-labelledby="hero-heading"
       >
         
@@ -447,10 +465,10 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* About Section - Gradient Background */}
+      {/* About Section */}
       <section 
         id="about" 
-        className="py-20 bg-gradient-to-br from-[#1E1A5F] via-[#0057B8] to-[#1E1A5F]"
+        className="py-20"
         aria-labelledby="about-heading"
       >
         <div className="container mx-auto px-6 lg:px-12">
@@ -475,10 +493,10 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* Program Pillars - Dark Gradient with Animated Orbs */}
+      {/* Program Pillars - with Animated Orbs */}
       <section 
         id="pillars" 
-        className="relative py-20 bg-gradient-to-br from-[#1E1A5F] via-[#0057B8] to-[#1E1A5F] overflow-hidden"
+        className="relative py-20 overflow-hidden"
         aria-labelledby="pillars-heading"
       >
         {/* Animated Gradient Orbs - 10th Edition Style */}
@@ -550,7 +568,7 @@ export function LandingPage() {
       {/* Our Programs Section */}
       <section 
         id="programs" 
-        className="py-20 bg-gradient-to-br from-[#0057B8] via-[#1E1A5F] to-[#0057B8]"
+        className="py-20"
         aria-labelledby="programs-heading"
       >
         <div className="container mx-auto px-6 lg:px-12">
@@ -582,7 +600,7 @@ export function LandingPage() {
       {/* Team Section */}
       <section 
         id="team" 
-        className="py-20 bg-gradient-to-br from-[#1E1A5F] via-[#0057B8] to-[#1E1A5F]"
+        className="py-20"
         aria-labelledby="team-heading"
       >
         <div className="container mx-auto px-6 lg:px-12">
@@ -614,7 +632,7 @@ export function LandingPage() {
       {/* Gallery Section */}
       <section 
         id="gallery" 
-        className="py-20 bg-gradient-to-br from-[#0057B8] via-[#1E1A5F] to-[#0057B8]"
+        className="py-20"
         aria-labelledby="gallery-heading"
       >
         <div className="container mx-auto px-6 lg:px-12">

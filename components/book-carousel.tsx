@@ -77,14 +77,14 @@ export function BookCarousel() {
   return (
     <section
       id="books"
-      className="py-12 sm:py-20 lg:py-32 relative overflow-hidden"
+      className="py-12 sm:py-20 lg:py-32 relative overflow-hidden bg-gradient-to-b from-[#1C2951] via-[#1E1A5F] to-[#0057B8]"
       aria-label="Book carousel section"
     >
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16 px-2">
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-[#C3D534] mb-3 sm:mb-4">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent mb-3 sm:mb-4">
             The Reading Journey
           </h2>
           <p className="text-sm sm:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
