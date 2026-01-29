@@ -2,7 +2,6 @@
 
 import { useRef, useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
-import { AuroraBackground } from "./aurora-background"
 
 interface AgendaItem {
   time: string
@@ -90,12 +89,11 @@ export function AgendaTimeline() {
   }, [])
 
   return (
-    <AuroraBackground variant="hero" className="py-20 lg:py-32">
-      <section
-        id="agenda"
-        className="container mx-auto px-4 sm:px-6 lg:px-8"
-        aria-labelledby="agenda-heading"
-      >
+    <section
+      id="agenda"
+      className="py-12 sm:py-20 lg:py-32 container mx-auto px-4 sm:px-6 lg:px-8"
+      aria-labelledby="agenda-heading"
+    >
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16 px-2">
           <h2
@@ -174,7 +172,6 @@ export function AgendaTimeline() {
             Agenda subject to adjustments | Light refreshments provided
           </span>
         </div>
-      </section>
-    </AuroraBackground>
+    </section>
   )
 }

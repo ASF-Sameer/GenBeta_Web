@@ -69,6 +69,26 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
 - Start command: `npm run start`
 
 ## Recent Changes
+- 2026-01-29: Enhanced UX with book effect and improved layouts
+  - **3D Book Effect**: Program cards now feature book cover "poking out" with:
+    - Negative margin positioning (book extends outside card)
+    - Drop shadow and slight rotation for 3D depth
+    - Scale and rotate animations on hover
+    - Responsive sizing for mobile/tablet/desktop
+  - **5-Pillar Grid**: Optimized layout with no empty space:
+    - Desktop: 3 cards on top row, 2 centered on bottom row
+    - Tablet: 2-column grid with proper spacing
+    - Mobile: Single column stack
+  - **Reframe Page Integration**: Seamless blending with main site:
+    - Continuous gradient wrapper matching landing page
+    - Removed individual section backgrounds for unified flow
+    - All sections now share the same gradient backdrop
+  - **WCAG 2.1 Compliance**: Accessibility features:
+    - Minimum 44x44px touch targets
+    - Focus states with ring indicators
+    - ARIA labels on all interactive elements
+    - Semantic HTML structure
+
 - 2026-01-29: Continuous gradient landing page with program images
   - Landing page now uses ONE continuous gradient background (no section breaks)
   - Programs section includes book cover images

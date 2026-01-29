@@ -1,7 +1,5 @@
 "use client"
 
-import { AuroraBackground } from "./aurora-background"
-
 const eventInfo = [
   { label: "Monday, February 10th, 2025" },
   { label: "2:00 PM - 3:30 PM (Kuwait)" },
@@ -12,12 +10,11 @@ const eventInfo = [
 
 export function Registration() {
   return (
-    <AuroraBackground variant="azure" className="py-20 lg:py-32">
-      <section
-        id="register"
-        className="container mx-auto px-4 sm:px-6 lg:px-8"
-        aria-labelledby="register-heading"
-      >
+    <section
+      id="register"
+      className="py-12 sm:py-20 lg:py-32 container mx-auto px-4 sm:px-6 lg:px-8"
+      aria-labelledby="register-heading"
+    >
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16 px-2">
           <h2
@@ -131,7 +128,6 @@ export function Registration() {
             plans change so we can offer your spot to a waitlisted colleague.
           </span>
         </div>
-      </section>
-    </AuroraBackground>
+    </section>
   )
 }

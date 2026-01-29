@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function ReframePage() {
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-b from-[#1C2951] via-[#1E1A5F] via-[#0057B8] via-[#1E1A5F] to-[#1C2951]">
       <Navbar />
       <main id="main-content">
         <Hero />
@@ -40,6 +40,6 @@ export default function ReframePage() {
       </main>
       <Footer />
       <FloatingCTA />
-    </>
+    </div>
   )
 }

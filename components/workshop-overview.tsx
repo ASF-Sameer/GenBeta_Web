@@ -1,7 +1,5 @@
 "use client"
 
-import { AuroraBackground } from "./aurora-background"
-
 const benefits = [
   {
     title: "Master Reset Frameworks",
@@ -52,12 +50,11 @@ const workshopDetails = [
 
 export function WorkshopOverview() {
   return (
-    <AuroraBackground variant="hero" className="py-20 lg:py-32">
-      <section
-        id="about"
-        className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
-        aria-labelledby="about-heading"
-      >
+    <section
+      id="about"
+      className="py-12 sm:py-20 lg:py-32 container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+      aria-labelledby="about-heading"
+    >
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16 px-2">
           <h2
@@ -136,7 +133,6 @@ export function WorkshopOverview() {
             ))}
           </ul>
         </div>
-      </section>
-    </AuroraBackground>
+    </section>
   )
 }

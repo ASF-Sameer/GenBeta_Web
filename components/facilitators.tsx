@@ -69,7 +69,7 @@ export function Facilitators() {
   return (
     <section
       id="team"
-      className="py-20 lg:py-32 relative overflow-hidden bg-gradient-to-b from-[#0057B8] via-[#1E1A5F] to-[#1C2951]"
+      className="py-12 sm:py-20 lg:py-32 relative overflow-hidden"
       aria-labelledby="team-heading"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
