@@ -243,8 +243,31 @@ function TeamMemberCard({ name, role, education, email, image }: { name: string;
 
 function GalleryCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const itemsPerView = 3
+  const [itemsPerView, setItemsPerView] = useState(3)
+  
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerView(1)
+      } else if (window.innerWidth < 1024) {
+        setItemsPerView(2)
+      } else {
+        setItemsPerView(3)
+      }
+    }
+    
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+  
   const maxIndex = Math.max(0, galleryImages.length - itemsPerView)
+  
+  useEffect(() => {
+    if (currentIndex > maxIndex) {
+      setCurrentIndex(maxIndex)
+    }
+  }, [maxIndex, currentIndex])
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => Math.max(0, prev - 1))
@@ -253,9 +276,15 @@ function GalleryCarousel() {
   const goToNext = () => {
     setCurrentIndex((prev) => Math.min(maxIndex, prev + 1))
   }
+  
+  const getItemWidth = () => {
+    if (itemsPerView === 1) return "w-full"
+    if (itemsPerView === 2) return "w-[calc(50%-0.5rem)]"
+    return "w-[calc(33.333%-0.67rem)]"
+  }
 
   return (
-    <div className="relative">
+    <div className="relative px-4 md:px-0">
       <div className="overflow-hidden">
         <div 
           className="flex gap-4 transition-transform duration-300 ease-out"
@@ -264,7 +293,7 @@ function GalleryCarousel() {
           {galleryImages.map((image, index) => (
             <div 
               key={index} 
-              className="flex-shrink-0 w-full md:w-[calc(33.333%-1rem)] aspect-[4/3] relative rounded-xl overflow-hidden"
+              className={cn("flex-shrink-0 aspect-[4/3] relative rounded-xl overflow-hidden", getItemWidth())}
             >
               <Image
                 src={image}
@@ -280,19 +309,19 @@ function GalleryCarousel() {
       <button
         onClick={goToPrevious}
         disabled={currentIndex === 0}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD]"
+        className="absolute left-0 top-1/2 -translate-y-1/2 md:-translate-x-4 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD]"
         aria-label="Previous gallery images"
       >
-        <ChevronLeft className="w-6 h-6 text-[#1E1A5F]" aria-hidden="true" />
+        <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-[#1E1A5F]" aria-hidden="true" />
       </button>
       
       <button
         onClick={goToNext}
         disabled={currentIndex >= maxIndex}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD]"
+        className="absolute right-0 top-1/2 -translate-y-1/2 md:translate-x-4 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD]"
         aria-label="Next gallery images"
       >
-        <ChevronRight className="w-6 h-6 text-[#1E1A5F]" aria-hidden="true" />
+        <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-[#1E1A5F]" aria-hidden="true" />
       </button>
       
       <div className="flex justify-center gap-2 mt-6" role="tablist" aria-label="Gallery navigation">

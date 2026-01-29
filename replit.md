@@ -5,10 +5,10 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
 
 ## Project Structure
 - `app/` - Next.js App Router pages and layouts
-  - `page.tsx` - Landing page with GenZLanding component
+  - `page.tsx` - Landing page with LandingPage component
   - `reframe/page.tsx` - Reframe program page with full sections
 - `components/` - Reusable React components
-  - `genz-landing.tsx` - Main landing page component
+  - `landing-page.tsx` - Main landing page with hero, pillars, team, gallery
   - `hero.tsx` - Hero section for Reframe page
   - `navbar.tsx` - Navigation bar
   - `footer.tsx` - Footer component
@@ -69,6 +69,21 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
 - Start command: `npm run start`
 
 ## Recent Changes
+- 2026-01-29: New landing page implementation with full Gen Z 11th Edition design
+  - Created new LandingPage component with complete sections:
+    - Hero section with team photo and block gradient background
+    - About section with program overview
+    - Program Pillars (4 cards with blue background, gold titles, Lucide icons)
+    - Program Targets (2x2 grid with same styling)
+    - Team profiles (6 members with photos, roles, education, email contacts)
+    - Photo gallery with responsive carousel (1/2/3 items per view)
+    - Footer with social links and Zain Group website connection
+  - Applied official Zain font from Google Fonts
+  - WCAG compliant: semantic HTML, ARIA labels, focus states, skip-to-content link
+  - No emojis used - only Lucide icons
+  - Design system: block gradient hero, smooth gradient content sections
+  - Color palette: Navy (#1C2951), Purple (#1E1A5F), Blue (#3B5998), Gold (#F6EB69), Turquoise (#00B5AD)
+  
 - 2026-01-28: Initial Replit setup and 10th/11th edition merge review
   - Configured Next.js to run on port 5000 with host 0.0.0.0
   - Removed macOS-specific dependency (@next/swc-darwin-arm64)
