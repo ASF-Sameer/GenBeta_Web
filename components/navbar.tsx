@@ -18,19 +18,11 @@ const navLinks = [
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [showLogo, setShowLogo] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
-      
-      // Show logo when scrolled past the books section
-      const booksSection = document.getElementById("books")
-      if (booksSection) {
-        const booksSectionTop = booksSection.offsetTop - 100
-        setShowLogo(window.scrollY >= booksSectionTop)
-      }
     }
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
@@ -69,27 +61,11 @@ export function Navbar() {
               <Link
                 href="/"
                 className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 transition-colors focus:outline-none focus:ring-2 focus:ring-turquoise"
-                aria-label="Back to Gen Z Program"
+                aria-label="Back to Generation Z Program"
               >
                 <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 text-foreground/70" aria-hidden="true" />
-                <span className="text-xs sm:text-sm font-medium text-foreground/80">Gen Z</span>
+                <span className="text-xs sm:text-sm font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">Generation Z</span>
               </Link>
-              
-              {/* REFRAME text - appears after scrolling */}
-              <a
-                href="#hero"
-                className={cn(
-                  "flex items-center transition-all duration-300",
-                  showLogo
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 -translate-x-4 pointer-events-none"
-                )}
-                aria-label="Reframe - Back to top"
-              >
-                <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">
-                  REFRAME
-                </span>
-              </a>
             </div>
 
             {/* Desktop Navigation */}

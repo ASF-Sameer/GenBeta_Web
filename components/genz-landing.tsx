@@ -133,23 +133,11 @@ export function GenZLanding() {
         <div className="max-w-6xl mx-auto">
           {/* Hero Section */}
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <motion.div variants={itemVariants}>
-              <Image
-                src="/images/genz-logo.svg"
-                alt="Gen Z Program"
-                width={120}
-                height={120}
-                className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto mb-6 sm:mb-8 object-contain"
-                priority
-              />
-            </motion.div>
-
             <motion.h1
               variants={itemVariants}
-              className="text-4xl sm:text-5xl lg:text-7xl font-black text-white mb-4 sm:mb-6"
+              className="text-4xl sm:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
-              Generation{" "}
-              <span className="bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">Z</span>
+              Generation Z
             </motion.h1>
 
             <motion.p

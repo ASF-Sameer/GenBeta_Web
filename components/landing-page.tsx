@@ -137,6 +137,54 @@ const galleryImages = [
   "/images/gallery-new/gallery-12.jpg"
 ]
 
+const previousGenZPrograms = [
+  {
+    year: "2024",
+    title: "Gen Z 2024",
+    description: "Focused on supercharging leadership skills and training based on 4 modules: Speak Up and Pitch Up; Strategic Innovation; Green Skills; and Digital World."
+  },
+  {
+    year: "2023",
+    title: "Gen Z 2023",
+    description: "Focused on cultivating entrepreneurial mindset that supports Zain's 4Sight strategy."
+  },
+  {
+    year: "2022",
+    title: "Gen Z 2022",
+    description: "Geared towards cultivating internal entrepreneurs, innovators, and new thinkers who already possess a mindset capable of supporting Zain's strategic goals."
+  },
+  {
+    year: "2021",
+    title: "Gen Z 2021",
+    description: "Focused on developing digital skills for future data analysts. Addressed the topics of big data, artificial intelligence, and sustainable innovation."
+  },
+  {
+    year: "2020",
+    title: "Gen Z 2020",
+    description: "This cycle incorporated three themes: corporate culture, leadership styles, and future trends."
+  },
+  {
+    year: "2019",
+    title: "Gen Z 2019",
+    description: "Enhancing corporate culture and teamwork when managing projects were the main focus of this edition."
+  },
+  {
+    year: "2018",
+    title: "Gen Z 2018",
+    description: "Enhancing digital skills such as coding and agile project management in addition to a focus on self-growth and development."
+  },
+  {
+    year: "2017",
+    title: "Gen Z 2017",
+    description: "Centered on establishing a business, gaining entrepreneurial skills, and studying innovative trends in the market."
+  },
+  {
+    year: "2016",
+    title: "Gen Z 2016",
+    description: "Focused on a rotation in different departments throughout Zain Group with an emphasis on conducting research on various digital verticals."
+  }
+]
+
 function PillarCard({ title, description, gradientClass, glowClass }: { 
   title: string; 
   description: string;
@@ -282,6 +330,12 @@ function TeamMemberCard({ name, role, email, linkedin, image }: { name: string; 
 function GalleryCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [itemsPerView, setItemsPerView] = useState(3)
+  const [shuffledImages, setShuffledImages] = useState<string[]>([])
+  
+  useEffect(() => {
+    const shuffled = [...galleryImages].sort(() => Math.random() - 0.5)
+    setShuffledImages(shuffled)
+  }, [])
   
   useEffect(() => {
     const handleResize = () => {
@@ -299,13 +353,21 @@ function GalleryCarousel() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
   
-  const maxIndex = Math.max(0, galleryImages.length - itemsPerView)
+  const maxIndex = Math.max(0, shuffledImages.length - itemsPerView)
   
   useEffect(() => {
     if (currentIndex > maxIndex) {
       setCurrentIndex(maxIndex)
     }
   }, [maxIndex, currentIndex])
+  
+  useEffect(() => {
+    if (shuffledImages.length === 0) return
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1))
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [maxIndex, shuffledImages.length])
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => Math.max(0, prev - 1))
@@ -328,9 +390,9 @@ function GalleryCarousel() {
           className="flex gap-4 transition-transform duration-300 ease-out"
           style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
         >
-          {galleryImages.map((image, index) => (
+          {shuffledImages.map((image, index) => (
             <div 
-              key={index} 
+              key={image} 
               className={cn("flex-shrink-0 aspect-[4/3] relative rounded-xl overflow-hidden", getItemWidth())}
             >
               <Image
@@ -398,14 +460,10 @@ export function LandingPage() {
         
         {/* Navigation */}
         <nav className="relative z-10 flex items-center justify-between px-6 py-4 lg:px-12" role="navigation" aria-label="Main navigation">
-          <Link href="/" className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-lg" aria-label="Gen Z Home">
-            <Image
-              src="/images/genz-logo.png"
-              alt="Gen Z Logo"
-              width={48}
-              height={48}
-              className="w-12 h-12"
-            />
+          <Link href="/" className="focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-lg" aria-label="Gen Z Home">
+            <span className="text-2xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">
+              Generation Z
+            </span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
             <a href="#about" className="text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Home</a>
@@ -636,6 +694,55 @@ export function LandingPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {teamMembers.map((member) => (
                 <TeamMemberCard key={member.name} {...member} />
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Previous Gen Z Programs Section */}
+      <section 
+        id="previous-programs" 
+        className="py-20"
+        aria-labelledby="previous-programs-heading"
+      >
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={containerVariants}
+          >
+            <motion.h2 
+              id="previous-programs-heading"
+              variants={itemVariants} 
+              className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
+            >
+              The Previous Gen Zs
+            </motion.h2>
+            <motion.p variants={itemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
+              Discover the legacy of innovation and leadership across all editions
+            </motion.p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {previousGenZPrograms.map((program) => (
+                <motion.article
+                  key={program.year}
+                  variants={itemVariants}
+                  className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl p-6 hover:bg-[#1E1A5F]/90 transition-all duration-300"
+                >
+                  <div className="flex flex-col space-y-3">
+                    <span className="text-[#F7E73F] text-sm font-semibold">{program.year}</span>
+                    <h3 className="text-xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">
+                      {program.title}
+                    </h3>
+                    <p className="text-white/80 text-sm">
+                      <span className="text-[#00B5AD] font-medium">What Made Us Different:</span>
+                    </p>
+                    <p className="text-white/70 text-sm leading-relaxed">
+                      {program.description}
+                    </p>
+                  </div>
+                </motion.article>
               ))}
             </div>
           </motion.div>
