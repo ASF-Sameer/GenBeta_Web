@@ -69,32 +69,26 @@ export function Facilitators() {
   return (
     <section
       id="team"
-      className="py-20 lg:py-32 bg-background relative overflow-hidden"
+      className="py-20 lg:py-32 relative overflow-hidden"
       aria-labelledby="team-heading"
     >
-      {/* Accent gradient in corner */}
-      <div
-        className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-[#9B4F96]/5 via-[#5B4B8A]/5 to-transparent pointer-events-none"
-        aria-hidden="true"
-      />
-
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16 px-2">
           <h2
             id="team-heading"
-            className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4"
+            className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4"
           >
-            Your <span className="gradient-text-purple">Facilitators</span>
+            Your <span className="bg-gradient-to-r from-[#9B4F96] to-[#F4A6C9] bg-clip-text text-transparent">Facilitators</span>
           </h2>
-          <p className="text-sm sm:text-lg text-foreground/70 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-lg text-white/80 max-w-2xl mx-auto">
             The Generation Z team at <span className="bg-gradient-to-r from-[#00B5AD] to-[#C3D534] bg-clip-text text-transparent font-semibold">Zain</span> - driving innovation and growth
           </p>
         </div>
 
         {/* Intro Text */}
-        <div className="glass-card p-4 sm:p-6 lg:p-8 max-w-3xl mx-auto mb-8 sm:mb-12 lg:mb-16">
-          <p className="text-center text-xs sm:text-sm lg:text-base text-foreground/80 leading-relaxed">
+        <div className="glass-dark rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 max-w-3xl mx-auto mb-8 sm:mb-12 lg:mb-16">
+          <p className="text-center text-xs sm:text-sm lg:text-base text-white/80 leading-relaxed">
             We are participants in <span className="bg-gradient-to-r from-[#00B5AD] to-[#C3D534] bg-clip-text text-transparent font-semibold">Zain</span> Gen Z 2026 Program, passionate about creating spaces for learning, meaningful conversations, and collective growth. This series is our way of giving back to our family.
           </p>
         </div>
@@ -104,7 +98,7 @@ export function Facilitators() {
           {facilitators.map((facilitator, index) => (
             <li
               key={facilitator.id}
-              className="glass-card p-3 sm:p-6 lg:p-8 flex flex-col items-center text-center group hover:-translate-y-2 transition-all duration-300"
+              className="glass-dark rounded-xl sm:rounded-2xl p-3 sm:p-6 lg:p-8 flex flex-col items-center text-center group hover:-translate-y-2 transition-all duration-300"
               style={{
                 animationDelay: `${index * 100}ms`,
               }}
@@ -128,10 +122,10 @@ export function Facilitators() {
               </div>
 
               {/* Name */}
-              <h3 className="text-sm sm:text-xl font-bold text-foreground mb-0.5 sm:mb-1">
+              <h3 className="text-sm sm:text-xl font-bold text-white mb-0.5 sm:mb-1">
                 {facilitator.name}
               </h3>
-              <p className="text-xs sm:text-sm text-foreground/60 mb-2 sm:mb-4">
+              <p className="text-xs sm:text-sm text-white/60 mb-2 sm:mb-4">
                 Gen Z 2026 Program
               </p>
 
@@ -139,7 +133,7 @@ export function Facilitators() {
               <div className="flex flex-col items-center gap-1 sm:gap-2">
                 <a
                   href={`mailto:${facilitator.email}`}
-                  className="inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-foreground/70 hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-turquoise focus:ring-offset-2 rounded"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-white/70 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-turquoise focus:ring-offset-2 rounded"
                   aria-label={`Send email to ${facilitator.name}`}
                 >
                   <Mail className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
@@ -150,7 +144,7 @@ export function Facilitators() {
                   href={facilitator.linkedIn}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 sm:gap-2 glass-button px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium text-foreground hover:glow-turquoise transition-all focus:outline-none focus:ring-2 focus:ring-turquoise focus:ring-offset-2"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 bg-white/10 hover:bg-white/20 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium text-white transition-all focus:outline-none focus:ring-2 focus:ring-turquoise focus:ring-offset-2"
                   aria-label={`Visit ${facilitator.name}'s LinkedIn profile (opens in new tab)`}
                 >
                   <Linkedin className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />

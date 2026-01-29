@@ -77,7 +77,7 @@ export function BookCarousel() {
   return (
     <section
       id="books"
-      className="py-12 sm:py-20 lg:py-32 relative overflow-hidden bg-gradient-to-b from-[#1E1A5F] via-[#0057B8] to-[#00B5AD]"
+      className="py-12 sm:py-20 lg:py-32 relative overflow-hidden"
       aria-label="Book carousel section"
     >
 

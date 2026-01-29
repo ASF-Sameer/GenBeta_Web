@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import {
   Calendar,
   Clock,
@@ -57,13 +56,7 @@ export function Registration() {
             <div className="mb-4 sm:mb-6">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-white/60 text-xs sm:text-sm tracking-wider uppercase">Reframe at</span>
-                <Image
-                  src="/images/zain-logo-white.png"
-                  alt="Zain"
-                  width={60}
-                  height={20}
-                  className="h-3 sm:h-4 w-auto inline-block"
-                />
+                <span className="bg-gradient-to-r from-[#00B5AD] to-[#C3D534] bg-clip-text text-transparent font-semibold text-xs sm:text-sm">ZAIN</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-white mt-1">
                 Session #1: Reset
