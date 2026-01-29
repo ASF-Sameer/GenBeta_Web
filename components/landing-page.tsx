@@ -117,46 +117,46 @@ const programTargets = [
 
 const teamMembers = [
   {
-    name: "Team Member 1",
-    role: "UX/UI Designer",
-    education: "Bachelor of Business Management",
-    email: "member1@zain.com",
-    image: "/images/team/member-1_1.jpg"
+    name: "Abdulmohsen AlZenki",
+    role: "Gen Z Graduate",
+    email: "Abdulmohsen.AlZenki@zain.com",
+    linkedin: "https://www.linkedin.com/in/abdulmohsen-alzenki",
+    image: "/images/team/abdulmohsen-alzenki.png"
   },
   {
-    name: "Team Member 2",
-    role: "Developer",
-    education: "Bachelor of Software Engineering",
-    email: "member2@zain.com",
-    image: "/images/team/member-1_2.jpg"
+    name: "Asail AlHeis",
+    role: "Gen Z Graduate",
+    email: "Asail.AlHeis@zain.com",
+    linkedin: "https://www.linkedin.com/in/asail-alheis",
+    image: "/images/team/asail-alheis.png"
   },
   {
-    name: "Team Member 3",
-    role: "Product Owner",
-    education: "Bachelor of Engineering",
-    email: "member3@zain.com",
-    image: "/images/team/member-1_3.jpg"
+    name: "Ayah AlFadhli",
+    role: "Gen Z Graduate",
+    email: "Ayah.AlFadhli@zain.com",
+    linkedin: "https://www.linkedin.com/in/ayah-alfadhli",
+    image: "/images/team/ayah-alfadhli.png"
   },
   {
-    name: "Team Member 4",
-    role: "Digital Performance Apprentice",
-    education: "Bachelor of International Relations",
-    email: "member4@zain.com",
-    image: "/images/team/member-1_4.jpg"
+    name: "Ahmed AlOnaizi",
+    role: "Gen Z Graduate",
+    email: "Ahmed.AlOnaizi@zain.com",
+    linkedin: "https://www.linkedin.com/in/ahmed-alonaizi",
+    image: "/images/team/ahmed-alonaizi.png"
   },
   {
-    name: "Team Member 5",
-    role: "Scrum Master",
-    education: "Bachelor of Computer Science",
-    email: "member5@zain.com",
-    image: "/images/team/member-1_5.jpg"
+    name: "Jana AlAbduljader",
+    role: "Gen Z Graduate",
+    email: "Jana.AlAbduljader@zain.com",
+    linkedin: "https://www.linkedin.com/in/jana-alabduljader",
+    image: "/images/team/jana-alabduljader.png"
   },
   {
-    name: "Team Member 6",
-    role: "Project Manager",
-    education: "Master of Business Administration",
-    email: "member6@zain.com",
-    image: "/images/team/member-1_6.jpg"
+    name: "Miteb AlOqab",
+    role: "Gen Z Graduate",
+    email: "Miteb.AlOqab@zain.com",
+    linkedin: "https://www.linkedin.com/in/miteb-aloqab",
+    image: "/images/team/miteb-aloqab.png"
   }
 ]
 
@@ -187,14 +187,14 @@ function PillarCard({ icon: Icon, title, description, gradientClass, glowClass }
       variants={itemVariants}
       className={cn(
         "relative rounded-2xl p-6 text-white h-full overflow-hidden backdrop-blur-md",
-        "bg-white/10 border border-white/20 hover:bg-white/15 transition-all duration-300",
+        "bg-[#1E1A5F]/80 border border-white/30 hover:bg-[#1E1A5F]/90 transition-all duration-300",
         glowClass
       )}
       role="article"
       aria-labelledby={`pillar-${title.replace(/\s+/g, '-').toLowerCase()}`}
       whileHover={{ scale: 1.02 }}
     >
-      <div className={cn("absolute inset-0 opacity-20 bg-gradient-to-br", gradientClass)} aria-hidden="true" />
+      <div className={cn("absolute inset-0 opacity-40 bg-gradient-to-br", gradientClass)} aria-hidden="true" />
       <div className="relative z-10 flex flex-col items-center text-center space-y-4">
         <div className={cn("w-16 h-16 rounded-full flex items-center justify-center bg-gradient-to-br", gradientClass)} aria-hidden="true">
           <Icon className="w-8 h-8 text-white drop-shadow-lg" aria-hidden={true} />
@@ -239,7 +239,7 @@ function TargetCard({ icon: Icon, title, description }: { icon: React.ComponentT
   )
 }
 
-function TeamMemberCard({ name, role, education, email, image }: { name: string; role: string; education: string; email: string; image: string }) {
+function TeamMemberCard({ name, role, email, linkedin, image }: { name: string; role: string; email: string; linkedin: string; image: string }) {
   return (
     <motion.article
       variants={itemVariants}
@@ -264,16 +264,29 @@ function TeamMemberCard({ name, role, education, email, image }: { name: string;
             {name}
           </h3>
           <p className="text-[#00B5AD] font-semibold">{role}</p>
-          <p className="text-gray-600 text-sm">{education}</p>
         </div>
-        <a 
-          href={`mailto:${email}`}
-          className="inline-flex items-center gap-2 text-[#3B5998] hover:text-[#1E1A5F] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 rounded-lg px-2 py-1"
-          aria-label={`Send email to ${name}`}
-        >
-          <Mail className="w-4 h-4" aria-hidden="true" />
-          <span className="text-sm">{email}</span>
-        </a>
+        <div className="flex flex-col items-center gap-2">
+          <a 
+            href={`mailto:${email}`}
+            className="inline-flex items-center gap-2 text-[#3B5998] hover:text-[#1E1A5F] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 rounded-lg px-2 py-1"
+            aria-label={`Send email to ${name}`}
+          >
+            <Mail className="w-4 h-4" aria-hidden="true" />
+            <span className="text-sm">{email}</span>
+          </a>
+          <a 
+            href={linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-[#0077B5] hover:text-[#005582] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 rounded-lg px-2 py-1"
+            aria-label={`Visit ${name}'s LinkedIn profile (opens in new tab)`}
+          >
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            <span className="text-sm">LinkedIn</span>
+          </a>
+        </div>
       </div>
     </motion.article>
   )
@@ -467,8 +480,8 @@ export function LandingPage() {
             >
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
                 <Image
-                  src="/images/team/group-photo.jpg"
-                  alt="Generation Z 11th Edition Team - Group photo of the 2026 cohort"
+                  src="/images/gallery-new/gallery-1.jpg"
+                  alt="Generation Z 11th Edition Team - Day 1 Photoshoot"
                   fill
                   className="object-cover"
                   priority
@@ -576,35 +589,6 @@ export function LandingPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {programPillars.map((pillar) => (
                 <PillarCard key={pillar.title} {...pillar} />
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Program Targets */}
-      <section 
-        id="targets" 
-        className="py-20 bg-white"
-        aria-labelledby="targets-heading"
-      >
-        <div className="container mx-auto px-6 lg:px-12">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
-          >
-            <motion.h2 
-              id="targets-heading"
-              variants={itemVariants} 
-              className="text-3xl md:text-4xl font-bold text-[#1E1A5F] mb-12 text-center"
-            >
-              11th Edition Program Targets
-            </motion.h2>
-            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {programTargets.map((target) => (
-                <TargetCard key={target.title} {...target} />
               ))}
             </div>
           </motion.div>
