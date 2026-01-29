@@ -8,6 +8,7 @@ import { Facilitators } from "@/components/facilitators"
 import { Registration } from "@/components/registration"
 import { Footer } from "@/components/footer"
 import { FloatingCTA } from "@/components/floating-cta"
+import { PageTransition } from "@/components/page-transition"
 
 export const metadata: Metadata = {
   title: "REFRAME | Gen Z 2026 Program - Zain Group",
@@ -31,12 +32,14 @@ export default function ReframePage() {
     <div className="min-h-screen bg-gradient-to-b from-[#1C2951] via-[#1E1A5F] via-[#0057B8] via-[#1E1A5F] to-[#1C2951]">
       <Navbar />
       <main id="main-content">
-        <Hero />
-        <WorkshopOverview />
-        <BookCarousel />
-        <AgendaTimeline />
-        <Facilitators />
-        <Registration />
+        <PageTransition>
+          <Hero />
+          <WorkshopOverview />
+          <BookCarousel />
+          <AgendaTimeline />
+          <Facilitators />
+          <Registration />
+        </PageTransition>
       </main>
       <Footer />
       <FloatingCTA />

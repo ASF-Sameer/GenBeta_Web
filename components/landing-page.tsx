@@ -190,8 +190,8 @@ function ProgramCard({ title, description, link, image }: { title: string; descr
             >
               {/* Book shadow */}
               <div className="absolute inset-0 rounded-lg bg-black/40 blur-lg translate-x-2 translate-y-2" aria-hidden="true" />
-              {/* Book spine */}
-              <div className="absolute left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-[#1a237e] via-[#283593] to-[#3949ab] rounded-l-md z-10" aria-hidden="true" />
+              {/* Book spine - Yellow to match book cover */}
+              <div className="absolute left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-[#d4c800] via-[#e6d900] to-[#f7e73f] rounded-l-md z-10" aria-hidden="true" />
               {/* Book cover */}
               <div className="absolute inset-0 rounded-r-lg rounded-l-sm overflow-hidden border-2 border-white/20 shadow-2xl">
                 <Image
