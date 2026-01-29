@@ -16,7 +16,12 @@ import {
   Mail,
   ExternalLink,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Brain,
+  HeartPulse,
+  Sparkles,
+  Network,
+  Megaphone
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -51,24 +56,39 @@ const itemVariants = {
 
 const programPillars = [
   {
-    icon: Lightbulb,
-    title: "Digital Innovation",
-    description: "An intensive full-stack workshop providing exposure to modern development practices and a ship-fast mindset. This toolkit has been applied to build digital products and event-launch microsites."
+    icon: Brain,
+    title: "AI & Big Data",
+    description: "LLMs & Agentic AI, Analytics & Reporting, Critical Thinking about Data Quality, Security & AI Ethics, and Technological Literacy",
+    gradientClass: "from-[#C3D534] to-[#00B5AD]",
+    glowClass: "shadow-[0_0_30px_rgba(195,213,52,0.3)]"
   },
   {
-    icon: Users,
-    title: "Customer Centricity",
-    description: "User-driven solutions designed across digital channels. Feedback, analytics, and rapid iteration are used to reduce friction and deliver intuitive, personal, and dependable experiences at scale."
+    icon: HeartPulse,
+    title: "Resilience, Flexibility & Agility",
+    description: "Neuroplasticity, Purpose & Fulfillment, Mental Toughness & Coaching",
+    gradientClass: "from-[#00B5AD] to-[#0057B8]",
+    glowClass: "shadow-[0_0_30px_rgba(0,181,173,0.3)]"
   },
   {
-    icon: Briefcase,
-    title: "Agile Delivery",
-    description: "All projects are executed using Agile methodologies, ensuring rapid iteration, continuous improvement, and delivering value incrementally while maintaining quality standards."
+    icon: Sparkles,
+    title: "Creative Thinking",
+    description: "Problem-solving through Inclusion, Wellbeing, and Collaborative Growth",
+    gradientClass: "from-[#9B4F96] to-[#F4A6C9]",
+    glowClass: "shadow-[0_0_30px_rgba(155,79,150,0.3)]"
   },
   {
-    icon: Award,
-    title: "Leadership Development",
-    description: "Developing critical leadership capabilities through executive mentorship, strategic thinking workshops, and real-world project ownership that prepares future leaders."
+    icon: Megaphone,
+    title: "Leadership & Social Influence",
+    description: "Effective Negotiation & Communication Skills, Curiosity & Lifelong Learning, Self-awareness & Motivation",
+    gradientClass: "from-[#F7E73F] to-[#C3D534]",
+    glowClass: "shadow-[0_0_30px_rgba(247,231,63,0.3)]"
+  },
+  {
+    icon: Network,
+    title: "Systems Thinking",
+    description: "Lean Six Sigma, Big Picture Thinking, Systems Mapping & Visualization",
+    gradientClass: "from-[#0057B8] to-[#1E1A5F]",
+    glowClass: "shadow-[0_0_30px_rgba(0,87,184,0.3)]"
   }
 ]
 
@@ -141,29 +161,47 @@ const teamMembers = [
 ]
 
 const galleryImages = [
-  "/images/gallery/gallery-1_1.jpg",
-  "/images/gallery/gallery-1_2.jpg",
-  "/images/gallery/gallery-1_3.jpg",
-  "/images/gallery/gallery-1_4.jpg",
-  "/images/gallery/gallery-1_5.jpg",
-  "/images/gallery/gallery-1_6.jpg"
+  "/images/gallery-new/gallery-1.jpg",
+  "/images/gallery-new/gallery-2.jpg",
+  "/images/gallery-new/gallery-3.jpg",
+  "/images/gallery-new/gallery-4.jpg",
+  "/images/gallery-new/gallery-5.jpg",
+  "/images/gallery-new/gallery-6.jpg",
+  "/images/gallery-new/gallery-7.jpg",
+  "/images/gallery-new/gallery-8.jpg",
+  "/images/gallery-new/gallery-9.jpg",
+  "/images/gallery-new/gallery-10.jpg",
+  "/images/gallery-new/gallery-11.jpg",
+  "/images/gallery-new/gallery-12.jpg"
 ]
 
-function PillarCard({ icon: Icon, title, description }: { icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>; title: string; description: string }) {
+function PillarCard({ icon: Icon, title, description, gradientClass, glowClass }: { 
+  icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>; 
+  title: string; 
+  description: string;
+  gradientClass: string;
+  glowClass: string;
+}) {
   return (
     <motion.article
       variants={itemVariants}
-      className="bg-[#3B5998] rounded-2xl p-8 text-white h-full"
+      className={cn(
+        "relative rounded-2xl p-6 text-white h-full overflow-hidden backdrop-blur-md",
+        "bg-white/10 border border-white/20 hover:bg-white/15 transition-all duration-300",
+        glowClass
+      )}
       role="article"
       aria-labelledby={`pillar-${title.replace(/\s+/g, '-').toLowerCase()}`}
+      whileHover={{ scale: 1.02 }}
     >
-      <div className="flex flex-col items-center text-center space-y-4">
-        <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center" aria-hidden="true">
-          <Icon className="w-8 h-8 text-white" aria-hidden={true} />
+      <div className={cn("absolute inset-0 opacity-20 bg-gradient-to-br", gradientClass)} aria-hidden="true" />
+      <div className="relative z-10 flex flex-col items-center text-center space-y-4">
+        <div className={cn("w-16 h-16 rounded-full flex items-center justify-center bg-gradient-to-br", gradientClass)} aria-hidden="true">
+          <Icon className="w-8 h-8 text-white drop-shadow-lg" aria-hidden={true} />
         </div>
         <h3 
           id={`pillar-${title.replace(/\s+/g, '-').toLowerCase()}`}
-          className="text-xl font-bold text-[#F6EB69]"
+          className={cn("text-xl font-bold bg-gradient-to-r bg-clip-text text-transparent", gradientClass)}
         >
           {title}
         </h3>
@@ -399,9 +437,9 @@ export function LandingPage() {
                 variants={itemVariants} 
                 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
               >
-                <span className="text-[#F6EB69]">The 11th Edition of</span>
+                <span className="bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">The 11th Edition of</span>
                 <br />
-                <span className="text-[#F6EB69] italic">Generation Z</span>
+                <span className="bg-gradient-to-r from-[#F7E73F] via-[#C3D534] to-[#00B5AD] bg-clip-text text-transparent italic">Generation Z</span>
                 <br />
                 <span className="text-white">by Zain</span>
               </motion.h1>
@@ -412,7 +450,7 @@ export function LandingPage() {
                 <Link href="/reframe">
                   <Button 
                     size="lg" 
-                    className="bg-[#00B5AD] hover:bg-[#009690] text-white px-8 py-6 text-lg focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
+                    className="bg-gradient-to-r from-[#C3D534] to-[#00B5AD] hover:from-[#00B5AD] hover:to-[#C3D534] text-[#1E1A5F] font-bold px-8 py-6 text-lg focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#1E1A5F] transition-all duration-300"
                   >
                     Explore Reframe Program
                     <ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
@@ -472,13 +510,53 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* Program Pillars - Smooth Gradient Background */}
+      {/* Program Pillars - Dark Gradient with Animated Orbs */}
       <section 
         id="pillars" 
-        className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100"
+        className="relative py-20 bg-gradient-to-br from-[#1E1A5F] via-[#0057B8] to-[#1E1A5F] overflow-hidden"
         aria-labelledby="pillars-heading"
       >
-        <div className="container mx-auto px-6 lg:px-12">
+        {/* Animated Gradient Orbs - 10th Edition Style */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+          <motion.div 
+            className="absolute top-20 right-10 w-96 h-96 bg-[#C3D534]/20 rounded-full blur-3xl"
+            animate={{ 
+              scale: [1, 1.1, 1],
+              opacity: [0.2, 0.3, 0.2],
+            }}
+            transition={{ 
+              duration: 8, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+          />
+          <motion.div 
+            className="absolute bottom-20 left-10 w-80 h-80 bg-[#F7E73F]/20 rounded-full blur-3xl"
+            animate={{ 
+              scale: [1, 1.15, 1],
+              opacity: [0.2, 0.25, 0.2],
+            }}
+            transition={{ 
+              duration: 10, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+          />
+          <motion.div 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00B5AD]/15 rounded-full blur-3xl"
+            animate={{ 
+              scale: [1, 1.05, 1],
+              opacity: [0.15, 0.2, 0.15],
+            }}
+            transition={{ 
+              duration: 12, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+          />
+        </div>
+        
+        <div className="relative z-10 container mx-auto px-6 lg:px-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -488,11 +566,14 @@ export function LandingPage() {
             <motion.h2 
               id="pillars-heading"
               variants={itemVariants} 
-              className="text-3xl md:text-4xl font-bold text-[#1E1A5F] mb-12 text-center"
+              className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
-              11th Edition Program Pillars
+              11th Edition Program Theme
             </motion.h2>
-            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <motion.p variants={itemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
+              Our comprehensive development framework designed to cultivate future-ready leaders
+            </motion.p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {programPillars.map((pillar) => (
                 <PillarCard key={pillar.title} {...pillar} />
               ))}
