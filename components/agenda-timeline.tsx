@@ -1,16 +1,6 @@
 "use client"
 
-import React from "react"
-
 import { useRef, useEffect, useState } from "react"
-import {
-  Users,
-  BookOpen,
-  MessageSquare,
-  PenTool,
-  Lightbulb,
-  CheckCircle,
-} from "lucide-react"
 import { cn } from "@/lib/utils"
 import { AuroraBackground } from "./aurora-background"
 
@@ -18,7 +8,6 @@ interface AgendaItem {
   time: string
   title: string
   description: string
-  icon: React.ElementType
   accentColor: string
   borderColor: string
 }
@@ -29,7 +18,6 @@ const agendaItems: AgendaItem[] = [
     title: "Welcome & Icebreaker",
     description:
       "Getting to know each other and setting intentions for our reset journey",
-    icon: Users,
     accentColor: "bg-[#C3D534]",
     borderColor: "border-l-[#C3D534]",
   },
@@ -38,7 +26,6 @@ const agendaItems: AgendaItem[] = [
     title: "Key Concepts from \"Reset\"",
     description:
       "Exploring Dan Heath's core frameworks for navigating moments of change",
-    icon: BookOpen,
     accentColor: "bg-[#00B5AD]",
     borderColor: "border-l-[#00B5AD]",
   },
@@ -47,7 +34,6 @@ const agendaItems: AgendaItem[] = [
     title: "Interactive Discussion",
     description:
       "Small group conversations applying reset principles to real scenarios",
-    icon: MessageSquare,
     accentColor: "bg-[#00B2E3]",
     borderColor: "border-l-[#00B2E3]",
   },
@@ -56,7 +42,6 @@ const agendaItems: AgendaItem[] = [
     title: "Personal Reflection",
     description:
       "Individual activity to identify your own stuck points and design your reset plan",
-    icon: PenTool,
     accentColor: "bg-[#9B4F96]",
     borderColor: "border-l-[#9B4F96]",
   },
@@ -65,7 +50,6 @@ const agendaItems: AgendaItem[] = [
     title: "Group Sharing",
     description:
       "Sharing key takeaways and learning from each other's unique perspectives",
-    icon: Lightbulb,
     accentColor: "bg-[#F4A6C9]",
     borderColor: "border-l-[#F4A6C9]",
   },
@@ -74,7 +58,6 @@ const agendaItems: AgendaItem[] = [
     title: "Closing & Next Steps",
     description:
       "Wrapping up with action commitments and a preview of the next session",
-    icon: CheckCircle,
     accentColor: "bg-[#0057B8]",
     borderColor: "border-l-[#0057B8]",
   },
@@ -157,14 +140,12 @@ export function AgendaTimeline() {
                 {/* Timeline Node */}
                 <div
                   className={cn(
-                    "absolute left-3 sm:left-4 lg:left-1/2 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transform -translate-x-1/2 z-10 transition-all duration-500",
+                    "absolute left-3 sm:left-4 lg:left-1/2 w-3 h-3 sm:w-4 sm:h-4 rounded-full transform -translate-x-1/2 z-10 transition-all duration-500",
                     item.accentColor,
                     visibleItems.includes(index) && "animate-pulse-glow"
                   )}
                   aria-hidden="true"
-                >
-                  <item.icon className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
-                </div>
+                />
 
                 {/* Card */}
                 <div

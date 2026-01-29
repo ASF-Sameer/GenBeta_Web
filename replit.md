@@ -69,6 +69,18 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
 - Start command: `npm run start`
 
 ## Recent Changes
+- 2026-01-29: Text-based accessible design with unified gradient backgrounds
+  - Removed all icons from pillar cards, team cards, workshop overview, agenda timeline, and registration sections
+  - Converted to text-based design with colored left-border accents for visual hierarchy
+  - Added "Our Programs" section on landing page featuring Reframe program
+  - Unified gradient backgrounds across all sections (removed all white sections)
+  - Systems Thinking pillar now uses turquoise-lime gradient for better visibility
+  - Simplified Reframe hero to single CTA button
+  - Team cards now show text-only LinkedIn links and email addresses
+  - Workshop benefits and attendees use border-left styling instead of icon badges
+  - Agenda timeline uses small colored dots instead of icon circles
+  - Registration form uses text-based event details with border accents
+
 - 2026-01-29: Updated design with 10th edition visual elements and new program theme
   - New Program Theme Pillars (5 pillars):
     - AI & Big Data (LLMs, Analytics, AI Ethics, Technological Literacy)
@@ -79,7 +91,7 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
   - 10th Edition Visual Design Applied:
     - Gradient text styling (lime-yellow-turquoise: #C3D534, #F7E73F, #00B5AD)
     - Animated gradient orbs in background
-    - Glassmorphism pillar cards with gradient icons and glow effects
+    - Glassmorphism pillar cards with glow effects (no icons)
     - Gradient CTA buttons with hover transitions
   - Real Event Gallery: 12 photos from actual Gen Z program events
   - Converted HEIC images to JPG for web compatibility
@@ -87,16 +99,16 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
 - 2026-01-29: New landing page implementation with full Gen Z 11th Edition design
   - Created new LandingPage component with complete sections:
     - Hero section with team photo and block gradient background
-    - About section with program overview
-    - Program Pillars (4 cards with blue background, gold titles, Lucide icons)
-    - Program Targets (2x2 grid with same styling)
-    - Team profiles (6 members with photos, roles, education, email contacts)
+    - About section with program overview (gradient background)
+    - Program Pillars (5 cards with glassmorphism, text-only design)
+    - Our Programs section with Reframe card
+    - Team profiles (6 members with photos, roles, email, LinkedIn)
     - Photo gallery with responsive carousel (1/2/3 items per view)
     - Footer with social links and Zain Group website connection
   - Applied official Zain font from Google Fonts
   - WCAG compliant: semantic HTML, ARIA labels, focus states, skip-to-content link
-  - No emojis used - only Lucide icons
-  - Design system: block gradient hero, smooth gradient content sections
+  - Text-based design without icons for better accessibility
+  - Design system: unified gradient backgrounds throughout
   - Color palette: Navy (#1C2951), Purple (#1E1A5F), Blue (#3B5998), Gold (#F6EB69), Turquoise (#00B5AD)
   
 - 2026-01-28: Initial Replit setup and 10th/11th edition merge review

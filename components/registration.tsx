@@ -1,30 +1,13 @@
 "use client"
 
-import {
-  Calendar,
-  Clock,
-  MapPin,
-  Users,
-  Ticket,
-  Mail,
-  ExternalLink,
-} from "lucide-react"
 import { AuroraBackground } from "./aurora-background"
 
 const eventInfo = [
-  { icon: Calendar, label: "Monday, February 10th, 2025" },
-  { icon: Clock, label: "2:00 PM - 3:30 PM (Kuwait)" },
-  { icon: MapPin, label: "ZINC - Innovation Campus" },
-  { icon: Users, label: "Facilitated by Gen Z Team" },
-  { icon: Ticket, label: "Limited spots available" },
-]
-
-const workshopInfo = [
-  { icon: Calendar, label: "Monday, February 10th, 2025" },
-  { icon: Clock, label: "2:00 PM - 3:30 PM (Kuwait)" },
-  { icon: MapPin, label: "ZINC - Innovation Campus" },
-  { icon: Users, label: "Facilitated by Gen Z Team" },
-  { icon: Ticket, label: "Limited spots available" },
+  { label: "Monday, February 10th, 2025" },
+  { label: "2:00 PM - 3:30 PM (Kuwait)" },
+  { label: "ZINC - Innovation Campus" },
+  { label: "Facilitated by Gen Z Team" },
+  { label: "Limited spots available" },
 ]
 
 export function Registration() {
@@ -65,16 +48,13 @@ export function Registration() {
 
             <div className="h-px bg-white/20 mb-4 sm:mb-6" role="separator" />
 
-            <ul className="space-y-3 sm:space-y-4" aria-label="Event details">
+            <ul className="space-y-2 sm:space-y-3" aria-label="Event details">
               {eventInfo.map((item) => (
                 <li
                   key={item.label}
-                  className="flex items-center gap-3 sm:gap-4 text-white text-sm sm:text-base"
+                  className="text-white text-sm sm:text-base border-l-2 border-[#C3D534] pl-3"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                    <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
-                  </div>
-                  <span>{item.label}</span>
+                  {item.label}
                 </li>
               ))}
             </ul>
@@ -87,24 +67,18 @@ export function Registration() {
               </p>
               <a
                 href="mailto:generationz@zain.com"
-                className="inline-flex items-center gap-2 text-white text-sm sm:text-base hover:text-[#C3D534] transition-colors focus:outline-none focus:ring-2 focus:ring-[#C3D534] focus:ring-offset-2 focus:ring-offset-[#0057B8] rounded"
+                className="text-white text-sm sm:text-base hover:text-[#C3D534] transition-colors focus:outline-none focus:ring-2 focus:ring-[#C3D534] focus:ring-offset-2 focus:ring-offset-[#0057B8] rounded"
               >
-                <Mail className="w-4 h-4" aria-hidden="true" />
-                <span className="break-all">generationz@zain.com</span>
+                generationz@zain.com
               </a>
             </div>
           </div>
 
           {/* Right Column - Registration Form */}
-          <div className="glass-card bg-white/20 dark:bg-black/30 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8">
-            <div className="flex items-center gap-2 mb-4 sm:mb-6">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-turquoise to-blue flex items-center justify-center">
-                <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold text-foreground">
-                Registration
-              </h3>
-            </div>
+          <div className="glass-dark rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6">
+              Registration
+            </h3>
 
             {/* Mobile: Direct Link Button */}
             <div className="block sm:hidden mb-4">
@@ -112,20 +86,18 @@ export function Registration() {
                 href="https://forms.office.com/Pages/ResponsePage.aspx?id=xeI9eiyCkkyHf9urffDz6r8iSFDpYhBGltmiiOk-wlVURU0xMVdCQ0FVSUowRUFaUkxaTkE5QjhRSi4u"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#C3D534] to-[#00B5AD] text-[#1E1A5F] font-semibold py-4 px-6 rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#C3D534] focus:ring-offset-2"
+                className="w-full flex items-center justify-center bg-gradient-to-r from-[#C3D534] to-[#00B5AD] text-[#1E1A5F] font-semibold py-4 px-6 rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#C3D534] focus:ring-offset-2"
                 aria-label="Open registration form (opens in new tab)"
               >
-                <Ticket className="w-5 h-5" aria-hidden="true" />
-                <span>Open Registration Form</span>
-                <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                Open Registration Form
               </a>
-              <p className="text-xs text-foreground/60 text-center mt-3">
+              <p className="text-xs text-white/60 text-center mt-3">
                 Tap the button above to register on Microsoft Forms
               </p>
             </div>
 
             {/* Desktop: Microsoft Form Embed */}
-            <div className="hidden sm:block bg-white/10 dark:bg-black/20 rounded-lg sm:rounded-xl border border-white/20 overflow-hidden">
+            <div className="hidden sm:block bg-white/10 rounded-lg sm:rounded-xl border border-white/20 overflow-hidden">
               <iframe
                 src="https://forms.office.com/Pages/ResponsePage.aspx?id=xeI9eiyCkkyHf9urffDz6r8iSFDpYhBGltmiiOk-wlVURU0xMVdCQ0FVSUowRUFaUkxaTkE5QjhRSi4u&embed=true"
                 width="100%"
@@ -143,11 +115,10 @@ export function Registration() {
                 href="https://forms.office.com/Pages/ResponsePage.aspx?id=xeI9eiyCkkyHf9urffDz6r8iSFDpYhBGltmiiOk-wlVURU0xMVdCQ0FVSUowRUFaUkxaTkE5QjhRSi4u"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-foreground/60 hover:text-turquoise transition-colors inline-flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-turquoise rounded"
+                className="text-sm text-white/60 hover:text-[#C3D534] transition-colors focus:outline-none focus:ring-2 focus:ring-[#C3D534] rounded"
                 aria-label="Having trouble? Register on external form (opens in new tab)"
               >
                 Having trouble? Register here
-                <ExternalLink className="w-3 h-3" aria-hidden="true" />
               </a>
             </div>
           </div>

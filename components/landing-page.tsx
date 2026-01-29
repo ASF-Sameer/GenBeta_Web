@@ -1,35 +1,16 @@
 "use client"
 
-import { useState, useEffect, Suspense } from "react"
-import dynamic from "next/dynamic"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { 
   ArrowRight, 
-  Lightbulb, 
-  Users, 
-  Target, 
-  Award,
-  BookOpen,
-  Briefcase,
-  Mail,
-  ExternalLink,
   ChevronLeft,
-  ChevronRight,
-  Brain,
-  HeartPulse,
-  Sparkles,
-  Network,
-  Megaphone
+  ChevronRight
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-
-const ParticleField = dynamic(
-  () => import("@/components/particle-field").then((mod) => mod.ParticleField),
-  { ssr: false }
-)
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -56,62 +37,42 @@ const itemVariants = {
 
 const programPillars = [
   {
-    icon: Brain,
     title: "AI & Big Data",
     description: "LLMs & Agentic AI, Analytics & Reporting, Critical Thinking about Data Quality, Security & AI Ethics, and Technological Literacy",
     gradientClass: "from-[#C3D534] to-[#00B5AD]",
     glowClass: "shadow-[0_0_30px_rgba(195,213,52,0.3)]"
   },
   {
-    icon: HeartPulse,
     title: "Resilience, Flexibility & Agility",
     description: "Neuroplasticity, Purpose & Fulfillment, Mental Toughness & Coaching",
     gradientClass: "from-[#00B5AD] to-[#0057B8]",
     glowClass: "shadow-[0_0_30px_rgba(0,181,173,0.3)]"
   },
   {
-    icon: Sparkles,
     title: "Creative Thinking",
     description: "Problem-solving through Inclusion, Wellbeing, and Collaborative Growth",
     gradientClass: "from-[#9B4F96] to-[#F4A6C9]",
     glowClass: "shadow-[0_0_30px_rgba(155,79,150,0.3)]"
   },
   {
-    icon: Megaphone,
     title: "Leadership & Social Influence",
     description: "Effective Negotiation & Communication Skills, Curiosity & Lifelong Learning, Self-awareness & Motivation",
     gradientClass: "from-[#F7E73F] to-[#C3D534]",
     glowClass: "shadow-[0_0_30px_rgba(247,231,63,0.3)]"
   },
   {
-    icon: Network,
     title: "Systems Thinking",
     description: "Lean Six Sigma, Big Picture Thinking, Systems Mapping & Visualization",
-    gradientClass: "from-[#0057B8] to-[#1E1A5F]",
-    glowClass: "shadow-[0_0_30px_rgba(0,87,184,0.3)]"
+    gradientClass: "from-[#00B5AD] to-[#C3D534]",
+    glowClass: "shadow-[0_0_30px_rgba(0,181,173,0.3)]"
   }
 ]
 
-const programTargets = [
+const ourPrograms = [
   {
-    icon: Users,
-    title: "Senior Leadership Collaboration",
-    description: "Direct collaboration with senior leaders and digital factory squads on strategic initiatives"
-  },
-  {
-    icon: Briefcase,
-    title: "Real Product Development",
-    description: "Hands-on work with live products and platforms, making meaningful contributions"
-  },
-  {
-    icon: BookOpen,
-    title: "Intensive Training",
-    description: "Participation in high-impact workshops including Agile, Lean Startup, and UI/UX Design"
-  },
-  {
-    icon: Award,
-    title: "Executive Mentorship",
-    description: "Receive direct mentorship from executive team to support growth and career development"
+    title: "Reframe",
+    description: "A learning series empowering colleagues to rethink, reset, and drive meaningful change. Starting with Dan Heath's transformative book 'Reset'.",
+    link: "/reframe"
   }
 ]
 
@@ -175,8 +136,7 @@ const galleryImages = [
   "/images/gallery-new/gallery-12.jpg"
 ]
 
-function PillarCard({ icon: Icon, title, description, gradientClass, glowClass }: { 
-  icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>; 
+function PillarCard({ title, description, gradientClass, glowClass }: { 
   title: string; 
   description: string;
   gradientClass: string;
@@ -195,17 +155,14 @@ function PillarCard({ icon: Icon, title, description, gradientClass, glowClass }
       whileHover={{ scale: 1.02 }}
     >
       <div className={cn("absolute inset-0 opacity-40 bg-gradient-to-br", gradientClass)} aria-hidden="true" />
-      <div className="relative z-10 flex flex-col items-center text-center space-y-4">
-        <div className={cn("w-16 h-16 rounded-full flex items-center justify-center bg-gradient-to-br", gradientClass)} aria-hidden="true">
-          <Icon className="w-8 h-8 text-white drop-shadow-lg" aria-hidden={true} />
-        </div>
+      <div className="relative z-10 flex flex-col items-start text-left space-y-3">
         <h3 
           id={`pillar-${title.replace(/\s+/g, '-').toLowerCase()}`}
           className={cn("text-xl font-bold bg-gradient-to-r bg-clip-text text-transparent", gradientClass)}
         >
           {title}
         </h3>
-        <p className="text-white/90 text-sm leading-relaxed">
+        <p className="text-white text-sm leading-relaxed">
           {description}
         </p>
       </div>
@@ -213,27 +170,31 @@ function PillarCard({ icon: Icon, title, description, gradientClass, glowClass }
   )
 }
 
-function TargetCard({ icon: Icon, title, description }: { icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>; title: string; description: string }) {
+function ProgramCard({ title, description, link }: { title: string; description: string; link: string }) {
   return (
     <motion.article
       variants={itemVariants}
-      className="bg-[#3B5998] rounded-2xl p-6 text-white"
+      className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl p-8 text-white hover:bg-[#1E1A5F]/90 transition-all duration-300"
       role="article"
-      aria-labelledby={`target-${title.replace(/\s+/g, '-').toLowerCase()}`}
+      aria-labelledby={`program-${title.replace(/\s+/g, '-').toLowerCase()}`}
     >
-      <div className="flex flex-col items-center text-center space-y-3">
-        <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center" aria-hidden="true">
-          <Icon className="w-7 h-7 text-white" aria-hidden={true} />
-        </div>
+      <div className="flex flex-col space-y-4">
         <h3 
-          id={`target-${title.replace(/\s+/g, '-').toLowerCase()}`}
-          className="text-lg font-bold text-[#F6EB69]"
+          id={`program-${title.replace(/\s+/g, '-').toLowerCase()}`}
+          className="text-2xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
         >
           {title}
         </h3>
-        <p className="text-white/90 text-sm leading-relaxed">
+        <p className="text-white text-base leading-relaxed">
           {description}
         </p>
+        <Link 
+          href={link}
+          className="inline-flex items-center gap-2 text-[#C3D534] hover:text-[#F7E73F] transition-colors font-semibold focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-lg w-fit"
+        >
+          <span>Learn More</span>
+          <ArrowRight className="w-5 h-5" aria-hidden="true" />
+        </Link>
       </div>
     </motion.article>
   )
@@ -243,7 +204,7 @@ function TeamMemberCard({ name, role, email, linkedin, image }: { name: string; 
   return (
     <motion.article
       variants={itemVariants}
-      className="bg-white rounded-2xl p-6 shadow-lg text-center"
+      className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl p-6 text-center"
       role="article"
       aria-labelledby={`team-${name.replace(/\s+/g, '-').toLowerCase()}`}
     >
@@ -259,32 +220,28 @@ function TeamMemberCard({ name, role, email, linkedin, image }: { name: string; 
         <div className="space-y-1">
           <h3 
             id={`team-${name.replace(/\s+/g, '-').toLowerCase()}`}
-            className="text-xl font-bold text-[#1E1A5F]"
+            className="text-xl font-bold text-white"
           >
             {name}
           </h3>
-          <p className="text-[#00B5AD] font-semibold">{role}</p>
+          <p className="text-[#C3D534] font-semibold">{role}</p>
         </div>
         <div className="flex flex-col items-center gap-2">
           <a 
             href={`mailto:${email}`}
-            className="inline-flex items-center gap-2 text-[#3B5998] hover:text-[#1E1A5F] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 rounded-lg px-2 py-1"
+            className="text-white/80 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 rounded-lg px-2 py-1 text-sm"
             aria-label={`Send email to ${name}`}
           >
-            <Mail className="w-4 h-4" aria-hidden="true" />
-            <span className="text-sm">{email}</span>
+            {email}
           </a>
           <a 
             href={linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[#0077B5] hover:text-[#005582] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 rounded-lg px-2 py-1"
+            className="text-[#00B5AD] hover:text-[#C3D534] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 rounded-lg px-2 py-1 text-sm"
             aria-label={`Visit ${name}'s LinkedIn profile (opens in new tab)`}
           >
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-            <span className="text-sm">LinkedIn</span>
+            LinkedIn Profile
           </a>
         </div>
       </div>
@@ -490,10 +447,10 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* About Section - White Background */}
+      {/* About Section - Gradient Background */}
       <section 
         id="about" 
-        className="py-20 bg-white"
+        className="py-20 bg-gradient-to-br from-[#1E1A5F] via-[#0057B8] to-[#1E1A5F]"
         aria-labelledby="about-heading"
       >
         <div className="container mx-auto px-6 lg:px-12">
@@ -507,11 +464,11 @@ export function LandingPage() {
             <motion.h2 
               id="about-heading"
               variants={itemVariants} 
-              className="text-3xl md:text-4xl font-bold text-[#1E1A5F] mb-8"
+              className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent mb-8"
             >
               About the Gen Z Program
             </motion.h2>
-            <motion.p variants={itemVariants} className="text-gray-700 text-lg leading-relaxed">
+            <motion.p variants={itemVariants} className="text-white text-lg leading-relaxed">
               Since 2016, Zain has continuously supported youth development and shaped future leaders, an effort that gave rise to the Generation Z program. It is a development program aimed at identifying and assessing young graduates who innately possess leadership skills. This year marks the 11th anniversary of the program, and as part of Zain&apos;s wider 4WARD strategy, the program positions 6 high-potential young talents at the center of digital transformation efforts, developing critical capabilities in product innovation, agile delivery, leadership, and customer experience.
             </motion.p>
           </motion.div>
@@ -590,10 +547,42 @@ export function LandingPage() {
         </div>
       </section>
 
+      {/* Our Programs Section */}
+      <section 
+        id="programs" 
+        className="py-20 bg-gradient-to-br from-[#0057B8] via-[#1E1A5F] to-[#0057B8]"
+        aria-labelledby="programs-heading"
+      >
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={containerVariants}
+          >
+            <motion.h2 
+              id="programs-heading"
+              variants={itemVariants} 
+              className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
+            >
+              Our Programs
+            </motion.h2>
+            <motion.p variants={itemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
+              Initiatives designed to foster growth, learning, and meaningful impact
+            </motion.p>
+            <div className="max-w-2xl mx-auto">
+              {ourPrograms.map((program) => (
+                <ProgramCard key={program.title} {...program} />
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Team Section */}
       <section 
         id="team" 
-        className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100"
+        className="py-20 bg-gradient-to-br from-[#1E1A5F] via-[#0057B8] to-[#1E1A5F]"
         aria-labelledby="team-heading"
       >
         <div className="container mx-auto px-6 lg:px-12">
@@ -606,11 +595,11 @@ export function LandingPage() {
             <motion.h2 
               id="team-heading"
               variants={itemVariants} 
-              className="text-3xl md:text-4xl font-bold text-[#1E1A5F] mb-4 text-center"
+              className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               Gen Z 2026
             </motion.h2>
-            <motion.p variants={itemVariants} className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+            <motion.p variants={itemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
               Meet the talented individuals driving innovation and leadership in the 11th Edition
             </motion.p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -625,7 +614,7 @@ export function LandingPage() {
       {/* Gallery Section */}
       <section 
         id="gallery" 
-        className="py-20 bg-white"
+        className="py-20 bg-gradient-to-br from-[#0057B8] via-[#1E1A5F] to-[#0057B8]"
         aria-labelledby="gallery-heading"
       >
         <div className="container mx-auto px-6 lg:px-12">
@@ -638,7 +627,7 @@ export function LandingPage() {
             <motion.h2 
               id="gallery-heading"
               variants={itemVariants} 
-              className="text-3xl md:text-4xl font-bold text-[#3B5998] mb-12"
+              className="text-3xl md:text-4xl font-bold mb-12 bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               Gallery
             </motion.h2>
@@ -695,11 +684,10 @@ export function LandingPage() {
                 href="https://www.zain.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-white rounded px-3 py-2"
+                className="text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-white rounded px-3 py-2"
                 aria-label="Visit Zain Group main website (opens in new tab)"
               >
-                <span>Visit Zain Group</span>
-                <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                Visit Zain Group
               </a>
               <p className="text-white/60 text-sm">
                 Copyright 2026 Zain. All Rights Reserved

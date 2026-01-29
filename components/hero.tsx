@@ -1,27 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Lightbulb, TrendingUp, ChevronDown } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { AuroraBackground } from "@/components/aurora-background"
 import { cn } from "@/lib/utils"
-
-const features = [
-  {
-    icon: Lightbulb,
-    title: "Strategic Thinking",
-    description: "Frameworks for navigating change",
-    accentClass: "glow-lime",
-    gradientClass: "from-[#C3D534] to-[#00B5AD]",
-  },
-  {
-    icon: TrendingUp,
-    title: "Personal Growth",
-    description: "Tools for continuous improvement",
-    accentClass: "glow-turquoise",
-    gradientClass: "from-[#00B5AD] to-[#00B2E3]",
-  },
-]
 
 export function Hero() {
   const [showScrollIndicator, setShowScrollIndicator] = useState(false)
@@ -88,53 +71,9 @@ export function Hero() {
               size="lg"
               className="w-full sm:w-auto bg-gradient-to-r from-turquoise to-blue text-white font-semibold px-6 sm:px-8 py-5 sm:py-6 rounded-full text-base sm:text-lg hover:shadow-xl hover:shadow-turquoise/30 transition-all duration-300 hover:-translate-y-1 focus:ring-2 focus:ring-turquoise focus:ring-offset-2"
             >
-              <a href="/reframe#hero">Register Now</a>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="w-full sm:w-auto glass-button px-6 sm:px-8 py-5 sm:py-6 rounded-full text-base sm:text-lg font-semibold border-white/30 text-foreground bg-transparent focus:ring-2 focus:ring-turquoise focus:ring-offset-2"
-            >
-              <a href="/reframe#hero">Explore Reframe</a>
+              <a href="#register">Register Now</a>
             </Button>
           </div>
-
-          {/* Feature Cards */}
-          <ul
-            className={cn(
-              "mt-10 sm:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 px-2 sm:px-0 transition-all duration-700 delay-500 list-none",
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-4"
-            )}
-            aria-label="Key benefits of the Reframe series"
-          >
-            {features.map((feature) => (
-              <li
-                key={feature.title}
-                className={cn(
-                  "glass-card p-4 sm:p-6 group hover:-translate-y-2 transition-all duration-300 cursor-default"
-                )}
-              >
-                <div
-                  className={cn(
-                    "w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br flex items-center justify-center mb-3 sm:mb-4 mx-auto group-hover:scale-110 transition-transform",
-                    feature.gradientClass
-                  )}
-                  aria-hidden="true"
-                >
-                  <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                </div>
-                <h2 className="text-base sm:text-lg font-bold text-foreground mb-1 sm:mb-2">
-                  {feature.title}
-                </h2>
-                <p className="text-xs sm:text-sm text-foreground/70">
-                  {feature.description}
-                </p>
-              </li>
-            ))}
-          </ul>
         </div>
 
         {/* Scroll Indicator */}
