@@ -1,13 +1,14 @@
 import React from "react"
 import type { Metadata, Viewport } from "next"
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google"
+import { Zain, JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Providers } from "@/components/providers"
 import "./globals.css"
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
+const zain = Zain({
+  subsets: ["latin", "arabic"],
+  weight: ["200", "300", "400", "700", "800", "900"],
+  variable: "--font-zain",
 })
 
 const jetbrainsMono = JetBrains_Mono({
@@ -67,7 +68,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+        className={`${zain.variable} ${jetbrainsMono.variable} font-zain antialiased`}
       >
         <Providers>
           <a
