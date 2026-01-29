@@ -175,53 +175,67 @@ function ProgramCard({ title, description, link, image }: { title: string; descr
   return (
     <motion.article
       variants={itemVariants}
-      className="relative bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl text-white hover:bg-[#1E1A5F]/90 transition-all duration-300 mt-16 sm:mt-20 md:mt-0 md:ml-24 lg:ml-32"
+      className="relative group"
       role="article"
       aria-labelledby={`program-${title.replace(/\s+/g, '-').toLowerCase()}`}
     >
-      {/* Book Image - Poking Out Effect */}
-      {image && (
-        <motion.div 
-          className="absolute -top-12 sm:-top-16 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 md:-translate-x-1/2 md:top-1/2 md:-translate-y-1/2 z-20"
-          whileHover={{ scale: 1.05, rotate: -2 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        >
-          <div className="relative w-24 h-36 sm:w-28 sm:h-40 md:w-32 md:h-48 lg:w-40 lg:h-56 transform md:-rotate-6 hover:-rotate-3 transition-transform duration-300">
-            <div className="absolute inset-0 rounded-lg shadow-2xl shadow-black/50 overflow-hidden border-2 border-white/20">
-              <Image
-                src={image}
-                alt={`${title} program cover`}
-                fill
-                className="object-cover"
-              />
+      <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+        {/* Book Cover - 3D Style */}
+        {image && (
+          <motion.div 
+            className="relative flex-shrink-0"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          >
+            <div className="relative w-40 h-56 sm:w-44 sm:h-60 md:w-48 md:h-64 lg:w-52 lg:h-72 perspective-1000">
+              {/* Book container with 3D effect */}
+              <div className="relative w-full h-full transform-style-3d group-hover:rotate-y-[-5deg] transition-transform duration-500">
+                {/* Book cover front */}
+                <div className="absolute inset-0 rounded-r-lg rounded-l-sm overflow-hidden shadow-[4px_4px_20px_rgba(0,0,0,0.5),8px_8px_40px_rgba(0,0,0,0.3)]">
+                  <Image
+                    src={image}
+                    alt={`${title} program cover`}
+                    fill
+                    className="object-cover"
+                  />
+                  {/* Glossy overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent pointer-events-none" />
+                </div>
+                {/* Book spine - left edge */}
+                <div className="absolute left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-[#2a1f5e] via-[#3d2d7a] to-[#1E1A5F] rounded-l-sm shadow-inner" aria-hidden="true" />
+                {/* Book pages - bottom edge */}
+                <div className="absolute bottom-0 left-1 right-0 h-2 bg-gradient-to-t from-gray-300 to-white rounded-b-sm" aria-hidden="true" />
+                {/* Book pages - right edge (visible when tilted) */}
+                <div className="absolute top-1 bottom-1 right-0 w-1 bg-gradient-to-l from-gray-200 to-white" aria-hidden="true" />
+              </div>
+              {/* Shadow underneath book */}
+              <div className="absolute -bottom-4 left-4 right-0 h-6 bg-black/40 rounded-full blur-xl -z-10" aria-hidden="true" />
             </div>
-            {/* Book spine effect */}
-            <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-white/40 via-white/20 to-white/40 rounded-l-lg" aria-hidden="true" />
-            {/* Book shadow underneath */}
-            <div className="absolute -bottom-2 left-2 right-2 h-4 bg-black/30 rounded-full blur-md -z-10" aria-hidden="true" />
+          </motion.div>
+        )}
+        
+        {/* Content Card */}
+        <div className="flex-1 bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl p-6 sm:p-8 text-white hover:bg-[#1E1A5F]/90 transition-all duration-300">
+          <div className="flex flex-col space-y-4">
+            <h3 
+              id={`program-${title.replace(/\s+/g, '-').toLowerCase()}`}
+              className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
+            >
+              {title}
+            </h3>
+            <p className="text-white text-sm sm:text-base leading-relaxed">
+              {description}
+            </p>
+            <Link 
+              href={link}
+              scroll={true}
+              className="inline-flex items-center gap-2 text-[#C3D534] hover:text-[#F7E73F] transition-colors font-semibold focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-lg w-fit min-h-[44px] py-2"
+            >
+              <span>Learn More</span>
+              <ArrowRight className="w-5 h-5" aria-hidden="true" />
+            </Link>
           </div>
-        </motion.div>
-      )}
-      
-      {/* Content */}
-      <div className="flex flex-col space-y-4 p-6 sm:p-8 pt-28 sm:pt-28 md:pt-8 md:pl-20 lg:pl-24">
-        <h3 
-          id={`program-${title.replace(/\s+/g, '-').toLowerCase()}`}
-          className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
-        >
-          {title}
-        </h3>
-        <p className="text-white text-sm sm:text-base leading-relaxed">
-          {description}
-        </p>
-        <Link 
-          href={link}
-          scroll={true}
-          className="inline-flex items-center gap-2 text-[#C3D534] hover:text-[#F7E73F] transition-colors font-semibold focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-lg w-fit min-h-[44px] py-2"
-        >
-          <span>Learn More</span>
-          <ArrowRight className="w-5 h-5" aria-hidden="true" />
-        </Link>
+        </div>
       </div>
     </motion.article>
   )
