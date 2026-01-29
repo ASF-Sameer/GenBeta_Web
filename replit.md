@@ -69,6 +69,20 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
 - Start command: `npm run start`
 
 ## Recent Changes
+- 2026-01-29: Previous Programs section and brand refinements
+  - **Previous Gen Z Programs**: New section displaying all 9 editions (2016-2024)
+    - Shows year, program title, and "What Made Us Different" descriptions
+    - Responsive grid: 3-column desktop, 2-column tablet, 1-column mobile
+    - Glassmorphism cards with gradient text styling
+  - **Logo Removal**: Replaced all logo images with "Generation Z" gradient text
+    - Navigation bar uses gradient text instead of logo
+    - genz-landing.tsx updated to use text-only branding
+  - **Auto-Shuffle Gallery**: Gallery carousel now:
+    - Shuffles images randomly on page load
+    - Auto-advances every 4 seconds
+    - Loops continuously through all images
+  - **Page Transitions**: Smooth fade/slide animations between pages using Framer Motion
+
 - 2026-01-29: Enhanced UX with book effect and improved layouts
   - **3D Book Effect**: Program cards now feature book cover "poking out" with:
     - Negative margin positioning (book extends outside card)
