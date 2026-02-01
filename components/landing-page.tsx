@@ -388,32 +388,48 @@ function GalleryCarousel() {
   }
 
   return (
-    <div className="relative px-4 md:px-0">
-      <div className="overflow-hidden">
+    <div className="relative px-2 sm:px-4 md:px-0">
+      <div className="overflow-hidden rounded-xl">
         <div 
-          className="flex gap-4 transition-transform duration-300 ease-out"
+          className="flex gap-2 sm:gap-4 transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
         >
           {shuffledImages.map((image, index) => (
             <div 
               key={image} 
-              className={cn("flex-shrink-0 aspect-[4/3] relative rounded-xl overflow-hidden", getItemWidth())}
+              className={cn("flex-shrink-0 aspect-[4/3] relative rounded-lg sm:rounded-xl overflow-hidden", getItemWidth())}
             >
               <Image
                 src={image}
                 alt={`Gallery image ${index + 1}`}
                 fill
                 className="object-cover"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
             </div>
           ))}
         </div>
       </div>
       
+      {/* Navigation dots for mobile */}
+      <div className="flex justify-center gap-2 mt-4 md:hidden">
+        {Array.from({ length: Math.min(maxIndex + 1, 8) }).map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentIndex(i)}
+            className={cn(
+              "w-2 h-2 rounded-full transition-all duration-300",
+              currentIndex === i ? "bg-[#00B5AD] w-6" : "bg-white/50"
+            )}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+      
       <button
         onClick={goToPrevious}
         disabled={currentIndex === 0}
-        className="absolute left-0 top-1/2 -translate-y-1/2 md:-translate-x-4 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD]"
+        className="absolute left-1 sm:left-0 top-1/2 -translate-y-1/2 md:-translate-x-4 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-[#00B5AD]"
         aria-label="Previous gallery images"
       >
         <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-[#1E1A5F]" aria-hidden="true" />
@@ -422,28 +438,13 @@ function GalleryCarousel() {
       <button
         onClick={goToNext}
         disabled={currentIndex >= maxIndex}
-        className="absolute right-0 top-1/2 -translate-y-1/2 md:translate-x-4 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD]"
+        className="absolute right-1 sm:right-0 top-1/2 -translate-y-1/2 md:translate-x-4 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-[#00B5AD]"
         aria-label="Next gallery images"
       >
         <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-[#1E1A5F]" aria-hidden="true" />
       </button>
       
-      <div className="flex justify-center gap-2 mt-6" role="tablist" aria-label="Gallery navigation">
-        {Array.from({ length: maxIndex + 1 }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={cn(
-              "w-3 h-3 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2",
-              index === currentIndex ? "bg-[#3B5998]" : "bg-gray-300 hover:bg-gray-400"
-            )}
-            role="tab"
-            aria-selected={index === currentIndex}
-            aria-label={`Go to gallery page ${index + 1}`}
-          />
-        ))}
       </div>
-    </div>
   )
 }
 
@@ -478,8 +479,8 @@ export function LandingPage() {
         </nav>
 
         {/* Hero Content */}
-        <div className="relative z-10 container mx-auto px-6 lg:px-12 py-16 lg:py-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-16 lg:py-24">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -492,7 +493,7 @@ export function LandingPage() {
               <motion.h1 
                 id="hero-heading"
                 variants={itemVariants} 
-                className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
               >
                 <span className="bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">The 11th Edition of</span>
                 <br />
@@ -500,14 +501,14 @@ export function LandingPage() {
                 <br />
                 <span className="text-white">by Zain</span>
               </motion.h1>
-              <motion.p variants={itemVariants} className="text-white/80 text-lg max-w-lg leading-relaxed">
+              <motion.p variants={itemVariants} className="text-white/80 text-base sm:text-lg max-w-lg leading-relaxed">
                 Over the past several months, we, as Generation Z graduates at Zain Group, have gained invaluable hands-on experience across diverse areas including leadership, innovation, digital delivery, UI/UX design, and agile methodologies.
               </motion.p>
               <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
                 <TransitionLink href="/reframe">
                   <Button 
                     size="lg" 
-                    className="bg-gradient-to-r from-[#C3D534] to-[#00B5AD] hover:from-[#00B5AD] hover:to-[#C3D534] text-[#1E1A5F] font-bold px-8 py-6 text-lg focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#1E1A5F] transition-all duration-300"
+                    className="bg-gradient-to-r from-[#C3D534] to-[#00B5AD] hover:from-[#00B5AD] hover:to-[#C3D534] text-[#1E1A5F] font-bold px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#1E1A5F] transition-all duration-300 active:scale-95"
                   >
                     Explore Reframe Program
                     <ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
