@@ -142,7 +142,8 @@ const previousGenZPrograms = [
     year: "2025",
     title: "Gen Z 2025",
     description: "Empowering the next generation with AI & Big Data, Resilience & Agility, Creative Thinking, Leadership, and Systems Thinking for the future of work.",
-    image: "/images/genz-2025.png"
+    image: "/images/genz-2025.png",
+    link: "https://generation-z-kappa.vercel.app/"
   },
   {
     year: "2024",
@@ -239,54 +240,40 @@ function ProgramCard({ title, description, link, image }: { title: string; descr
     <Link href={link} scroll={true} className="block group focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-2xl">
       <motion.article
         variants={itemVariants}
-        className="relative bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl text-white hover:bg-[#1E1A5F]/90 transition-all duration-300 overflow-visible"
+        className="relative bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl text-white hover:bg-[#1E1A5F]/90 transition-all duration-300 overflow-hidden"
         role="article"
         aria-labelledby={`program-${title.replace(/\s+/g, '-').toLowerCase()}`}
         whileHover={{ scale: 1.02 }}
       >
-        {/* Book Cover - Overlapping/Poking Out Effect */}
-        {image && (
-          <div className="absolute -top-8 -left-4 sm:-top-10 sm:-left-6 z-20 pointer-events-none">
-            <motion.div 
-              className="relative w-28 h-40 sm:w-32 sm:h-44 md:w-36 md:h-52 transform -rotate-6 group-hover:-rotate-3 group-hover:scale-105 transition-all duration-300"
-              style={{ transformOrigin: 'bottom right' }}
+        <div className="flex flex-col sm:flex-row">
+          {/* Book Cover */}
+          {image && (
+            <div className="relative w-full sm:w-32 md:w-40 h-48 sm:h-auto flex-shrink-0">
+              <Image
+                src={image}
+                alt={`${title} program cover`}
+                fill
+                className="object-cover sm:object-contain p-4"
+              />
+            </div>
+          )}
+          
+          {/* Content */}
+          <div className="flex flex-col space-y-4 p-6 sm:p-8">
+            <h3 
+              id={`program-${title.replace(/\s+/g, '-').toLowerCase()}`}
+              className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
-              {/* Book shadow */}
-              <div className="absolute inset-0 rounded-lg bg-black/40 blur-lg translate-x-2 translate-y-2" aria-hidden="true" />
-              {/* Book spine - Yellow to match book cover */}
-              <div className="absolute left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-[#d4c800] via-[#e6d900] to-[#f7e73f] rounded-l-md z-10" aria-hidden="true" />
-              {/* Book cover */}
-              <div className="absolute inset-0 rounded-r-lg rounded-l-sm overflow-hidden border-2 border-white/20 shadow-2xl">
-                <Image
-                  src={image}
-                  alt={`${title} program cover`}
-                  fill
-                  className="object-cover"
-                />
-                {/* Glossy reflection */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/25 via-transparent to-transparent pointer-events-none" />
-              </div>
-              {/* Page edges - bottom */}
-              <div className="absolute bottom-0 left-2 right-0 h-2 bg-gradient-to-t from-gray-200 to-white rounded-b-sm" aria-hidden="true" />
-            </motion.div>
+              {title}
+            </h3>
+            <p className="text-white text-sm sm:text-base leading-relaxed">
+              {description}
+            </p>
+            <span className="inline-flex items-center gap-2 text-[#C3D534] group-hover:text-[#F7E73F] transition-colors font-semibold w-fit">
+              <span>Learn More</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+            </span>
           </div>
-        )}
-        
-        {/* Content */}
-        <div className="flex flex-col space-y-4 p-6 sm:p-8 pl-28 sm:pl-32 md:pl-36 min-h-[180px]">
-          <h3 
-            id={`program-${title.replace(/\s+/g, '-').toLowerCase()}`}
-            className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
-          >
-            {title}
-          </h3>
-          <p className="text-white text-sm sm:text-base leading-relaxed">
-            {description}
-          </p>
-          <span className="inline-flex items-center gap-2 text-[#C3D534] group-hover:text-[#F7E73F] transition-colors font-semibold w-fit">
-            <span>Learn More</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-          </span>
         </div>
       </motion.article>
     </Link>
@@ -739,40 +726,64 @@ export function LandingPage() {
               Discover the legacy of innovation and leadership across all editions
             </motion.p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {previousGenZPrograms.map((program) => (
-                <motion.article
-                  key={program.year}
-                  variants={itemVariants}
-                  className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl overflow-hidden hover:bg-[#1E1A5F]/90 transition-all duration-300 group"
-                >
-                  <div className={cn(
-                    "relative w-full overflow-hidden",
-                    program.year === "2025" ? "h-36" : "h-48"
-                  )}>
-                    <Image
-                      src={program.image}
-                      alt={`${program.title} team photo`}
-                      fill
-                      className={cn(
-                        "group-hover:scale-105 transition-transform duration-500 object-cover",
-                        program.year === "2025" && "object-[center_20%]"
+              {previousGenZPrograms.map((program) => {
+                const CardContent = (
+                  <>
+                    <div className={cn(
+                      "relative w-full overflow-hidden",
+                      program.year === "2025" ? "h-36" : "h-48"
+                    )}>
+                      <Image
+                        src={program.image}
+                        alt={`${program.title} team photo`}
+                        fill
+                        className={cn(
+                          "group-hover:scale-105 transition-transform duration-500 object-cover",
+                          program.year === "2025" && "object-[center_20%]"
+                        )}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#1E1A5F] via-transparent to-transparent" />
+                    </div>
+                    <div className="p-5 flex flex-col space-y-3">
+                      <h3 className="text-xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">
+                        {program.title}
+                      </h3>
+                      <p className="text-white/80 text-sm">
+                        <span className="text-[#00B5AD] font-medium">What Made Us Different:</span>
+                      </p>
+                      <p className="text-white/70 text-sm leading-relaxed">
+                        {program.description}
+                      </p>
+                      {program.link && (
+                        <span className="inline-flex items-center gap-2 text-[#C3D534] group-hover:text-[#F7E73F] transition-colors font-semibold text-sm">
+                          Visit Website <ArrowRight className="w-4 h-4" />
+                        </span>
                       )}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1E1A5F] via-transparent to-transparent" />
-                  </div>
-                  <div className="p-5 flex flex-col space-y-3">
-                    <h3 className="text-xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">
-                      {program.title}
-                    </h3>
-                    <p className="text-white/80 text-sm">
-                      <span className="text-[#00B5AD] font-medium">What Made Us Different:</span>
-                    </p>
-                    <p className="text-white/70 text-sm leading-relaxed">
-                      {program.description}
-                    </p>
-                  </div>
-                </motion.article>
-              ))}
+                    </div>
+                  </>
+                );
+
+                return program.link ? (
+                  <motion.a
+                    key={program.year}
+                    href={program.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variants={itemVariants}
+                    className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl overflow-hidden hover:bg-[#1E1A5F]/90 transition-all duration-300 group block"
+                  >
+                    {CardContent}
+                  </motion.a>
+                ) : (
+                  <motion.article
+                    key={program.year}
+                    variants={itemVariants}
+                    className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl overflow-hidden hover:bg-[#1E1A5F]/90 transition-all duration-300 group"
+                  >
+                    {CardContent}
+                  </motion.article>
+                );
+              })}
             </div>
           </motion.div>
         </div>
