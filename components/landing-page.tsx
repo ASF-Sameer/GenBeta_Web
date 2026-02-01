@@ -750,10 +750,12 @@ export function LandingPage() {
                       src={program.image}
                       alt={`${program.title} team photo`}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className={cn(
+                        "group-hover:scale-105 transition-transform duration-500",
+                        program.year === "2025" ? "object-contain bg-[#1E1A5F]" : "object-cover"
+                      )}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1E1A5F] via-transparent to-transparent" />
-                    <span className="absolute bottom-3 left-4 text-[#F7E73F] text-lg font-bold">{program.year}</span>
                   </div>
                   <div className="p-5 flex flex-col space-y-3">
                     <h3 className="text-xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">
