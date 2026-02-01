@@ -139,49 +139,64 @@ const galleryImages = [
 
 const previousGenZPrograms = [
   {
+    year: "2025",
+    title: "Gen Z 2025",
+    description: "Empowering the next generation with AI & Big Data, Resilience & Agility, Creative Thinking, Leadership, and Systems Thinking for the future of work.",
+    image: "/images/genz-2025.png"
+  },
+  {
     year: "2024",
     title: "Gen Z 2024",
-    description: "Focused on supercharging leadership skills and training based on 4 modules: Speak Up and Pitch Up; Strategic Innovation; Green Skills; and Digital World."
+    description: "Focused on supercharging leadership skills and training based on 4 modules: Speak Up and Pitch Up; Strategic Innovation; Green Skills; and Digital World.",
+    image: "/images/genz-2024.png"
   },
   {
     year: "2023",
     title: "Gen Z 2023",
-    description: "Focused on cultivating entrepreneurial mindset that supports Zain's 4Sight strategy."
+    description: "Focused on cultivating entrepreneurial mindset that supports Zain's 4Sight strategy.",
+    image: "/images/genz-2023.png"
   },
   {
     year: "2022",
     title: "Gen Z 2022",
-    description: "Geared towards cultivating internal entrepreneurs, innovators, and new thinkers who already possess a mindset capable of supporting Zain's strategic goals."
+    description: "Geared towards cultivating internal entrepreneurs, innovators, and new thinkers who already possess a mindset capable of supporting Zain's strategic goals.",
+    image: "/images/genz-2022.png"
   },
   {
     year: "2021",
     title: "Gen Z 2021",
-    description: "Focused on developing digital skills for future data analysts. Addressed the topics of big data, artificial intelligence, and sustainable innovation."
+    description: "Focused on developing digital skills for future data analysts. Addressed the topics of big data, artificial intelligence, and sustainable innovation.",
+    image: "/images/genz-2021.png"
   },
   {
     year: "2020",
     title: "Gen Z 2020",
-    description: "This cycle incorporated three themes: corporate culture, leadership styles, and future trends."
+    description: "This cycle incorporated three themes: corporate culture, leadership styles, and future trends.",
+    image: "/images/genz-2020.png"
   },
   {
     year: "2019",
     title: "Gen Z 2019",
-    description: "Enhancing corporate culture and teamwork when managing projects were the main focus of this edition."
+    description: "Enhancing corporate culture and teamwork when managing projects were the main focus of this edition.",
+    image: "/images/genz-2019.png"
   },
   {
     year: "2018",
     title: "Gen Z 2018",
-    description: "Enhancing digital skills such as coding and agile project management in addition to a focus on self-growth and development."
+    description: "Enhancing digital skills such as coding and agile project management in addition to a focus on self-growth and development.",
+    image: "/images/genz-2018.png"
   },
   {
     year: "2017",
     title: "Gen Z 2017",
-    description: "Centered on establishing a business, gaining entrepreneurial skills, and studying innovative trends in the market."
+    description: "Centered on establishing a business, gaining entrepreneurial skills, and studying innovative trends in the market.",
+    image: "/images/genz-2017.png"
   },
   {
     year: "2016",
     title: "Gen Z 2016",
-    description: "Focused on a rotation in different departments throughout Zain Group with an emphasis on conducting research on various digital verticals."
+    description: "Focused on a rotation in different departments throughout Zain Group with an emphasis on conducting research on various digital verticals.",
+    image: "/images/genz-2016.png"
   }
 ]
 
@@ -728,10 +743,19 @@ export function LandingPage() {
                 <motion.article
                   key={program.year}
                   variants={itemVariants}
-                  className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl p-6 hover:bg-[#1E1A5F]/90 transition-all duration-300"
+                  className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl overflow-hidden hover:bg-[#1E1A5F]/90 transition-all duration-300 group"
                 >
-                  <div className="flex flex-col space-y-3">
-                    <span className="text-[#F7E73F] text-sm font-semibold">{program.year}</span>
+                  <div className="relative h-48 w-full overflow-hidden">
+                    <Image
+                      src={program.image}
+                      alt={`${program.title} team photo`}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1E1A5F] via-transparent to-transparent" />
+                    <span className="absolute bottom-3 left-4 text-[#F7E73F] text-lg font-bold">{program.year}</span>
+                  </div>
+                  <div className="p-5 flex flex-col space-y-3">
                     <h3 className="text-xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">
                       {program.title}
                     </h3>
