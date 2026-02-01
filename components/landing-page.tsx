@@ -73,7 +73,7 @@ const ourPrograms = [
     title: "Reframe",
     description: "A learning series empowering colleagues to rethink, reset, and drive meaningful change. Starting with Dan Heath's transformative book 'Reset'.",
     link: "/reframe",
-    image: "/images/reset-book-cover.png"
+    image: "/images/reset-book-3d.png"
   }
 ]
 
@@ -245,18 +245,16 @@ function ProgramCard({ title, description, link, image }: { title: string; descr
         aria-labelledby={`program-${title.replace(/\s+/g, '-').toLowerCase()}`}
       >
         <div className="flex flex-col sm:flex-row items-center gap-8 p-8">
-          {/* Clean 3D Book */}
+          {/* 3D Book */}
           {image && (
-            <div className="relative flex-shrink-0">
-              <div className="book-container group-hover:scale-105 transition-transform duration-500 ease-out">
-                <div className="relative w-32 h-44 sm:w-36 sm:h-52 shadow-2xl rounded-sm overflow-hidden">
-                  <Image
-                    src={image}
-                    alt={`${title} program cover`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+            <div className="relative flex-shrink-0 group-hover:scale-105 transition-transform duration-500 ease-out">
+              <div className="relative w-36 h-48 sm:w-44 sm:h-56">
+                <Image
+                  src={image}
+                  alt={`${title} program cover`}
+                  fill
+                  className="object-contain drop-shadow-2xl"
+                />
               </div>
             </div>
           )}
