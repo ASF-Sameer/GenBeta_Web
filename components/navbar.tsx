@@ -7,6 +7,7 @@ import { Menu, X, ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { cn } from "@/lib/utils"
+import { TransitionLink } from "@/components/transition-link"
 
 const navLinks = [
   { href: "#about", label: "About" },
@@ -58,14 +59,14 @@ export function Navbar() {
             {/* Logo section with back to Gen Z link */}
             <div className="flex items-center gap-2 sm:gap-3">
               {/* Back to Gen Z */}
-              <Link
+              <TransitionLink
                 href="/"
                 className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 transition-colors focus:outline-none focus:ring-2 focus:ring-turquoise"
-                aria-label="Back to Generation Z Program"
+                ariaLabel="Back to Generation Z Program"
               >
                 <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 text-foreground/70" aria-hidden="true" />
                 <span className="text-xs sm:text-sm font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">Generation Z</span>
-              </Link>
+              </TransitionLink>
             </div>
 
             {/* Desktop Navigation */}

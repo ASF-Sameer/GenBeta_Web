@@ -11,6 +11,7 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { TransitionLink } from "@/components/transition-link"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -237,7 +238,7 @@ function PillarCard({ title, description, gradientClass, glowClass }: {
 
 function ProgramCard({ title, description, link, image }: { title: string; description: string; link: string; image?: string }) {
   return (
-    <Link href={link} scroll={true} className="block group focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-2xl">
+    <TransitionLink href={link} className="block group focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-2xl">
       <motion.article
         variants={itemVariants}
         className="relative bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl text-white hover:bg-[#1E1A5F]/90 transition-all duration-300"
@@ -277,7 +278,7 @@ function ProgramCard({ title, description, link, image }: { title: string; descr
           </div>
         </div>
       </motion.article>
-    </Link>
+    </TransitionLink>
   )
 }
 
@@ -503,7 +504,7 @@ export function LandingPage() {
                 Over the past several months, we, as Generation Z graduates at Zain Group, have gained invaluable hands-on experience across diverse areas including leadership, innovation, digital delivery, UI/UX design, and agile methodologies.
               </motion.p>
               <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
-                <Link href="/reframe">
+                <TransitionLink href="/reframe">
                   <Button 
                     size="lg" 
                     className="bg-gradient-to-r from-[#C3D534] to-[#00B5AD] hover:from-[#00B5AD] hover:to-[#C3D534] text-[#1E1A5F] font-bold px-8 py-6 text-lg focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#1E1A5F] transition-all duration-300"
@@ -511,7 +512,7 @@ export function LandingPage() {
                     Explore Reframe Program
                     <ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
                   </Button>
-                </Link>
+                </TransitionLink>
               </motion.div>
             </motion.div>
 
