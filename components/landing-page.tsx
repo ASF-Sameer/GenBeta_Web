@@ -745,14 +745,17 @@ export function LandingPage() {
                   variants={itemVariants}
                   className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl overflow-hidden hover:bg-[#1E1A5F]/90 transition-all duration-300 group"
                 >
-                  <div className="relative h-48 w-full overflow-hidden">
+                  <div className={cn(
+                    "relative w-full overflow-hidden",
+                    program.year === "2025" ? "h-36" : "h-48"
+                  )}>
                     <Image
                       src={program.image}
                       alt={`${program.title} team photo`}
                       fill
                       className={cn(
-                        "group-hover:scale-105 transition-transform duration-500",
-                        program.year === "2025" ? "object-contain bg-[#1E1A5F]" : "object-cover"
+                        "group-hover:scale-105 transition-transform duration-500 object-cover",
+                        program.year === "2025" && "object-[center_20%]"
                       )}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1E1A5F] via-transparent to-transparent" />
