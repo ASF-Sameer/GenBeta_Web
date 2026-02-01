@@ -243,61 +243,36 @@ function ProgramCard({ title, description, link, image }: { title: string; descr
         className="relative bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl text-white hover:bg-[#1E1A5F]/90 transition-all duration-300"
         role="article"
         aria-labelledby={`program-${title.replace(/\s+/g, '-').toLowerCase()}`}
-        whileHover={{ scale: 1.01 }}
       >
-        <div className="flex flex-col sm:flex-row items-center gap-6 p-6 sm:p-8">
-          {/* 3D Book */}
+        <div className="flex flex-col sm:flex-row items-center gap-8 p-8">
+          {/* Clean 3D Book */}
           {image && (
-            <div className="relative flex-shrink-0 perspective-[1000px]">
-              <motion.div 
-                className="relative w-28 h-40 sm:w-32 sm:h-44 preserve-3d"
-                initial={{ rotateY: -15 }}
-                whileHover={{ rotateY: 0, scale: 1.05 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                {/* Book shadow */}
-                <div className="absolute -bottom-2 left-2 right-2 h-4 bg-black/30 blur-md rounded-full" />
-                
-                {/* Book spine */}
-                <div 
-                  className="absolute left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-[#c9a800] to-[#e6c200] rounded-l-sm"
-                  style={{ transform: "translateZ(-6px) rotateY(-90deg)", transformOrigin: "left" }}
-                />
-                
-                {/* Book cover */}
-                <div className="relative w-full h-full rounded-r-md rounded-l-sm overflow-hidden shadow-xl border border-white/10">
+            <div className="relative flex-shrink-0">
+              <div className="book-container group-hover:scale-105 transition-transform duration-500 ease-out">
+                <div className="relative w-32 h-44 sm:w-36 sm:h-52 shadow-2xl rounded-sm overflow-hidden">
                   <Image
                     src={image}
                     alt={`${title} program cover`}
                     fill
                     className="object-cover"
                   />
-                  {/* Subtle shine */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent pointer-events-none" />
                 </div>
-                
-                {/* Page edges */}
-                <div 
-                  className="absolute top-1 bottom-1 right-0 w-1 bg-gradient-to-r from-gray-100 to-gray-200"
-                  style={{ transform: "translateZ(-2px)" }}
-                />
-              </motion.div>
+              </div>
             </div>
           )}
           
           {/* Content */}
-          <div className="flex flex-col space-y-4 text-center sm:text-left">
+          <div className="flex flex-col space-y-4 text-center sm:text-left flex-1">
             <h3 
               id={`program-${title.replace(/\s+/g, '-').toLowerCase()}`}
-              className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
+              className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               {title}
             </h3>
-            <p className="text-white/90 text-sm sm:text-base leading-relaxed">
+            <p className="text-white/90 text-base leading-relaxed">
               {description}
             </p>
-            <span className="inline-flex items-center gap-2 text-[#C3D534] group-hover:text-[#F7E73F] transition-colors font-semibold w-fit mx-auto sm:mx-0">
+            <span className="inline-flex items-center gap-2 text-[#C3D534] group-hover:text-[#F7E73F] transition-colors font-semibold w-fit mx-auto sm:mx-0 mt-2">
               <span>Learn More</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
             </span>
