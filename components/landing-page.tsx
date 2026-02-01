@@ -522,12 +522,12 @@ export function LandingPage() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="relative"
             >
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
+              <div className="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
                 <Image
                   src="/images/team/group-photo.jpg"
                   alt="Generation Z 11th Edition Team - Official Group Photo"
                   fill
-                  className="object-cover"
+                  className="object-contain bg-gray-100"
                   priority
                 />
               </div>
