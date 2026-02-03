@@ -282,7 +282,7 @@ function ProgramCard({ title, description, link, image }: { title: string; descr
   )
 }
 
-function TeamMemberCard({ name, role, email, linkedin, image }: { name: string; role: string; email: string; linkedin: string; image: string }) {
+function TeamMemberCard({ name, role, email, linkedin, image }: { name: string; role: string; email?: string; linkedin?: string; image?: string }) {
   return (
     <motion.article
       variants={itemVariants}
@@ -292,12 +292,18 @@ function TeamMemberCard({ name, role, email, linkedin, image }: { name: string; 
     >
       <div className="flex flex-col items-center space-y-4">
         <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-[#00B5AD]">
-          <Image
-            src={image}
-            alt={`Portrait of ${name}`}
-            fill
-            className="object-cover"
-          />
+          {image ? (
+            <Image
+              src={image}
+              alt={`Portrait of ${name}`}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-[#C3D534] to-[#00B5AD] flex items-center justify-center">
+              <span className="text-4xl font-bold text-white">{name.charAt(0)}</span>
+            </div>
+          )}
         </div>
         <div className="space-y-1">
           <h3 
@@ -309,22 +315,26 @@ function TeamMemberCard({ name, role, email, linkedin, image }: { name: string; 
           <p className="text-[#C3D534] font-semibold">{role}</p>
         </div>
         <div className="flex flex-col items-center gap-2">
-          <a 
-            href={`mailto:${email}`}
-            className="text-white/80 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 rounded-lg px-2 py-1 text-sm"
-            aria-label={`Send email to ${name}`}
-          >
-            {email}
-          </a>
-          <a 
-            href={linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#00B5AD] hover:text-[#C3D534] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 rounded-lg px-2 py-1 text-sm"
-            aria-label={`Visit ${name}'s LinkedIn profile (opens in new tab)`}
-          >
-            LinkedIn Profile
-          </a>
+          {email && (
+            <a 
+              href={`mailto:${email}`}
+              className="text-white/80 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 rounded-lg px-2 py-1 text-sm"
+              aria-label={`Send email to ${name}`}
+            >
+              {email}
+            </a>
+          )}
+          {linkedin && (
+            <a 
+              href={linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#00B5AD] hover:text-[#C3D534] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 rounded-lg px-2 py-1 text-sm"
+              aria-label={`Visit ${name}'s LinkedIn profile (opens in new tab)`}
+            >
+              LinkedIn Profile
+            </a>
+          )}
         </div>
       </div>
     </motion.article>
@@ -448,8 +458,21 @@ function GalleryCarousel() {
   )
 }
 
-export function LandingPage() {
+interface TeamMember {
+  name: string
+  role: string
+  email?: string
+  linkedin?: string
+  image?: string
+}
+
+interface LandingPageProps {
+  sanityTeamMembers?: TeamMember[]
+}
+
+export function LandingPage({ sanityTeamMembers }: LandingPageProps) {
   const [isClient, setIsClient] = useState(false)
+  const displayTeamMembers = sanityTeamMembers && sanityTeamMembers.length > 0 ? sanityTeamMembers : teamMembers
 
   useEffect(() => {
     setIsClient(true)
@@ -696,7 +719,7 @@ export function LandingPage() {
               Meet the talented individuals driving innovation and leadership in the 11th Edition
             </motion.p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-              {teamMembers.map((member) => (
+              {displayTeamMembers.map((member) => (
                 <TeamMemberCard key={member.name} {...member} />
               ))}
             </div>
