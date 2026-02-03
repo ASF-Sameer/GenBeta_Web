@@ -7,10 +7,11 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
 - `app/` - Next.js App Router pages and layouts
   - `page.tsx` - Landing page with LandingPage component
   - `reframe/page.tsx` - Reframe program page with full sections
+  - `workshop/[slug]/page.tsx` - Dynamic workshop pages (CMS-driven)
 - `components/` - Reusable React components
   - `landing-page.tsx` - Main landing page with hero, pillars, team, gallery
-  - `hero.tsx` - Hero section for Reframe page
-  - `navbar.tsx` - Navigation bar
+  - `hero.tsx` - Hero section (accepts title/subtitle props for CMS)
+  - `navbar.tsx` - Navigation bar (always visible text links)
   - `footer.tsx` - Footer component
   - `aurora-background.tsx` - Animated gradient background
   - `floating-cube.tsx` - 3D interactive cube (Three.js)
@@ -24,6 +25,8 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
   - `ui/` - Radix UI/Shadcn components
 - `hooks/` - Custom React hooks
 - `lib/` - Utility functions
+  - `sanity.ts` - Sanity CMS client and query functions
+- `sanity-schemas/` - Sanity schema definitions (copy to your Sanity Studio)
 - `public/` - Static assets (images, logos, icons)
 - `docs/` - Project documentation (PRD, visual design recommendations)
 
@@ -32,8 +35,42 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
 - **UI**: React 19, Radix UI, Tailwind CSS v4
 - **Animations**: Framer Motion, GSAP, Lenis (smooth scrolling)
 - **3D**: Three.js, @react-three/fiber, @react-three/drei
+- **CMS**: Sanity.io (headless CMS)
 - **Form handling**: React Hook Form with Zod validation
 - **Analytics**: Vercel Analytics
+
+## Sanity CMS Integration
+The website is connected to Sanity CMS for content management.
+
+### Environment Variables
+- `NEXT_PUBLIC_SANITY_PROJECT_ID`: nbpw4115
+- `NEXT_PUBLIC_SANITY_DATASET`: production
+
+### Content Types (Schemas)
+1. **Program** - Main programs like Gen Z 2026 overview
+2. **Previous Edition** - Historical Gen Z editions (2016-2024)
+3. **Workshop** - Individual workshops (like Reframe)
+4. **Gallery Image** - Photo gallery images
+5. **Team Member** - Team member profiles
+
+### Schema Files Location
+Copy files from `sanity-schemas/` folder to your Sanity Studio's `schemaTypes/` folder:
+- `program.ts` - Program schema
+- `previousEdition.ts` - Previous editions schema
+- `workshop.ts` - Workshop schema (full page with all sections)
+- `galleryImage.ts` - Gallery images schema
+- `teamMember.ts` - Team members schema
+- `index.ts` - Schema registry
+
+### Sanity Queries (lib/sanity.ts)
+- `getPrograms()` - Fetch all programs
+- `getProgram(slug)` - Fetch single program
+- `getPreviousEditions()` - Fetch historical editions
+- `getGenZ2026()` - Fetch current year content
+- `getGalleryImages()` - Fetch gallery images
+- `getWorkshops()` - Fetch all workshops
+- `getWorkshop(slug)` - Fetch single workshop with all sections
+- `getTeamMembers()` - Fetch team members
 
 ## Pages
 1. **Landing Page** (`/`) - Gen Z program overview with 3D cube navigation
@@ -44,6 +81,7 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
    - Agenda timeline
    - Facilitators section
    - Registration form
+3. **Dynamic Workshop Pages** (`/workshop/[slug]`) - CMS-driven workshop pages
 
 ## Features from 10th Edition (Integrated)
 - Smooth scrolling with Lenis
@@ -69,6 +107,22 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
 - Start command: `npm run start`
 
 ## Recent Changes
+- 2026-02-03: Sanity CMS Integration
+  - Added Sanity client and image URL packages
+  - Created `lib/sanity.ts` with queries for all content types
+  - Created schema definitions in `sanity-schemas/` folder:
+    - Program, Previous Edition, Workshop, Gallery Image, Team Member
+  - Added dynamic workshop route at `/workshop/[slug]`
+  - Hero component now accepts title/subtitle props for CMS content
+  - Environment variables configured for Sanity project
+
+- 2026-02-03: Corporate Navigation Improvements
+  - Removed hamburger menu - all links now visible on all screen sizes
+  - Full gradient background on navbar (navy-to-blue)
+  - Uppercase navigation links with letter-spacing
+  - Register button has gradient accent treatment
+  - Responsive text sizing and spacing
+
 - 2026-01-29: Previous Programs section and brand refinements
   - **Previous Gen Z Programs**: New section displaying all 9 editions (2016-2024)
     - Shows year, program title, and "What Made Us Different" descriptions
@@ -102,60 +156,3 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
     - Focus states with ring indicators
     - ARIA labels on all interactive elements
     - Semantic HTML structure
-
-- 2026-01-29: Continuous gradient landing page with program images
-  - Landing page now uses ONE continuous gradient background (no section breaks)
-  - Programs section includes book cover images
-  - "Learn More" link now scrolls to top of target page
-  - Reading Journey (book-carousel) uses header gradient color scheme (navy-blue)
-  - Facilitators section uses header gradient color scheme (blue-navy)
-  - Gradient styling: from-[#1C2951] via-[#1E1A5F] to-[#0057B8]
-
-- 2026-01-29: Text-based accessible design with unified gradient backgrounds
-  - Removed all icons from pillar cards, team cards, workshop overview, agenda timeline, and registration sections
-  - Converted to text-based design with colored left-border accents for visual hierarchy
-  - Added "Our Programs" section on landing page featuring Reframe program
-  - Unified gradient backgrounds across all sections (removed all white sections)
-  - Systems Thinking pillar now uses turquoise-lime gradient for better visibility
-  - Simplified Reframe hero to single CTA button
-  - Team cards now show text-only LinkedIn links and email addresses
-  - Workshop benefits and attendees use border-left styling instead of icon badges
-  - Agenda timeline uses small colored dots instead of icon circles
-  - Registration form uses text-based event details with border accents
-
-- 2026-01-29: Updated design with 10th edition visual elements and new program theme
-  - New Program Theme Pillars (5 pillars):
-    - AI & Big Data (LLMs, Analytics, AI Ethics, Technological Literacy)
-    - Resilience, Flexibility & Agility (Neuroplasticity, Purpose, Mental Toughness)
-    - Creative Thinking (Problem-solving, Inclusion, Wellbeing, Collaboration)
-    - Leadership & Social Influence (Negotiation, Communication, Lifelong Learning)
-    - Systems Thinking (Lean Six Sigma, Big Picture, Systems Mapping)
-  - 10th Edition Visual Design Applied:
-    - Gradient text styling (lime-yellow-turquoise: #C3D534, #F7E73F, #00B5AD)
-    - Animated gradient orbs in background
-    - Glassmorphism pillar cards with glow effects (no icons)
-    - Gradient CTA buttons with hover transitions
-  - Real Event Gallery: 12 photos from actual Gen Z program events
-  - Converted HEIC images to JPG for web compatibility
-
-- 2026-01-29: New landing page implementation with full Gen Z 11th Edition design
-  - Created new LandingPage component with complete sections:
-    - Hero section with team photo and block gradient background
-    - About section with program overview (gradient background)
-    - Program Pillars (5 cards with glassmorphism, text-only design)
-    - Our Programs section with Reframe card
-    - Team profiles (6 members with photos, roles, email, LinkedIn)
-    - Photo gallery with responsive carousel (1/2/3 items per view)
-    - Footer with social links and Zain Group website connection
-  - Applied official Zain font from Google Fonts
-  - WCAG compliant: semantic HTML, ARIA labels, focus states, skip-to-content link
-  - Text-based design without icons for better accessibility
-  - Design system: unified gradient backgrounds throughout
-  - Color palette: Navy (#1C2951), Purple (#1E1A5F), Blue (#3B5998), Gold (#F6EB69), Turquoise (#00B5AD)
-  
-- 2026-01-28: Initial Replit setup and 10th/11th edition merge review
-  - Configured Next.js to run on port 5000 with host 0.0.0.0
-  - Removed macOS-specific dependency (@next/swc-darwin-arm64)
-  - Added allowedDevOrigins for Replit proxy compatibility
-  - Fixed TypeScript types for Framer Motion ease properties
-  - Verified smooth scrolling, animations, and 3D elements are working

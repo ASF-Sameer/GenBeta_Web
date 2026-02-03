@@ -6,7 +6,12 @@ import { Button } from "@/components/ui/button"
 import { AuroraBackground } from "@/components/aurora-background"
 import { cn } from "@/lib/utils"
 
-export function Hero() {
+interface HeroProps {
+  title?: string
+  subtitle?: string
+}
+
+export function Hero({ title = "REFRAME", subtitle }: HeroProps) {
   const [showScrollIndicator, setShowScrollIndicator] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -35,7 +40,7 @@ export function Hero() {
           >
             <span className="sr-only">Reframe at Zain - Gen Z Program</span>
             <span className="block text-5xl sm:text-6xl lg:text-8xl font-black tracking-tight mb-2" aria-hidden="true">
-              <span className="bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#C3D534] bg-clip-text text-transparent">REFRAME</span>
+              <span className="bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#C3D534] bg-clip-text text-transparent">{title.toUpperCase()}</span>
             </span>
             <span className="flex items-center justify-center gap-2 sm:gap-3 text-3xl sm:text-4xl lg:text-6xl font-bold text-white" aria-hidden="true">
               <span>AT</span>
@@ -52,9 +57,7 @@ export function Hero() {
                 : "opacity-0 translate-y-4"
             )}
           >
-            A learning series empowering colleagues to rethink, reset, and
-            drive meaningful change. Starting with Dan Heath&apos;s
-            transformative book &quot;Reset.&quot;
+            {subtitle || "A learning series empowering colleagues to rethink, reset, and drive meaningful change. Starting with Dan Heath's transformative book \"Reset.\""}
           </p>
 
           {/* CTA Buttons */}
