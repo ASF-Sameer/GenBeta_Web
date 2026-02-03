@@ -88,7 +88,7 @@ export function Navbar() {
                 )}
                 ariaLabel="Back to Generation Z Program"
               >
-                <ArrowLeft className={cn("w-3 h-3 sm:w-4 sm:h-4", isWhiteSection ? "text-[#1E1A5F]" : "text-foreground/70")} aria-hidden="true" />
+                <ArrowLeft className={cn("w-3 h-3 sm:w-4 sm:h-4", isWhiteSection ? "text-[#1E1A5F]" : "text-white")} aria-hidden="true" />
                 <span className="text-xs sm:text-sm font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">Generation Z</span>
               </TransitionLink>
             </div>
@@ -101,7 +101,7 @@ export function Navbar() {
                   href={link.href}
                   className={cn(
                     "relative px-4 py-2 text-sm font-medium transition-colors group rounded focus:outline-none focus:ring-2 focus:ring-turquoise focus:ring-offset-2",
-                    isWhiteSection ? "text-[#1E1A5F] hover:text-[#00B5AD]" : "text-foreground/80 hover:text-foreground"
+                    isWhiteSection ? "text-[#1E1A5F] hover:text-[#00B5AD]" : "text-white hover:text-[#00B5AD]"
                   )}
                 >
                   {link.label}
@@ -127,7 +127,7 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="glass-button rounded-full"
+                className={cn("glass-button rounded-full", isWhiteSection ? "text-[#1E1A5F]" : "text-white")}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-expanded={isMobileMenuOpen}
                 aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
