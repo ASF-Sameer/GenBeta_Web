@@ -1,0 +1,111 @@
+Skip to content
+abdulmohsenalzenki-gmailcom's projects
+abdulmohsenalzenki-gmailcom's projects
+
+Hobby
+
+genz-sanity-studio
+
+64r4EXTWu
+
+
+Find…
+F
+
+Deployment Details
+Build Failed
+Command "npm run build" exited with 1
+
+Created
+github/ASF-Sameer
+ASF-Sameer
+2m ago
+Status
+Error
+Latest
+Duration
+1m 14s
+Just now
+Environment
+Production
+Domains
+genz-sanity-st-git-aed433-abdulmohsenalzenki-gmailcoms-projects.vercel.app
+genz-sanity-studio-qfwrxgn7x.vercel.app
+Source
+main
+05a2b69
+Add files via upload
+
+Deployment Settings
+3 Recommendations
+Build Logs
+1m 14s
+41 lines
+Find in logs
+CtrlF
+13:17:45.791 
+   │                                                                                                               │
+13:17:45.791 
+   └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+13:17:45.791 
+13:17:45.864 
+⚠ Declared version of styled-components (^6) is not compatible with the version required by sanity (^6.1.15). This might cause problems!
+13:17:45.867 
+- Clean output folder
+13:17:45.868 
+✓ Clean output folder (3ms)
+13:17:45.869 
+- Build Sanity Studio
+13:17:46.488 
+✗ Build Sanity Studio
+13:17:46.491 
+13:17:46.491 
+Could not resolve "./schemaTypes" from "sanity.config.ts"
+13:17:46.492 
+file: /vercel/path0/sanity.config.ts
+13:17:46.492 
+    at getRollupError (file://~/path0/node_modules/rollup/dist/es/shared/parseAst.js:402:41)
+13:17:46.492 
+    at error (file://~/path0/node_modules/rollup/dist/es/shared/parseAst.js:398:42)
+13:17:46.492 
+    at ModuleLoader.handleInvalidResolvedId (file://~/path0/node_modules/rollup/dist/es/shared/node-entry.js:21687:24)
+13:17:46.493 
+    at file://~/path0/node_modules/rollup/dist/es/shared/node-entry.js:21647:26
+13:17:46.541 
+Error: Command "npm run build" exited with 1
+Deployment Summary
+Deployment Checks
+Assigning Custom Domains
+Runtime Logs
+
+View and debug runtime logs & errors
+
+Observability
+
+Monitor app health & performance
+
+Speed Insights
+
+Not Enabled
+Performance metrics from real users
+
+Web Analytics
+
+Not Enabled
+Analyze visitors & traffic in real-time
+
+Home
+Docs
+Knowledge Base
+Academy
+Help
+Contact
+Loading status…
+
+Select a display theme:
+
+system
+
+light
+
+dark
