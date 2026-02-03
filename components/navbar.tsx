@@ -84,12 +84,12 @@ export function Navbar() {
                 href="/"
                 className={cn(
                   "flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-turquoise",
-                  isWhiteSection ? "bg-gray-100 hover:bg-gray-200" : "bg-white/10 hover:bg-white/20"
+                  isWhiteSection ? "bg-gray-100 hover:bg-gray-200" : "bg-black/20 hover:bg-black/30 md:bg-white/10 md:hover:bg-white/20"
                 )}
                 ariaLabel="Back to Generation Z Program"
               >
-                <ArrowLeft className={cn("w-3 h-3 sm:w-4 sm:h-4", isWhiteSection ? "text-[#1E1A5F]" : "text-white")} aria-hidden="true" />
-                <span className="text-xs sm:text-sm font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">Generation Z</span>
+                <ArrowLeft className={cn("w-3 h-3 sm:w-4 sm:h-4", isWhiteSection ? "text-[#1E1A5F]" : "text-white shadow-sm")} aria-hidden="true" />
+                <span className="text-xs sm:text-sm font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent drop-shadow-sm">Generation Z</span>
               </TransitionLink>
             </div>
 
@@ -101,7 +101,7 @@ export function Navbar() {
                   href={link.href}
                   className={cn(
                     "relative px-4 py-2 text-sm font-medium transition-colors group rounded focus:outline-none focus:ring-2 focus:ring-turquoise focus:ring-offset-2",
-                    isWhiteSection ? "text-[#1E1A5F] hover:text-[#00B5AD]" : "text-white hover:text-[#00B5AD]"
+                    isWhiteSection ? "text-[#1E1A5F] hover:text-[#00B5AD]" : "text-white hover:text-[#00B5AD] drop-shadow-sm"
                   )}
                 >
                   {link.label}
@@ -127,7 +127,12 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 size="icon"
-                className={cn("glass-button rounded-full", isWhiteSection ? "text-[#1E1A5F]" : "text-white")}
+                className={cn(
+                  "rounded-full transition-all",
+                  isWhiteSection 
+                    ? "text-[#1E1A5F] hover:bg-black/5" 
+                    : "text-white bg-black/20 hover:bg-black/30 backdrop-blur-sm shadow-sm"
+                )}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-expanded={isMobileMenuOpen}
                 aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
