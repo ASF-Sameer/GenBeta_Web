@@ -51,14 +51,14 @@ const workshopDetails = [
 export function WorkshopOverview() {
   return (
     <section
-      id="about"
+      id="workshop-overview"
       className="py-12 sm:py-20 lg:py-32 container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
-      aria-labelledby="about-heading"
+      aria-labelledby="overview-heading"
     >
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16 px-2">
           <h2
-            id="about-heading"
+            id="overview-heading"
             className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4"
           >
             About <span className="bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">Reframe</span> at <span className="bg-gradient-to-r from-[#00B5AD] to-[#C3D534] bg-clip-text text-transparent">Zain</span>

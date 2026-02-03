@@ -11,13 +11,14 @@ import { TransitionLink } from "@/components/transition-link"
 
 const navLinks = [
   { href: "#about", label: "About" },
+  { href: "#workshop-overview", label: "Overview" },
   { href: "#books", label: "Books" },
   { href: "#agenda", label: "Agenda" },
   { href: "#team", label: "Team" },
   { href: "#register", label: "Register" },
 ]
 
-const whiteSections = ["about", "books", "agenda", "team"]
+const whiteSections = ["about", "workshop-overview", "books", "agenda", "team"]
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -95,7 +96,7 @@ export function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-1" role="list">
-              {navLinks.slice(0, -1).map((link) => (
+              {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
@@ -113,12 +114,6 @@ export function Navbar() {
             {/* Desktop Actions */}
             <div className="hidden lg:flex items-center gap-3">
               <ThemeToggle />
-              <Button
-                asChild
-                className="bg-gradient-to-r from-turquoise to-blue text-white font-semibold px-6 rounded-full hover:shadow-lg hover:shadow-turquoise/25 transition-all duration-300 hover:-translate-y-0.5 focus:ring-2 focus:ring-turquoise focus:ring-offset-2"
-              >
-                <a href="#register">Register</a>
-              </Button>
             </div>
 
             {/* Mobile Menu Button */}
