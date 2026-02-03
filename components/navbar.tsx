@@ -17,15 +17,34 @@ const navLinks = [
   { href: "#register", label: "Register" },
 ]
 
+const whiteSections = ["about", "books", "agenda", "team"]
+
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isWhiteSection, setIsWhiteSection] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
+      
+      // Check if we're in a white section
+      let inWhiteSection = false
+      for (const sectionId of whiteSections) {
+        const section = document.getElementById(sectionId)
+        if (section) {
+          const rect = section.getBoundingClientRect()
+          // Check if section top is near the top of viewport (within navbar height)
+          if (rect.top <= 80 && rect.bottom > 80) {
+            inWhiteSection = true
+            break
+          }
+        }
+      }
+      setIsWhiteSection(inWhiteSection)
     }
     window.addEventListener("scroll", handleScroll)
+    handleScroll() // Check on mount
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -45,9 +64,11 @@ export function Navbar() {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          isScrolled
-            ? "bg-white/70 dark:bg-black/50 backdrop-blur-xl border-b border-white/20"
-            : "bg-transparent"
+          isWhiteSection
+            ? "bg-white shadow-md"
+            : isScrolled
+              ? "bg-white/70 dark:bg-black/50 backdrop-blur-xl border-b border-white/20"
+              : "bg-transparent"
         )}
       >
         <nav
@@ -61,10 +82,13 @@ export function Navbar() {
               {/* Back to Gen Z */}
               <TransitionLink
                 href="/"
-                className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 transition-colors focus:outline-none focus:ring-2 focus:ring-turquoise"
+                className={cn(
+                  "flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-turquoise",
+                  isWhiteSection ? "bg-gray-100 hover:bg-gray-200" : "bg-white/10 hover:bg-white/20"
+                )}
                 ariaLabel="Back to Generation Z Program"
               >
-                <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 text-foreground/70" aria-hidden="true" />
+                <ArrowLeft className={cn("w-3 h-3 sm:w-4 sm:h-4", isWhiteSection ? "text-[#1E1A5F]" : "text-foreground/70")} aria-hidden="true" />
                 <span className="text-xs sm:text-sm font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">Generation Z</span>
               </TransitionLink>
             </div>
@@ -75,7 +99,10 @@ export function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="relative px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors group rounded focus:outline-none focus:ring-2 focus:ring-turquoise focus:ring-offset-2"
+                  className={cn(
+                    "relative px-4 py-2 text-sm font-medium transition-colors group rounded focus:outline-none focus:ring-2 focus:ring-turquoise focus:ring-offset-2",
+                    isWhiteSection ? "text-[#1E1A5F] hover:text-[#00B5AD]" : "text-foreground/80 hover:text-foreground"
+                  )}
                 >
                   {link.label}
                   <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-turquoise transition-all duration-300 group-hover:w-3/4" aria-hidden="true" />
