@@ -1,0 +1,110 @@
+Skip to content
+abdulmohsenalzenki-gmailcom's projects
+abdulmohsenalzenki-gmailcom's projects
+
+Hobby
+
+genz-sanity-studio
+
+EPykw4Jne
+
+
+Find…
+F
+
+Deployment Details
+Build Failed
+No Output Directory named "public" found after the Build completed. Configure the Output Directory in your Project Settings. Alternatively, configure vercel.json#outputDirectory.
+
+Created
+github/ASF-Sameer
+ASF-Sameer
+2m ago
+Status
+Error
+Latest
+Duration
+1m 34s
+Just now
+Environment
+Production
+Domains
+genz-sanity-st-git-aed433-abdulmohsenalzenki-gmailcoms-projects.vercel.app
+genz-sanity-studio-r6h85d49z.vercel.app
+Source
+main
+33551cc
+Add files via upload
+
+Deployment Settings
+3 Recommendations
+Build Logs
+1m 34s
+35 lines
+Find in logs
+CtrlF
+13:21:19.753 
+13:21:21.205 
+13:21:21.206 
+   ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+13:21:21.206 
+   │                                                                                                               │
+13:21:21.207 
+   │   The `sanity` package is moving to v4 on July 15 and will require Node.js 20+.                               │
+13:21:21.207 
+   │   Learn what this means for your apps at https://www.sanity.io/blog/a-major-version-bump-for-a-minor-reason   │
+13:21:21.207 
+   │                                                                                                               │
+13:21:21.208 
+   └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+13:21:21.208 
+13:21:21.280 
+⚠ Declared version of styled-components (^6) is not compatible with the version required by sanity (^6.1.15). This might cause problems!
+13:21:21.283 
+- Clean output folder
+13:21:21.284 
+✓ Clean output folder (3ms)
+13:21:21.284 
+- Build Sanity Studio
+13:21:44.420 
+✓ Build Sanity Studio (23135ms)
+13:21:44.559 
+Error: No Output Directory named "public" found after the Build completed. Configure the Output Directory in your Project Settings. Alternatively, configure vercel.json#outputDirectory.
+13:21:44.560 
+Learn More: https://vercel.link/missing-public-directory
+Deployment Summary
+Deployment Checks
+Assigning Custom Domains
+Runtime Logs
+
+View and debug runtime logs & errors
+
+Observability
+
+Monitor app health & performance
+
+Speed Insights
+
+Not Enabled
+Performance metrics from real users
+
+Web Analytics
+
+Not Enabled
+Analyze visitors & traffic in real-time
+
+Home
+Docs
+Knowledge Base
+Academy
+Help
+Contact
+Loading status…
+
+Select a display theme:
+
+system
+
+light
+
+dark
