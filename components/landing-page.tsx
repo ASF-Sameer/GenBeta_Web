@@ -457,30 +457,33 @@ export function LandingPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1C2951] via-[#1E1A5F] via-[#0057B8] via-[#1E1A5F] to-[#1C2951]">
-      {/* Hero Section */}
-      <section 
-        className="relative min-h-screen"
-        aria-labelledby="hero-heading"
-      >
+      {/* Single Container for All Content */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         
-        {/* Navigation */}
-        <nav className="relative z-10 flex items-center justify-between px-6 py-4 lg:px-12" role="navigation" aria-label="Main navigation">
-          <Link href="/" className="focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-lg" aria-label="Gen Z Home">
-            <span className="text-2xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">
-              Generation Z
-            </span>
-          </Link>
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#about" className="text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Home</a>
-            <a href="#team" className="text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Meet the Team</a>
-            <a href="#pillars" className="text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Explore our Work</a>
-            <a href="#gallery" className="text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Our Experiences</a>
-          </div>
-        </nav>
+        {/* Hero Section */}
+        <section 
+          className="relative min-h-screen"
+          aria-labelledby="hero-heading"
+        >
+          
+          {/* Navigation */}
+          <nav className="relative z-10 flex items-center justify-between py-4" role="navigation" aria-label="Main navigation">
+            <Link href="/" className="focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-lg" aria-label="Gen Z Home">
+              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">
+                Generation Z
+              </span>
+            </Link>
+            <div className="hidden md:flex items-center gap-4 lg:gap-8">
+              <a href="#about" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Home</a>
+              <a href="#team" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Meet the Team</a>
+              <a href="#pillars" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Explore our Work</a>
+              <a href="#gallery" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Our Experiences</a>
+            </div>
+          </nav>
 
-        {/* Hero Content */}
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-16 lg:py-24">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* Hero Content */}
+          <div className="relative z-10 py-8 sm:py-12 lg:py-20">
+            <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -542,12 +545,11 @@ export function LandingPage() {
       </section>
 
       {/* About Section */}
-      <section 
-        id="about" 
-        className="py-20"
-        aria-labelledby="about-heading"
-      >
-        <div className="container mx-auto px-6 lg:px-12">
+        <section 
+          id="about" 
+          className="py-12 sm:py-16 lg:py-20"
+          aria-labelledby="about-heading"
+        >
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -562,21 +564,20 @@ export function LandingPage() {
             >
               About the Gen Z Program
             </motion.h2>
-            <motion.p variants={itemVariants} className="text-white text-lg leading-relaxed">
+            <motion.p variants={itemVariants} className="text-white text-base sm:text-lg leading-relaxed">
               Since 2016, Zain has continuously supported youth development and shaped future leaders, an effort that gave rise to the Generation Z program. It is a development program aimed at identifying and assessing young graduates who innately possess leadership skills. This year marks the 11th anniversary of the program, and as part of Zain&apos;s wider 4WARD strategy, the program positions 6 high-potential young talents at the center of digital transformation efforts, developing critical capabilities in product innovation, agile delivery, leadership, and customer experience.
             </motion.p>
           </motion.div>
-        </div>
-      </section>
+        </section>
 
       {/* Program Pillars - with Animated Orbs */}
-      <section 
-        id="pillars" 
-        className="relative py-20 overflow-hidden"
-        aria-labelledby="pillars-heading"
-      >
-        {/* Animated Gradient Orbs - 10th Edition Style */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <section 
+          id="pillars" 
+          className="relative py-12 sm:py-16 lg:py-20 overflow-hidden"
+          aria-labelledby="pillars-heading"
+        >
+          {/* Animated Gradient Orbs - 10th Edition Style */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <motion.div 
             className="absolute top-20 right-10 w-96 h-96 bg-[#C3D534]/20 rounded-full blur-3xl"
             animate={{ 
@@ -615,40 +616,39 @@ export function LandingPage() {
           />
         </div>
         
-        <div className="relative z-10 container mx-auto px-6 lg:px-12">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
-          >
-            <motion.h2 
-              id="pillars-heading"
-              variants={itemVariants} 
-              className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
+        <div className="relative z-10">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={containerVariants}
             >
-              11th Edition Program Theme
-            </motion.h2>
-            <motion.p variants={itemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
-              Our comprehensive development framework designed to cultivate future-ready leaders
-            </motion.p>
-            {/* 5-Pillar Grid: All 5 in responsive grid */}
-            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {programPillars.map((pillar) => (
-                <PillarCard key={pillar.title} {...pillar} />
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+              <motion.h2 
+                id="pillars-heading"
+                variants={itemVariants} 
+                className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
+              >
+                11th Edition Program Theme
+              </motion.h2>
+              <motion.p variants={itemVariants} className="text-white/70 text-center mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
+                Our comprehensive development framework designed to cultivate future-ready leaders
+              </motion.p>
+              {/* 5-Pillar Grid: All 5 in responsive grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                {programPillars.map((pillar) => (
+                  <PillarCard key={pillar.title} {...pillar} />
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
 
       {/* Our Programs Section */}
-      <section 
-        id="programs" 
-        className="py-20"
-        aria-labelledby="programs-heading"
-      >
-        <div className="container mx-auto px-6 lg:px-12">
+        <section 
+          id="programs" 
+          className="py-12 sm:py-16 lg:py-20"
+          aria-labelledby="programs-heading"
+        >
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -658,11 +658,11 @@ export function LandingPage() {
             <motion.h2 
               id="programs-heading"
               variants={itemVariants} 
-              className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               Our Programs
             </motion.h2>
-            <motion.p variants={itemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
+            <motion.p variants={itemVariants} className="text-white/70 text-center mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
               Initiatives designed to foster growth, learning, and meaningful impact
             </motion.p>
             <div className="max-w-2xl mx-auto">
@@ -671,16 +671,14 @@ export function LandingPage() {
               ))}
             </div>
           </motion.div>
-        </div>
-      </section>
+        </section>
 
-      {/* Team Section */}
-      <section 
-        id="team" 
-        className="py-20"
-        aria-labelledby="team-heading"
-      >
-        <div className="container mx-auto px-6 lg:px-12">
+        {/* Team Section */}
+        <section 
+          id="team" 
+          className="py-12 sm:py-16 lg:py-20"
+          aria-labelledby="team-heading"
+        >
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -690,29 +688,27 @@ export function LandingPage() {
             <motion.h2 
               id="team-heading"
               variants={itemVariants} 
-              className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               Gen Z 2026
             </motion.h2>
-            <motion.p variants={itemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
+            <motion.p variants={itemVariants} className="text-white/70 text-center mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
               Meet the talented individuals driving innovation and leadership in the 11th Edition
             </motion.p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
               {teamMembers.map((member) => (
                 <TeamMemberCard key={member.name} {...member} />
               ))}
             </div>
           </motion.div>
-        </div>
-      </section>
+        </section>
 
-      {/* Previous Gen Z Programs Section */}
-      <section 
-        id="previous-programs" 
-        className="py-20"
-        aria-labelledby="previous-programs-heading"
-      >
-        <div className="container mx-auto px-6 lg:px-12">
+        {/* Previous Gen Z Programs Section */}
+        <section 
+          id="previous-programs" 
+          className="py-12 sm:py-16 lg:py-20"
+          aria-labelledby="previous-programs-heading"
+        >
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -722,14 +718,14 @@ export function LandingPage() {
             <motion.h2 
               id="previous-programs-heading"
               variants={itemVariants} 
-              className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               The Previous Gen Zs
             </motion.h2>
-            <motion.p variants={itemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
+            <motion.p variants={itemVariants} className="text-white/70 text-center mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
               Discover the legacy of innovation and leadership across all editions
             </motion.p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {previousGenZPrograms.map((program) => {
                 const CardContent = (
                   <>
@@ -790,16 +786,14 @@ export function LandingPage() {
               })}
             </div>
           </motion.div>
-        </div>
-      </section>
+        </section>
 
-      {/* Gallery Section */}
-      <section 
-        id="gallery" 
-        className="py-20"
-        aria-labelledby="gallery-heading"
-      >
-        <div className="container mx-auto px-6 lg:px-12">
+        {/* Gallery Section */}
+        <section 
+          id="gallery" 
+          className="py-12 sm:py-16 lg:py-20"
+          aria-labelledby="gallery-heading"
+        >
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -809,7 +803,7 @@ export function LandingPage() {
             <motion.h2 
               id="gallery-heading"
               variants={itemVariants} 
-              className="text-3xl md:text-4xl font-bold mb-12 bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               Gallery
             </motion.h2>
@@ -817,14 +811,16 @@ export function LandingPage() {
               <GalleryCarousel />
             </motion.div>
           </motion.div>
-        </div>
-      </section>
+        </section>
+        
+      </div>
+      {/* End of Single Container */}
 
-      {/* Footer */}
-      <footer className="bg-[#1E1A5F] py-16" role="contentinfo">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="flex flex-col items-center space-y-8">
-            <h2 className="text-2xl font-bold text-white">Connect with us</h2>
+      {/* Footer - Full Width */}
+      <footer className="bg-[#1E1A5F] py-12 sm:py-16" role="contentinfo">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          <div className="flex flex-col items-center space-y-6 sm:space-y-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">Connect with us</h2>
             <div className="flex gap-6">
               <a 
                 href="https://www.linkedin.com/company/zaborns" 
