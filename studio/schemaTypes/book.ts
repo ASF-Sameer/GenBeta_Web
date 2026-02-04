@@ -30,6 +30,13 @@ export const bookType = defineType({
       description: 'Brief description shown on the card',
     }),
     defineField({
+      name: 'isPrimary',
+      title: 'Primary Book',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Mark as the default book to show when users first enter this workshop. Only one book per workshop should be primary.',
+    }),
+    defineField({
       name: 'isDecided',
       title: 'Is Book Decided',
       type: 'boolean',
@@ -94,11 +101,14 @@ export const bookType = defineType({
       title: 'title',
       author: 'author',
       isDecided: 'isDecided',
+      isPrimary: 'isPrimary',
       media: 'coverImage',
     },
-    prepare({title, author, isDecided, media}) {
+    prepare({title, author, isDecided, isPrimary, media}) {
+      const prefix = isPrimary ? '⭐ ' : ''
+      const suffix = isDecided ? '' : ' [Undecided]'
       return {
-        title: isDecided ? title : `[Undecided] ${title || 'Book'}`,
+        title: `${prefix}${title || 'Book'}${suffix}`,
         subtitle: author,
         media,
       }

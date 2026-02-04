@@ -12,8 +12,9 @@ A Next.js 16 website for "Generation Z" - 11th Edition 2026. This is a merged co
   - `workshop/[slug]/page.tsx` - Dynamic workshop pages (fully CMS-driven)
 - `components/` - Reusable React components
   - `landing-page.tsx` - Main landing page with CMS-editable hero, pillars, team, gallery
-  - `workshop-page-content.tsx` - Full CMS-driven workshop page with all sections
-  - `book-popup-modal.tsx` - Book cards with popup modals for workshop details
+  - `interactive-workshop-page.tsx` - Full CMS-driven workshop page with interactive book selection
+  - `book-detail-section.tsx` - Full-page book detail view (replaces popup modal)
+  - `selectable-book-card.tsx` - Clickable book card with selection state and "Featured" badge
   - `hero.tsx` - Hero section (accepts title/subtitle props for CMS)
   - `navbar.tsx` - Navigation bar (always visible text links)
   - `footer.tsx` - Footer component
@@ -152,12 +153,19 @@ Change the `formEmbedUrl` field in the CMS to swap embedded registration forms (
 - Start command: `npm run start`
 
 ## Recent Changes
+- 2026-02-04: Interactive Book Selection & Primary Book Feature
+  - Replaced popup modals with full-page book detail view using smooth page transitions
+  - Added `isPrimary` field to book schema - mark a book as the default to show when entering a workshop
+  - Primary books are auto-selected when users navigate to a workshop page
+  - Books marked as primary show a "Featured" badge in the reading journey section
+  - Added empty state messaging when no books/CMS content is available
+  - Created `InteractiveWorkshopPage`, `BookDetailSection`, and `SelectableBookCard` components
+  - Book selection uses AnimatePresence for smooth slide animations between views
+
 - 2026-02-04: Full CMS Integration for All Content
   - Created `siteSettings` schema for global site configuration
   - Created comprehensive `book` schema with popup content, files, links, and placeholder messages
   - Enhanced `workshop` schema with all sections (hero badge, about, benefits, attendees, timing, reading journey, session flow, facilitators, reserve spot, registration)
-  - Added `BookPopupModal` component for book detail popups
-  - Added `WorkshopPageContent` component for fully CMS-driven workshop pages
   - Updated `landing-page.tsx` to accept all CMS data (pillars, programs, previous editions, gallery, footer, hero, about)
   - Updated `app/page.tsx` to fetch all data from Sanity and pass to LandingPage
   - Updated `app/reframe/page.tsx` to use CMS data with fallback to hardcoded

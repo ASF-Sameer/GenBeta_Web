@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { PortableText } from "@portabletext/react"
@@ -48,6 +48,7 @@ interface Book {
   author?: string
   coverImageUrl?: string
   shortDescription?: string
+  isPrimary?: boolean
   isDecided: boolean
   placeholderMessage?: string
   popupContent?: {
@@ -172,6 +173,18 @@ function getIcon(iconName?: string) {
 
 export function InteractiveWorkshopPage({ workshop }: InteractiveWorkshopPageProps) {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null)
+  const [hasInitialized, setHasInitialized] = useState(false)
+
+  // Auto-select the primary book when the page loads
+  useEffect(() => {
+    if (!hasInitialized && workshop.readingJourneySection?.books && workshop.readingJourneySection.books.length > 0) {
+      const primaryBook = workshop.readingJourneySection.books.find(book => book.isPrimary)
+      if (primaryBook) {
+        setSelectedBook(primaryBook)
+      }
+      setHasInitialized(true)
+    }
+  }, [workshop.readingJourneySection?.books, hasInitialized])
 
   const handleBookSelect = (book: Book) => {
     setSelectedBook(book)
@@ -230,13 +243,12 @@ export function InteractiveWorkshopPage({ workshop }: InteractiveWorkshopPagePro
               <TimingSection data={workshop.timingSection} />
             )}
             
-            {workshop.readingJourneySection && workshop.readingJourneySection.books && workshop.readingJourneySection.books.length > 0 && (
-              <ReadingJourneySection 
-                data={workshop.readingJourneySection} 
-                onBookSelect={handleBookSelect}
-                selectedBookId={selectedBook?._id}
-              />
-            )}
+            <ReadingJourneySection 
+              data={workshop.readingJourneySection} 
+              onBookSelect={handleBookSelect}
+              selectedBookId={selectedBook?._id}
+              showEmptyState={true}
+            />
             
             {workshop.sessionFlowSection && (
               <SessionFlowSection data={workshop.sessionFlowSection} />
@@ -535,12 +547,52 @@ function TimingSection({ data }: { data: NonNullable<WorkshopData['timingSection
   )
 }
 
-function ReadingJourneySection({ data, onBookSelect, selectedBookId }: { 
-  data: NonNullable<WorkshopData['readingJourneySection']>
+function ReadingJourneySection({ data, onBookSelect, selectedBookId, showEmptyState = false }: { 
+  data?: WorkshopData['readingJourneySection']
   onBookSelect: (book: Book) => void
   selectedBookId?: string
+  showEmptyState?: boolean
 }) {
-  if (!data.books || data.books.length === 0) return null
+  const hasBooks = data?.books && data.books.length > 0
+  
+  // Show empty state message when no books available
+  if (!hasBooks) {
+    if (!showEmptyState) return null
+    
+    return (
+      <section className="py-16 lg:py-24">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={containerVariants}
+            className="text-center"
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
+            >
+              {data?.title || "Your Reading Journey"}
+            </motion.h2>
+            
+            <motion.div 
+              variants={itemVariants}
+              className="max-w-xl mx-auto mt-8 p-8 bg-[#1E1A5F]/60 backdrop-blur-md border border-white/20 rounded-2xl"
+            >
+              <BookOpen className="w-16 h-16 text-[#C3D534] mx-auto mb-4" />
+              <p className="text-white/80 text-lg mb-2">
+                {data?.subtitle || "Books will be announced soon!"}
+              </p>
+              <p className="text-white/60 text-sm">
+                Stay tuned for the curated reading list that will guide your learning journey.
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+    )
+  }
   
   return (
     <section className="py-16 lg:py-24">
@@ -551,7 +603,7 @@ function ReadingJourneySection({ data, onBookSelect, selectedBookId }: {
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
         >
-          {data.title && (
+          {data?.title && (
             <motion.h2
               variants={itemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
@@ -560,7 +612,7 @@ function ReadingJourneySection({ data, onBookSelect, selectedBookId }: {
             </motion.h2>
           )}
           
-          {data.subtitle && (
+          {data?.subtitle && (
             <motion.p variants={itemVariants} className="text-white/70 text-center mb-4 max-w-2xl mx-auto">
               {data.subtitle}
             </motion.p>
@@ -571,7 +623,7 @@ function ReadingJourneySection({ data, onBookSelect, selectedBookId }: {
           </motion.p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {data.books.map((book) => (
+            {data?.books?.map((book) => (
               <motion.div key={book._id} variants={itemVariants}>
                 <SelectableBookCard 
                   book={book}

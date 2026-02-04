@@ -10,6 +10,7 @@ interface Book {
   author?: string
   coverImageUrl?: string
   shortDescription?: string
+  isPrimary?: boolean
   isDecided: boolean
   placeholderMessage?: string
 }
@@ -55,6 +56,11 @@ export function SelectableBookCard({ book, onSelect, isSelected }: SelectableBoo
             <svg className="w-4 h-4 text-[#1E1A5F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
             </svg>
+          </div>
+        )}
+        {book.isPrimary && !isSelected && (
+          <div className="absolute top-2 left-2 px-2 py-1 bg-[#F7E73F] rounded-full flex items-center justify-center">
+            <span className="text-[10px] font-bold text-[#1E1A5F] uppercase tracking-wide">Featured</span>
           </div>
         )}
       </div>

@@ -251,6 +251,7 @@ export async function getWorkshop(slug: string) {
           author,
           coverImage,
           shortDescription,
+          isPrimary,
           isDecided,
           placeholderMessage,
           popupContent {
