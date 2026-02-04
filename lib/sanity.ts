@@ -24,6 +24,26 @@ export async function getSiteSettings() {
   return sanityClient.fetch(`
     *[_type == "siteSettings"][0] {
       siteTitle,
+      theme {
+        colors {
+          primary,
+          secondary,
+          accent,
+          navyDark,
+          navyLight,
+          blue
+        },
+        fonts {
+          headingFont,
+          bodyFont
+        },
+        gradients {
+          heroGradientStart,
+          heroGradientEnd,
+          cardGradientStart,
+          cardGradientEnd
+        }
+      },
       heroSection {
         welcomeText,
         title,
@@ -89,6 +109,34 @@ export async function getSiteSettings() {
         label,
         url,
         isButton
+      }
+    }
+  `)
+}
+
+// Get only theme settings (for layout)
+export async function getThemeSettings() {
+  return sanityClient.fetch(`
+    *[_type == "siteSettings"][0] {
+      theme {
+        colors {
+          primary,
+          secondary,
+          accent,
+          navyDark,
+          navyLight,
+          blue
+        },
+        fonts {
+          headingFont,
+          bodyFont
+        },
+        gradients {
+          heroGradientStart,
+          heroGradientEnd,
+          cardGradientStart,
+          cardGradientEnd
+        }
       }
     }
   `)

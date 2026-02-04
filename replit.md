@@ -153,6 +153,16 @@ Change the `formEmbedUrl` field in the CMS to swap embedded registration forms (
 - Start command: `npm run start`
 
 ## Recent Changes
+- 2026-02-04: CMS-Editable Theme (Fonts & Colors)
+  - Added `theme` settings to siteSettings schema with:
+    - **Colors**: Primary (lime), Secondary (yellow), Accent (turquoise), Navy Dark, Navy Light, Blue
+    - **Fonts**: Heading font and body font selection (Zain, Inter, Poppins, Montserrat, Playfair, Space Grotesk, Open Sans, Lato, Source Sans, Roboto)
+    - **Gradients**: Hero gradient, card gradient start/end colors
+  - Created `CMSThemeProvider` component that applies CSS variables from CMS
+  - Updated layout.tsx to load all Google Fonts and fetch theme settings server-side
+  - Updated globals.css to use CSS custom properties for colors
+  - Theme changes in Sanity CMS automatically apply to the entire website
+
 - 2026-02-04: Interactive Book Selection & Primary Book Feature
   - Replaced popup modals with full-page book detail view using smooth page transitions
   - Added `isPrimary` field to book schema - mark a book as the default to show when entering a workshop

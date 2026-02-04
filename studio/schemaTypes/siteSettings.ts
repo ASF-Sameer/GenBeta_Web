@@ -4,17 +4,100 @@ export const siteSettingsType = defineType({
   name: 'siteSettings',
   title: 'Site Settings',
   type: 'document',
+  groups: [
+    {name: 'general', title: 'General'},
+    {name: 'theme', title: 'Theme & Design'},
+    {name: 'content', title: 'Content Sections'},
+    {name: 'navigation', title: 'Navigation & Footer'},
+  ],
   fields: [
     defineField({
       name: 'siteTitle',
       title: 'Site Title',
       type: 'string',
       initialValue: 'Generation Z',
+      group: 'general',
+    }),
+    defineField({
+      name: 'theme',
+      title: 'Theme Settings',
+      type: 'object',
+      group: 'theme',
+      options: {
+        collapsible: true,
+        collapsed: false,
+      },
+      fields: [
+        {
+          name: 'colors',
+          title: 'Brand Colors',
+          type: 'object',
+          fields: [
+            {name: 'primary', title: 'Primary (Lime)', type: 'string', initialValue: '#C3D534', description: 'Main accent color'},
+            {name: 'secondary', title: 'Secondary (Yellow)', type: 'string', initialValue: '#F7E73F', description: 'Secondary accent color'},
+            {name: 'accent', title: 'Accent (Turquoise)', type: 'string', initialValue: '#00B5AD', description: 'Highlight/CTA color'},
+            {name: 'navyDark', title: 'Navy Dark', type: 'string', initialValue: '#1E1A5F', description: 'Dark background color'},
+            {name: 'navyLight', title: 'Navy Light', type: 'string', initialValue: '#1C2951', description: 'Lighter navy for gradients'},
+            {name: 'blue', title: 'Blue', type: 'string', initialValue: '#0057B8', description: 'Secondary blue color'},
+          ],
+        },
+        {
+          name: 'fonts',
+          title: 'Font Settings',
+          type: 'object',
+          fields: [
+            {
+              name: 'headingFont',
+              title: 'Heading Font',
+              type: 'string',
+              options: {
+                list: [
+                  {title: 'Zain (Default)', value: 'zain'},
+                  {title: 'Inter', value: 'inter'},
+                  {title: 'Poppins', value: 'poppins'},
+                  {title: 'Montserrat', value: 'montserrat'},
+                  {title: 'Playfair Display', value: 'playfair'},
+                  {title: 'Space Grotesk', value: 'space-grotesk'},
+                ],
+              },
+              initialValue: 'zain',
+            },
+            {
+              name: 'bodyFont',
+              title: 'Body Font',
+              type: 'string',
+              options: {
+                list: [
+                  {title: 'Zain (Default)', value: 'zain'},
+                  {title: 'Inter', value: 'inter'},
+                  {title: 'Open Sans', value: 'open-sans'},
+                  {title: 'Lato', value: 'lato'},
+                  {title: 'Source Sans Pro', value: 'source-sans'},
+                  {title: 'Roboto', value: 'roboto'},
+                ],
+              },
+              initialValue: 'zain',
+            },
+          ],
+        },
+        {
+          name: 'gradients',
+          title: 'Gradient Settings',
+          type: 'object',
+          fields: [
+            {name: 'heroGradientStart', title: 'Hero Gradient Start', type: 'string', initialValue: '#1E1A5F'},
+            {name: 'heroGradientEnd', title: 'Hero Gradient End', type: 'string', initialValue: '#0057B8'},
+            {name: 'cardGradientStart', title: 'Card Gradient Start', type: 'string', initialValue: '#1C2951'},
+            {name: 'cardGradientEnd', title: 'Card Gradient End', type: 'string', initialValue: '#0057B8'},
+          ],
+        },
+      ],
     }),
     defineField({
       name: 'heroSection',
       title: 'Hero Section',
       type: 'object',
+      group: 'content',
       fields: [
         {name: 'welcomeText', title: 'Welcome Text', type: 'string', initialValue: 'Welcome to'},
         {name: 'title', title: 'Title', type: 'string', initialValue: 'The 11th Edition of'},
@@ -30,6 +113,7 @@ export const siteSettingsType = defineType({
       name: 'aboutSection',
       title: 'About Section',
       type: 'object',
+      group: 'content',
       fields: [
         {name: 'title', title: 'Section Title', type: 'string', initialValue: 'About Generation Z'},
         {name: 'subtitle', title: 'Subtitle', type: 'text'},
@@ -41,6 +125,7 @@ export const siteSettingsType = defineType({
       name: 'pillars',
       title: 'Program Pillars/Themes',
       type: 'array',
+      group: 'content',
       of: [{
         type: 'object',
         fields: [
@@ -58,6 +143,7 @@ export const siteSettingsType = defineType({
       name: 'pillarsSection',
       title: 'Pillars/Themes Section',
       type: 'object',
+      group: 'content',
       fields: [
         {name: 'title', title: 'Section Title', type: 'string', initialValue: '11th Edition Program Theme'},
         {name: 'subtitle', title: 'Subtitle', type: 'text'},
@@ -67,6 +153,7 @@ export const siteSettingsType = defineType({
       name: 'programsSection',
       title: 'Programs Section',
       type: 'object',
+      group: 'content',
       fields: [
         {name: 'title', title: 'Section Title', type: 'string', initialValue: 'Our Programs'},
         {name: 'subtitle', title: 'Subtitle', type: 'text'},
@@ -76,6 +163,7 @@ export const siteSettingsType = defineType({
       name: 'previousEditionsSection',
       title: 'Previous Editions Section',
       type: 'object',
+      group: 'content',
       fields: [
         {name: 'title', title: 'Section Title', type: 'string', initialValue: 'Previous Gen Z Programs'},
         {name: 'subtitle', title: 'Subtitle', type: 'text'},
@@ -85,6 +173,7 @@ export const siteSettingsType = defineType({
       name: 'gallerySection',
       title: 'Gallery Section',
       type: 'object',
+      group: 'content',
       fields: [
         {name: 'title', title: 'Section Title', type: 'string', initialValue: 'Our Experiences'},
         {name: 'subtitle', title: 'Subtitle', type: 'text'},
@@ -94,6 +183,7 @@ export const siteSettingsType = defineType({
       name: 'teamSection',
       title: 'Team Section',
       type: 'object',
+      group: 'content',
       fields: [
         {name: 'title', title: 'Section Title', type: 'string', initialValue: 'Meet the Team'},
         {name: 'subtitle', title: 'Subtitle', type: 'text'},
@@ -103,6 +193,7 @@ export const siteSettingsType = defineType({
       name: 'footer',
       title: 'Footer',
       type: 'object',
+      group: 'navigation',
       fields: [
         {name: 'copyrightText', title: 'Copyright Text', type: 'string'},
         {name: 'tagline', title: 'Tagline', type: 'string'},
@@ -149,6 +240,7 @@ export const siteSettingsType = defineType({
       name: 'navLinks',
       title: 'Navigation Links',
       type: 'array',
+      group: 'navigation',
       of: [{
         type: 'object',
         fields: [
