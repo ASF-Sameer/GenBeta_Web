@@ -14,6 +14,86 @@ export function urlFor(source: Parameters<typeof builder.image>[0]) {
   return builder.image(source)
 }
 
+export function fileUrl(ref: string) {
+  const [, id, extension] = ref.split('-')
+  return `https://cdn.sanity.io/files/${sanityClient.config().projectId}/${sanityClient.config().dataset}/${id}.${extension}`
+}
+
+// Site Settings (global site configuration)
+export async function getSiteSettings() {
+  return sanityClient.fetch(`
+    *[_type == "siteSettings"][0] {
+      siteTitle,
+      heroSection {
+        welcomeText,
+        title,
+        programName,
+        byLine,
+        description,
+        ctaText,
+        ctaLink,
+        heroImage
+      },
+      aboutSection {
+        title,
+        subtitle,
+        description
+      },
+      pillars[] {
+        title,
+        description,
+        icon,
+        color,
+        topics,
+        bookCover,
+        linkUrl
+      },
+      pillarsSection {
+        title,
+        subtitle
+      },
+      programsSection {
+        title,
+        subtitle
+      },
+      previousEditionsSection {
+        title,
+        subtitle
+      },
+      gallerySection {
+        title,
+        subtitle
+      },
+      teamSection {
+        title,
+        subtitle
+      },
+      footer {
+        copyrightText,
+        tagline,
+        socialLinks[] {
+          platform,
+          url,
+          icon
+        },
+        quickLinks[] {
+          label,
+          url
+        },
+        zainLinks[] {
+          label,
+          url
+        }
+      },
+      navLinks[] {
+        label,
+        url,
+        isButton
+      }
+    }
+  `)
+}
+
 // Programs (Our Programs section - like Reframe, etc.)
 export async function getPrograms() {
   return sanityClient.fetch(`
@@ -61,7 +141,7 @@ export async function getPreviousEditions() {
   `)
 }
 
-// Gen Z 2026 Content
+// Gen Z 2026 Content (legacy - keeping for compatibility)
 export async function getGenZ2026() {
   return sanityClient.fetch(`
     *[_type == "genZ2026"][0] {
@@ -73,7 +153,7 @@ export async function getGenZ2026() {
         title,
         description,
         color,
-        topics[]
+        topics
       },
       teamMembers[] {
         name,
@@ -103,15 +183,14 @@ export async function getGalleryImages() {
 // Workshops (individual workshop pages like Reframe)
 export async function getWorkshops() {
   return sanityClient.fetch(`
-    *[_type == "workshop"] | order(date desc) {
+    *[_type == "workshop"] | order(order asc) {
       _id,
       title,
       slug,
       shortDescription,
       image,
-      date,
-      location,
-      featured
+      featured,
+      order
     }
   `)
 }
@@ -122,52 +201,167 @@ export async function getWorkshop(slug: string) {
       _id,
       title,
       slug,
-      heroTitle,
-      heroSubtitle,
-      description,
+      shortDescription,
       image,
-      date,
-      time,
-      location,
-      facilitatedBy,
-      overview {
+      featured,
+      heroSection {
+        badge,
+        title,
+        subtitle,
+        backgroundImage
+      },
+      aboutSection {
+        title,
+        description,
+        highlights,
+        image
+      },
+      benefitsSection {
         title,
         subtitle,
         benefits[] {
+          icon,
           title,
           description
-        },
-        attendees[] {
-          title,
-          description
-        },
-        details[] {
-          label
         }
       },
-      books[] {
+      attendeesSection {
         title,
-        author,
-        description,
-        image
+        subtitle,
+        attendeeTypes[] {
+          icon,
+          title,
+          description
+        }
       },
-      agenda[] {
-        time,
+      timingSection {
         title,
-        description,
-        duration
+        details[] {
+          icon,
+          label,
+          value
+        }
       },
-      team[] {
-        name,
-        role,
-        image,
-        email,
-        linkedin,
-        bio
+      readingJourneySection {
+        title,
+        subtitle,
+        books[]-> {
+          _id,
+          title,
+          author,
+          coverImage,
+          shortDescription,
+          isDecided,
+          placeholderMessage,
+          popupContent {
+            headline,
+            description,
+            workshopDetails,
+            keyTakeaways,
+            duration,
+            format
+          },
+          files[] {
+            fileName,
+            "fileUrl": file.asset->url,
+            description
+          },
+          links[] {
+            label,
+            url,
+            isExternal
+          },
+          order
+        }
       },
-      registrationUrl
+      sessionFlowSection {
+        badge,
+        title,
+        subtitle,
+        sessions[] {
+          time,
+          title,
+          description,
+          duration,
+          icon
+        }
+      },
+      facilitatorsSection {
+        title,
+        subtitle,
+        facilitators[] {
+          name,
+          role,
+          bio,
+          image,
+          email,
+          linkedin,
+          specialties
+        }
+      },
+      reserveSpotSection {
+        title,
+        subtitle,
+        ctaText,
+        spotsText
+      },
+      registrationSection {
+        title,
+        subtitle,
+        formEmbedUrl,
+        formHeight,
+        alternativeText
+      }
     }
   `, { slug })
+}
+
+// Books
+export async function getBooks() {
+  return sanityClient.fetch(`
+    *[_type == "book"] | order(order asc) {
+      _id,
+      title,
+      author,
+      coverImage,
+      shortDescription,
+      isDecided,
+      placeholderMessage,
+      order
+    }
+  `)
+}
+
+export async function getBook(id: string) {
+  return sanityClient.fetch(`
+    *[_type == "book" && _id == $id][0] {
+      _id,
+      title,
+      author,
+      coverImage,
+      shortDescription,
+      isDecided,
+      placeholderMessage,
+      popupContent {
+        headline,
+        description,
+        workshopDetails,
+        keyTakeaways,
+        duration,
+        format
+      },
+      files[] {
+        fileName,
+        "fileUrl": file.asset->url,
+        description
+      },
+      links[] {
+        label,
+        url,
+        isExternal
+      }
+    }
+  `, { id })
 }
 
 // Team Members
