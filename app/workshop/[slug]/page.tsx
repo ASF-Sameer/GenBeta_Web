@@ -3,7 +3,7 @@ import { Footer } from "@/components/footer"
 import { PageTransition } from "@/components/page-transition"
 import { getWorkshop, getWorkshops, urlFor } from "@/lib/sanity"
 import { notFound } from "next/navigation"
-import { WorkshopPageContent } from "@/components/workshop-page-content"
+import { InteractiveWorkshopPage } from "@/components/interactive-workshop-page"
 
 export async function generateStaticParams() {
   try {
@@ -114,7 +114,7 @@ export default async function WorkshopPage({
       <Navbar />
       <main id="main-content">
         <PageTransition>
-          <WorkshopPageContent workshop={processedWorkshop} />
+          <InteractiveWorkshopPage workshop={processedWorkshop} />
         </PageTransition>
       </main>
       <Footer />

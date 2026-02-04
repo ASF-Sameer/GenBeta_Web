@@ -10,7 +10,7 @@ import { Footer } from "@/components/footer"
 import { FloatingCTA } from "@/components/floating-cta"
 import { PageTransition } from "@/components/page-transition"
 import { getWorkshop, urlFor } from "@/lib/sanity"
-import { WorkshopPageContent } from "@/components/workshop-page-content"
+import { InteractiveWorkshopPage } from "@/components/interactive-workshop-page"
 
 export const metadata: Metadata = {
   title: "REFRAME | Gen Z 2026 Program - Zain Group",
@@ -109,7 +109,7 @@ export default async function ReframePage() {
         <Navbar />
         <main id="main-content">
           <PageTransition>
-            <WorkshopPageContent workshop={workshop} />
+            <InteractiveWorkshopPage workshop={workshop} />
           </PageTransition>
         </main>
         <Footer />
