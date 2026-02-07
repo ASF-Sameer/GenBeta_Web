@@ -417,6 +417,10 @@ function GalleryCarousel({ images }: { images?: string[] }) {
   }
   
   if (shuffledImages.length === 0) return null
+
+  const gapPx = itemsPerView > 1 ? 16 : 0
+  const slideWidth = `calc((100% - ${(itemsPerView - 1) * gapPx}px) / ${itemsPerView})`
+  const offset = `calc(-${currentIndex} * (${slideWidth} + ${gapPx}px))`
   
   return (
     <div className="relative">
@@ -427,14 +431,17 @@ function GalleryCarousel({ images }: { images?: string[] }) {
         onTouchEnd={handleTouchEnd}
       >
         <div 
-          className="flex transition-transform duration-500 ease-out gap-4"
-          style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView + (4 / itemsPerView))}%)` }}
+          className="flex transition-transform duration-500 ease-out"
+          style={{ 
+            transform: `translateX(${offset})`,
+            gap: `${gapPx}px`
+          }}
         >
           {shuffledImages.map((img, index) => (
             <div 
               key={index}
-              className="flex-shrink-0"
-              style={{ width: `calc(${100 / itemsPerView}% - ${(itemsPerView - 1) * 16 / itemsPerView}px)` }}
+              className="shrink-0"
+              style={{ width: slideWidth }}
             >
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
                 <Image
@@ -453,7 +460,7 @@ function GalleryCarousel({ images }: { images?: string[] }) {
       <button 
         onClick={handlePrev}
         disabled={currentIndex === 0}
-        className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed hover:bg-black/50 active:scale-90 transition-all focus:outline-none focus:ring-2 focus:ring-white/50"
+        className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed hover:bg-black/50 active:scale-90 transition-all focus:outline-none focus:ring-2 focus:ring-white/50"
         aria-label="Previous gallery images"
       >
         <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-white" aria-hidden="true" />
@@ -461,11 +468,27 @@ function GalleryCarousel({ images }: { images?: string[] }) {
       <button 
         onClick={handleNext}
         disabled={currentIndex >= maxIndex}
-        className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed hover:bg-black/50 active:scale-90 transition-all focus:outline-none focus:ring-2 focus:ring-white/50"
+        className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed hover:bg-black/50 active:scale-90 transition-all focus:outline-none focus:ring-2 focus:ring-white/50"
         aria-label="Next gallery images"
       >
         <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" aria-hidden="true" />
       </button>
+
+      <div className="flex justify-center gap-1.5 mt-4 sm:hidden">
+        {shuffledImages.slice(0, Math.min(shuffledImages.length, 12)).map((_, index) => (
+          <button
+            key={`gallery-dot-${index}`}
+            onClick={() => setCurrentIndex(index)}
+            className={cn(
+              "h-1.5 rounded-full transition-all duration-300",
+              index === currentIndex
+                ? "bg-gradient-to-r from-[#C3D534] to-[#00B5AD] w-4"
+                : "bg-white/25 w-1.5"
+            )}
+            aria-label={`Go to image ${index + 1}`}
+          />
+        ))}
+      </div>
     </div>
   )
 }
@@ -608,17 +631,25 @@ export function LandingPage({
           className="relative min-h-screen"
           aria-labelledby="hero-heading"
         >
-          <nav className="relative z-10 flex items-center justify-between py-4" role="navigation" aria-label="Main navigation">
-            <Link href="/" className="focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-lg" aria-label="Gen Z Home">
-              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">
-                Generation Z
-              </span>
-            </Link>
-            <div className="hidden md:flex items-center gap-4 lg:gap-8">
-              <a href="#about" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Home</a>
-              <a href="#team" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Meet the Team</a>
-              <a href="#pillars" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Explore our Work</a>
-              <a href="#gallery" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Our Experiences</a>
+          <nav className="relative z-10 py-4" role="navigation" aria-label="Main navigation">
+            <div className="flex items-center justify-between">
+              <Link href="/" className="focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-lg shrink-0" aria-label="Gen Z Home">
+                <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">
+                  Generation Z
+                </span>
+              </Link>
+              <div className="hidden md:flex items-center gap-4 lg:gap-8">
+                <a href="#about" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Home</a>
+                <a href="#team" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Meet the Team</a>
+                <a href="#pillars" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Explore our Work</a>
+                <a href="#gallery" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Our Experiences</a>
+              </div>
+            </div>
+            <div className="flex md:hidden items-center gap-3 mt-2 overflow-x-auto pb-1 no-scrollbar">
+              <a href="#about" className="text-xs text-white/80 hover:text-[#00B5AD] transition-colors whitespace-nowrap px-2 py-1 rounded-full bg-white/10">Home</a>
+              <a href="#team" className="text-xs text-white/80 hover:text-[#00B5AD] transition-colors whitespace-nowrap px-2 py-1 rounded-full bg-white/10">Team</a>
+              <a href="#pillars" className="text-xs text-white/80 hover:text-[#00B5AD] transition-colors whitespace-nowrap px-2 py-1 rounded-full bg-white/10">Our Work</a>
+              <a href="#gallery" className="text-xs text-white/80 hover:text-[#00B5AD] transition-colors whitespace-nowrap px-2 py-1 rounded-full bg-white/10">Experiences</a>
             </div>
           </nav>
 
@@ -673,8 +704,8 @@ export function LandingPage({
                   fetchPriority="high"
                 />
               </div>
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-[#00B5AD]/30 rounded-full blur-xl" aria-hidden="true" />
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-[#F6EB69]/20 rounded-full blur-xl" aria-hidden="true" />
+              <div className="absolute -top-4 -right-4 w-16 sm:w-24 h-16 sm:h-24 bg-[#00B5AD]/30 rounded-full blur-xl" aria-hidden="true" />
+              <div className="absolute -bottom-4 -left-4 w-20 sm:w-32 h-20 sm:h-32 bg-[#F6EB69]/20 rounded-full blur-xl" aria-hidden="true" />
             </div>
           </div>
         </div>
@@ -712,20 +743,22 @@ export function LandingPage({
       >
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <motion.div 
-            className="absolute top-20 right-10 w-96 h-96 bg-[#C3D534]/20 rounded-full blur-3xl"
+            className="absolute top-20 right-10 w-48 sm:w-96 h-48 sm:h-96 bg-[#C3D534]/20 rounded-full blur-3xl"
             animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.3, 0.2] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div 
-            className="absolute bottom-20 left-10 w-80 h-80 bg-[#F7E73F]/20 rounded-full blur-3xl"
+            className="absolute bottom-20 left-10 w-40 sm:w-80 h-40 sm:h-80 bg-[#F7E73F]/20 rounded-full blur-3xl"
             animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0.25, 0.2] }}
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           />
-          <motion.div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00B5AD]/15 rounded-full blur-3xl"
-            animate={{ scale: [1, 1.05, 1], opacity: [0.15, 0.2, 0.15] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          />
+          <div className="hidden sm:block">
+            <motion.div 
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00B5AD]/15 rounded-full blur-3xl"
+              animate={{ scale: [1, 1.05, 1], opacity: [0.15, 0.2, 0.15] }}
+              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
         </div>
         
         <div className="relative z-10">
