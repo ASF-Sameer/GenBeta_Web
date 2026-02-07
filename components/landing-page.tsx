@@ -660,29 +660,35 @@ export function LandingPage({
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
             {mobileMenuOpen && (
-              <>
-                <div className="fixed inset-0 bg-black/40 backdrop-blur-sm -z-10" onClick={() => setMobileMenuOpen(false)} />
-                <div className="absolute top-14 right-0 w-56">
-                  <div className="bg-[#1E1A5F]/90 backdrop-blur-xl border border-white/15 rounded-2xl p-3 space-y-0.5 shadow-xl shadow-black/30">
-                    {[
-                      { href: "#about", label: "Home" },
-                      { href: "#team", label: "Meet the Team" },
-                      { href: "#pillars", label: "Explore our Work" },
-                      { href: "#gallery", label: "Our Experiences" },
-                    ].map((link) => (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-white/90 hover:bg-white/10 hover:text-[#00B5AD] active:bg-white/15 transition-all"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#C3D534] to-[#00B5AD] shrink-0" />
-                        {link.label}
-                      </a>
-                    ))}
+              <div className="fixed inset-0 z-40 flex items-center justify-center" onClick={() => setMobileMenuOpen(false)}>
+                <div className="absolute inset-0 bg-black/60 backdrop-blur-md" />
+                <div className="relative z-10 w-[85vw] max-w-sm" onClick={(e) => e.stopPropagation()}>
+                  <div className="bg-gradient-to-b from-[#1E1A5F] to-[#0057B8]/90 backdrop-blur-2xl border border-white/15 rounded-3xl p-6 shadow-2xl shadow-black/40">
+                    <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-4 px-2">Navigation</p>
+                    <div className="space-y-1">
+                      {[
+                        { href: "#about", label: "Home" },
+                        { href: "#team", label: "Meet the Team" },
+                        { href: "#pillars", label: "Explore our Work" },
+                        { href: "#gallery", label: "Our Experiences" },
+                      ].map((link) => (
+                        <a
+                          key={link.href}
+                          href={link.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center gap-4 px-4 py-4 rounded-2xl text-base font-medium text-white hover:bg-white/10 hover:text-[#00B5AD] active:bg-white/15 transition-all"
+                        >
+                          <span className="w-2 h-2 rounded-full bg-gradient-to-r from-[#C3D534] to-[#00B5AD] shrink-0" />
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
+                    <div className="mt-5 pt-4 border-t border-white/10 px-2">
+                      <p className="text-xs text-white/30 text-center">Generation Z &middot; 11th Edition</p>
+                    </div>
                   </div>
                 </div>
-              </>
+              </div>
             )}
           </div>
 
