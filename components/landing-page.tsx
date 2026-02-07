@@ -709,7 +709,7 @@ export function LandingPage({
                 <span className="text-white">{hero.byLine || "by Zain"}</span>
               </motion.h1>
               <motion.p variants={itemVariants} className="text-white/80 text-base sm:text-lg max-w-lg leading-relaxed">
-                {hero.description || "Over the past several months, we, as Generation Z graduates at Zain Group, have gained invaluable hands-on experience across diverse areas including leadership, innovation, digital delivery, UI/UX design, and agile methodologies."}
+                {hero.description || "Generation Z is Zain Group's flagship graduate development program, designed to cultivate the next wave of leaders through five transformative pillars: AI & Big Data, Creative Thinking, Resilience & Agility, Leadership & Social Influence, and Systems Thinking."}
               </motion.p>
               <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
                 <TransitionLink href={hero.ctaLink || "/reframe"}>
