@@ -114,9 +114,9 @@ export function BookCarousel() {
         </div>
 
         {/* Mobile: swipeable single-card carousel */}
-        <div className="sm:hidden">
+        <div className="sm:hidden overflow-hidden">
           <div
-            className="relative overflow-hidden touch-pan-y"
+            className="relative touch-pan-y"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
@@ -136,7 +136,7 @@ export function BookCarousel() {
               {books.map((book, index) => (
                 <div
                   key={book.id}
-                  className="min-w-full px-4 flex-shrink-0"
+                  className="w-full shrink-0 box-border"
                   role="group"
                   aria-roledescription="slide"
                   aria-label={`${index + 1} of ${books.length}: ${book.title} by ${book.author}`}
@@ -147,7 +147,7 @@ export function BookCarousel() {
             </div>
           </div>
 
-          <div className="flex items-center justify-center gap-3 mt-3">
+          <div className="flex items-center justify-center gap-3 mt-4">
             <button
               onClick={prevSlide}
               className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center active:scale-90 transition-transform"
@@ -215,14 +215,14 @@ function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
   return (
     <div
       className={cn(
-        "bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 flex flex-col items-center transition-all duration-300 w-full",
+        "bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 overflow-hidden box-border transition-all duration-300",
         isActive && book.status === "current" && "ring-1 ring-[#C3D534]"
       )}
     >
-      <div className="flex items-center justify-between w-full mb-3">
+      <div className="flex items-center justify-between mb-3">
         <span
           className={cn(
-            "px-2.5 py-1 rounded-full text-xs font-bold tracking-wider shrink-0",
+            "px-2.5 py-1 rounded-full text-xs font-bold tracking-wider",
             book.badgeColor
           )}
         >
@@ -231,46 +231,48 @@ function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
           {book.status === "future" && "○ "}
           {book.badgeText}
         </span>
-        <span className="text-xs text-white/50 flex items-center gap-1 shrink-0">
+        <span className="text-xs text-white/50 flex items-center gap-1">
           <Calendar className="w-3 h-3" />
           {book.date}
         </span>
       </div>
 
-      <div
-        className={cn(
-          "w-1/3 max-w-[128px] aspect-[3/4] rounded-xl bg-gradient-to-br relative overflow-hidden mb-3 shadow-lg",
-          book.coverGradient
-        )}
-      >
-        {book.status === "current" && book.coverImage ? (
-          <Image
-            src={book.coverImage}
-            alt={book.title}
-            fill
-            className="object-contain p-1"
-            sizes="128px"
-            priority
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <HelpCircle
-              className={cn(
-                "w-10 h-10 text-white/80",
-                book.status === "upcoming" && "animate-pulse"
-              )}
+      <div className="flex justify-center mb-3">
+        <div
+          className={cn(
+            "w-24 h-32 rounded-lg bg-gradient-to-br relative overflow-hidden shadow-lg",
+            book.coverGradient
+          )}
+        >
+          {book.status === "current" && book.coverImage ? (
+            <Image
+              src={book.coverImage}
+              alt={book.title}
+              fill
+              className="object-contain p-1"
+              sizes="96px"
+              priority
             />
-          </div>
-        )}
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <HelpCircle
+                className={cn(
+                  "w-8 h-8 text-white/80",
+                  book.status === "upcoming" && "animate-pulse"
+                )}
+              />
+            </div>
+          )}
+        </div>
       </div>
 
       <h3 className="text-base font-bold text-white text-center leading-tight">{book.title}</h3>
       <p className="text-sm text-white/60 text-center mt-0.5">by {book.author}</p>
-      <p className="text-sm text-white/70 text-center leading-relaxed mt-2 line-clamp-3">
+      <p className="text-sm text-white/70 text-center leading-relaxed mt-2 line-clamp-2 break-words">
         {book.description}
       </p>
 
-      <div className="mt-3 w-full">
+      <div className="mt-3">
         {book.status === "current" ? (
           <Button
             asChild
