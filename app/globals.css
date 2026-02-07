@@ -186,8 +186,8 @@
   body {
     @apply bg-background text-foreground;
   }
-  html {
-    scroll-behavior: smooth; /* Keep existing html scroll-behavior */
+  html[data-scroll-behavior] {
+    scroll-behavior: smooth;
   }
 }
 

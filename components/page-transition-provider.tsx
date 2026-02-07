@@ -1,8 +1,7 @@
 "use client"
 
-import { createContext, useContext, useState, useCallback, ReactNode } from "react"
-import { useRouter } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
+import { createContext, useContext, useState, useCallback, useRef, useEffect, ReactNode } from "react"
+import { useRouter, usePathname } from "next/navigation"
 
 interface TransitionContextType {
   navigateTo: (href: string) => void
@@ -21,8 +20,12 @@ export function usePageTransition() {
 
 export function PageTransitionProvider({ children }: { children: ReactNode }) {
   const router = useRouter()
+  const pathname = usePathname()
   const [isTransitioning, setIsTransitioning] = useState(false)
-  const [showContent, setShowContent] = useState(true)
+  const [contentHidden, setContentHidden] = useState(false)
+  const targetPathRef = useRef<string | null>(null)
+  const previousPathRef = useRef(pathname)
+  const hasNavigatedRef = useRef(false)
 
   const forceScrollTop = useCallback(() => {
     const lenis = typeof window !== "undefined" ? (window as any).__lenis : null
@@ -34,103 +37,86 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
     document.body.scrollTop = 0
   }, [])
 
+  useEffect(() => {
+    if (pathname !== previousPathRef.current && isTransitioning) {
+      hasNavigatedRef.current = true
+      forceScrollTop()
+      requestAnimationFrame(() => {
+        forceScrollTop()
+        requestAnimationFrame(() => {
+          setContentHidden(false)
+          setTimeout(() => {
+            setIsTransitioning(false)
+            targetPathRef.current = null
+            hasNavigatedRef.current = false
+          }, 100)
+        })
+      })
+    }
+    previousPathRef.current = pathname
+  }, [pathname, isTransitioning, forceScrollTop])
+
   const navigateTo = useCallback((href: string) => {
     if (isTransitioning) return
     
+    targetPathRef.current = href
+    hasNavigatedRef.current = false
     setIsTransitioning(true)
-    setShowContent(false)
+    setContentHidden(true)
     
     setTimeout(() => {
       forceScrollTop()
       router.push(href)
       
-      requestAnimationFrame(() => {
-        forceScrollTop()
-      })
-      
       setTimeout(() => {
-        forceScrollTop()
-        setShowContent(true)
-        setTimeout(() => {
-          setIsTransitioning(false)
-        }, 600)
-      }, 300)
-    }, 500)
+        if (!hasNavigatedRef.current) {
+          forceScrollTop()
+          setContentHidden(false)
+          setTimeout(() => {
+            setIsTransitioning(false)
+            targetPathRef.current = null
+          }, 100)
+        }
+      }, 3000)
+    }, 400)
   }, [router, isTransitioning, forceScrollTop])
 
   return (
     <TransitionContext.Provider value={{ navigateTo, isTransitioning }}>
-      <AnimatePresence mode="wait">
-        {isTransitioning && (
-          <motion.div
-            key="transition-overlay"
-            className="fixed inset-0 z-[100] flex items-center justify-center"
-            style={{
-              background: "linear-gradient(135deg, #1C2951 0%, #1E1A5F 50%, #0057B8 100%)"
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            <div className="flex flex-col items-center gap-6">
-              <motion.div
-                className="relative"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.1, duration: 0.3 }}
-              >
-                <motion.div
-                  className="w-16 h-16 rounded-full border-4 border-transparent"
-                  style={{
-                    borderTopColor: "#C3D534",
-                    borderRightColor: "#F7E73F",
-                    borderBottomColor: "#00B5AD",
-                  }}
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: 1,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
-                />
-                <motion.div
-                  className="absolute inset-2 rounded-full border-4 border-transparent"
-                  style={{
-                    borderTopColor: "#00B5AD",
-                    borderLeftColor: "#F7E73F",
-                  }}
-                  animate={{ rotate: -360 }}
-                  transition={{
-                    duration: 0.8,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
-                />
-              </motion.div>
-              
-              <motion.span
-                className="text-xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.3 }}
-              >
-                Generation Z
-              </motion.span>
+      {isTransitioning && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center"
+          style={{
+            background: "linear-gradient(135deg, #1C2951 0%, #1E1A5F 50%, #0057B8 100%)"
+          }}
+        >
+          <div className="flex flex-col items-center gap-6">
+            <div className="relative">
+              <div
+                className="w-16 h-16 rounded-full border-4 border-transparent animate-spin"
+                style={{
+                  borderTopColor: "#C3D534",
+                  borderRightColor: "#F7E73F",
+                  borderBottomColor: "#00B5AD",
+                  animationDuration: "1s",
+                }}
+              />
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <span className="text-xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">
+              Generation Z
+            </span>
+          </div>
+        </div>
+      )}
       
-      <motion.div
-        animate={{ 
-          opacity: showContent ? 1 : 0,
-          y: showContent ? 0 : 20
+      <div
+        style={{
+          opacity: contentHidden ? 0 : 1,
+          transition: contentHidden ? "none" : "opacity 0.3s ease",
         }}
-        transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
         {children}
-      </motion.div>
+      </div>
     </TransitionContext.Provider>
   )
 }

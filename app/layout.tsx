@@ -132,7 +132,7 @@ export default async function RootLayout({
   ].join(" ")
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body
         className={`${fontVariables} font-zain antialiased`}
       >

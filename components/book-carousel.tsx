@@ -213,17 +213,16 @@ export function BookCarousel() {
 
 function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
   return (
-    <article
+    <div
       className={cn(
         "bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 flex flex-col transition-all duration-300",
         isActive && book.status === "current" && "ring-1 ring-[#C3D534]"
       )}
-      aria-label={`${book.title} by ${book.author}`}
     >
-      <div className="flex items-center gap-2 mb-3">
+      <div className="flex items-center justify-between mb-3">
         <span
           className={cn(
-            "inline-block px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider",
+            "px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider",
             book.badgeColor
           )}
         >
@@ -232,51 +231,48 @@ function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
           {book.status === "future" && "○ "}
           {book.badgeText}
         </span>
-        <div className="flex items-center gap-1 text-[11px] text-white/50 ml-auto">
-          <Calendar className="w-3 h-3 flex-shrink-0" aria-hidden="true" />
-          <time dateTime={book.status === "current" ? "2025-02-10" : undefined}>{book.date}</time>
-        </div>
+        <span className="text-[11px] text-white/50 flex items-center gap-1">
+          <Calendar className="w-3 h-3" />
+          {book.date}
+        </span>
       </div>
 
-      <div className="flex gap-4 items-start">
+      <div className="flex justify-center mb-3">
         <div
           className={cn(
-            "w-24 flex-shrink-0 aspect-[3/4] rounded-lg bg-gradient-to-br flex items-center justify-center relative overflow-hidden",
+            "w-28 h-[150px] rounded-lg bg-gradient-to-br relative overflow-hidden",
             book.coverGradient
           )}
-          aria-hidden="true"
         >
           {book.status === "current" && book.coverImage ? (
             <Image
               src={book.coverImage}
-              alt=""
+              alt={book.title}
               fill
               className="object-contain p-1"
-              sizes="96px"
+              sizes="112px"
               priority
             />
           ) : (
-            <div className="text-center">
+            <div className="absolute inset-0 flex items-center justify-center">
               <HelpCircle
                 className={cn(
-                  "w-8 h-8 text-white/80",
+                  "w-10 h-10 text-white/80",
                   book.status === "upcoming" && "animate-pulse"
                 )}
               />
             </div>
           )}
         </div>
-
-        <div className="flex flex-col flex-1 min-w-0 justify-center">
-          <h3 className="text-lg font-bold text-white leading-tight">{book.title}</h3>
-          <p className="text-xs text-white/60 mt-0.5">by {book.author}</p>
-          <p className="text-xs text-white/70 leading-relaxed mt-2 line-clamp-3">
-            {book.description}
-          </p>
-        </div>
       </div>
 
-      <div className="mt-4">
+      <h3 className="text-base font-bold text-white text-center leading-tight">{book.title}</h3>
+      <p className="text-xs text-white/60 text-center mt-0.5">by {book.author}</p>
+      <p className="text-[11px] text-white/70 text-center leading-relaxed mt-1.5 line-clamp-2 px-1">
+        {book.description}
+      </p>
+
+      <div className="mt-3">
         {book.status === "current" ? (
           <Button
             asChild
@@ -293,7 +289,7 @@ function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
           </Button>
         )}
       </div>
-    </article>
+    </div>
   )
 }
 
