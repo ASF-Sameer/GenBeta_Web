@@ -7,9 +7,7 @@ import { motion } from "framer-motion"
 import { 
   ArrowRight, 
   ChevronLeft,
-  ChevronRight,
-  Menu,
-  X
+  ChevronRight
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -590,7 +588,14 @@ export function LandingPage({
   sectionTitles
 }: LandingPageProps) {
   const [isClient, setIsClient] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50)
+    window.addEventListener("scroll", handleScroll)
+    handleScroll()
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
   
   const displayTeamMembers = sanityTeamMembers && sanityTeamMembers.length > 0 ? sanityTeamMembers : defaultTeamMembers
   const displayPillars = sanityPillars && sanityPillars.length > 0 
@@ -630,61 +635,48 @@ export function LandingPage({
     <div className="min-h-screen bg-gradient-to-b from-[#1C2951] via-[#1E1A5F] via-[#0057B8] via-[#1E1A5F] to-[#1C2951]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         
-        <section 
-          className="relative min-h-screen"
-          aria-labelledby="hero-heading"
+        <header
+          className={cn(
+            "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+            "bg-gradient-to-r from-[#1C2951] via-[#1E1A5F] to-[#0057B8] shadow-lg"
+          )}
         >
-          <nav className="relative z-10 py-4" role="navigation" aria-label="Main navigation">
-            <div className="flex items-center justify-between">
+          <nav className="w-full px-3 sm:px-4 lg:px-6" role="navigation" aria-label="Main navigation">
+            <div className="flex items-center justify-between h-12 sm:h-14 lg:h-16 max-w-7xl mx-auto">
               <Link href="/" className="focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-lg shrink-0" aria-label="Gen Z Home">
-                <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">
+                <span className="text-sm sm:text-lg lg:text-xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent whitespace-nowrap">
                   Generation Z
                 </span>
               </Link>
+              <div className="flex items-center justify-end flex-1 gap-0.5 sm:gap-1 lg:gap-2 ml-2 sm:ml-4">
+                {[
+                  { href: "#about", label: "About" },
+                  { href: "#pillars", label: "Pillars" },
+                  { href: "#team", label: "Team" },
+                  { href: "#gallery", label: "Gallery" },
+                  { href: "#programs", label: "Programs" },
+                ].map((link, index, arr) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className={cn(
+                      "px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs lg:text-sm font-semibold transition-all duration-200 rounded whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-[#00B5AD] uppercase tracking-wide",
+                      "text-white/90 hover:text-white hover:bg-white/10",
+                      index === arr.length - 1 && "bg-gradient-to-r from-[#00B5AD] to-[#C3D534] text-white hover:opacity-90 rounded-full"
+                    )}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
             </div>
           </nav>
+        </header>
 
-          <div className="fixed top-4 right-4 sm:top-6 sm:right-6 z-50">
-            <button
-              className="w-11 h-11 flex items-center justify-center rounded-full bg-[#1E1A5F]/80 backdrop-blur-xl border border-white/20 text-white shadow-lg shadow-black/20 hover:bg-[#1E1A5F] transition-all"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileMenuOpen}
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-            {mobileMenuOpen && (
-              <div className="fixed inset-0 z-40 flex items-center justify-center" onClick={() => setMobileMenuOpen(false)}>
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-md" />
-                <div className="relative z-10 w-[85vw] max-w-sm" onClick={(e) => e.stopPropagation()}>
-                  <div className="bg-gradient-to-b from-[#1E1A5F] to-[#0057B8]/90 backdrop-blur-2xl border border-white/15 rounded-3xl p-6 shadow-2xl shadow-black/40">
-                    <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-4 px-2">Navigation</p>
-                    <div className="space-y-1">
-                      {[
-                        { href: "#about", label: "Home" },
-                        { href: "#team", label: "Meet the Team" },
-                        { href: "#pillars", label: "Explore our Work" },
-                        { href: "#gallery", label: "Our Experiences" },
-                      ].map((link) => (
-                        <a
-                          key={link.href}
-                          href={link.href}
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="flex items-center gap-4 px-4 py-4 rounded-2xl text-base font-medium text-white hover:bg-white/10 hover:text-[#00B5AD] active:bg-white/15 transition-all"
-                        >
-                          <span className="w-2 h-2 rounded-full bg-gradient-to-r from-[#C3D534] to-[#00B5AD] shrink-0" />
-                          {link.label}
-                        </a>
-                      ))}
-                    </div>
-                    <div className="mt-5 pt-4 border-t border-white/10 px-2">
-                      <p className="text-xs text-white/30 text-center">Generation Z &middot; 11th Edition</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+        <section 
+          className="relative min-h-screen pt-14 sm:pt-16"
+          aria-labelledby="hero-heading"
+        >
 
           <div className="relative z-10 py-8 sm:py-12 lg:py-20">
             <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
