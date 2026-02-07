@@ -199,9 +199,9 @@ export function BookCarousel() {
           </div>
         </div>
 
-        <div className="mt-3 sm:mt-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-3 sm:p-4 lg:p-6 relative">
+        <div className="mt-5 sm:mt-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-5 lg:p-6 relative">
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#C3D534] via-[#00B5AD] to-[#0057B8] -z-10 animate-pulse-glow opacity-20" aria-hidden="true" />
-          <p className="text-center text-white/90 text-xs sm:text-sm lg:text-base leading-relaxed">
+          <p className="text-center text-white text-sm sm:text-base lg:text-lg leading-relaxed font-medium">
             Our first and flagship program in the Gen Z 2026 series. Join now to be part of a
             growing community of colleagues committed to continuous learning.
           </p>
@@ -215,14 +215,14 @@ function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
   return (
     <div
       className={cn(
-        "bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 flex flex-col transition-all duration-300",
+        "bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-5 flex flex-col items-center transition-all duration-300 mx-2",
         isActive && book.status === "current" && "ring-1 ring-[#C3D534]"
       )}
     >
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex items-center justify-between w-full mb-4">
         <span
           className={cn(
-            "px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider",
+            "px-3 py-1 rounded-full text-xs font-bold tracking-wider",
             book.badgeColor
           )}
         >
@@ -231,59 +231,57 @@ function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
           {book.status === "future" && "○ "}
           {book.badgeText}
         </span>
-        <span className="text-[11px] text-white/50 flex items-center gap-1">
-          <Calendar className="w-3 h-3" />
+        <span className="text-xs text-white/50 flex items-center gap-1">
+          <Calendar className="w-3.5 h-3.5" />
           {book.date}
         </span>
       </div>
 
-      <div className="flex justify-center mb-3">
-        <div
-          className={cn(
-            "w-28 h-[150px] rounded-lg bg-gradient-to-br relative overflow-hidden",
-            book.coverGradient
-          )}
-        >
-          {book.status === "current" && book.coverImage ? (
-            <Image
-              src={book.coverImage}
-              alt={book.title}
-              fill
-              className="object-contain p-1"
-              sizes="112px"
-              priority
+      <div
+        className={cn(
+          "w-32 h-44 rounded-xl bg-gradient-to-br relative overflow-hidden mb-4 shadow-lg",
+          book.coverGradient
+        )}
+      >
+        {book.status === "current" && book.coverImage ? (
+          <Image
+            src={book.coverImage}
+            alt={book.title}
+            fill
+            className="object-contain p-1"
+            sizes="128px"
+            priority
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <HelpCircle
+              className={cn(
+                "w-12 h-12 text-white/80",
+                book.status === "upcoming" && "animate-pulse"
+              )}
             />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <HelpCircle
-                className={cn(
-                  "w-10 h-10 text-white/80",
-                  book.status === "upcoming" && "animate-pulse"
-                )}
-              />
-            </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
-      <h3 className="text-base font-bold text-white text-center leading-tight">{book.title}</h3>
-      <p className="text-xs text-white/60 text-center mt-0.5">by {book.author}</p>
-      <p className="text-[11px] text-white/70 text-center leading-relaxed mt-1.5 line-clamp-2 px-1">
+      <h3 className="text-lg font-bold text-white text-center leading-tight">{book.title}</h3>
+      <p className="text-sm text-white/60 text-center mt-1">by {book.author}</p>
+      <p className="text-sm text-white/70 text-center leading-relaxed mt-2 line-clamp-3 px-2">
         {book.description}
       </p>
 
-      <div className="mt-3">
+      <div className="mt-4 w-full">
         {book.status === "current" ? (
           <Button
             asChild
-            className="w-full bg-gradient-to-r from-[#00B5AD] to-[#0057B8] text-white font-semibold rounded-full text-sm h-10"
+            className="w-full bg-gradient-to-r from-[#00B5AD] to-[#0057B8] text-white font-semibold rounded-full text-sm h-11"
           >
             <a href="#register">Join This Session</a>
           </Button>
         ) : (
           <Button
             variant="outline"
-            className="w-full glass-button rounded-full font-semibold bg-transparent text-sm h-10"
+            className="w-full glass-button rounded-full font-semibold bg-transparent text-sm h-11"
           >
             Get Notified
           </Button>

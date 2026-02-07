@@ -75,10 +75,10 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
           setTimeout(() => {
             setIsTransitioning(false)
             targetPathRef.current = null
-          }, 100)
+          }, 50)
         }
-      }, 3000)
-    }, 400)
+      }, 2000)
+    }, 150)
   }, [router, isTransitioning, forceScrollTop])
 
   return (
