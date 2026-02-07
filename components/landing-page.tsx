@@ -647,38 +647,44 @@ export function LandingPage({
                 <a href="#pillars" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Explore our Work</a>
                 <a href="#gallery" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Our Experiences</a>
               </div>
-              <button
-                className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-                aria-expanded={mobileMenuOpen}
-              >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
             </div>
-            {mobileMenuOpen && (
-              <div className="md:hidden mt-3 overflow-hidden">
-                <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 space-y-1">
-                  {[
-                    { href: "#about", label: "Home" },
-                    { href: "#team", label: "Meet the Team" },
-                    { href: "#pillars", label: "Explore our Work" },
-                    { href: "#gallery", label: "Our Experiences" },
-                  ].map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-white/90 hover:bg-white/10 hover:text-[#00B5AD] active:bg-white/15 transition-all"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#C3D534] to-[#00B5AD] shrink-0" />
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
           </nav>
+
+          <div className="md:hidden fixed top-4 right-4 z-50">
+            <button
+              className="w-11 h-11 flex items-center justify-center rounded-full bg-[#1E1A5F]/80 backdrop-blur-xl border border-white/20 text-white shadow-lg shadow-black/20 hover:bg-[#1E1A5F] transition-all"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+            {mobileMenuOpen && (
+              <>
+                <div className="fixed inset-0 bg-black/40 backdrop-blur-sm -z-10" onClick={() => setMobileMenuOpen(false)} />
+                <div className="absolute top-14 right-0 w-56">
+                  <div className="bg-[#1E1A5F]/90 backdrop-blur-xl border border-white/15 rounded-2xl p-3 space-y-0.5 shadow-xl shadow-black/30">
+                    {[
+                      { href: "#about", label: "Home" },
+                      { href: "#team", label: "Meet the Team" },
+                      { href: "#pillars", label: "Explore our Work" },
+                      { href: "#gallery", label: "Our Experiences" },
+                    ].map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-white/90 hover:bg-white/10 hover:text-[#00B5AD] active:bg-white/15 transition-all"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#C3D534] to-[#00B5AD] shrink-0" />
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
 
           <div className="relative z-10 py-8 sm:py-12 lg:py-20">
             <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
