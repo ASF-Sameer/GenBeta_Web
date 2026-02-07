@@ -7,7 +7,9 @@ import { motion } from "framer-motion"
 import { 
   ArrowRight, 
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Menu,
+  X
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -204,9 +206,9 @@ const defaultPreviousGenZPrograms = [
 
 const defaultFooter = {
   socialLinks: [
-    { platform: "linkedin", url: "https://www.linkedin.com/company/zaborns" },
-    { platform: "twitter", url: "https://twitter.com/zaborns" },
-    { platform: "instagram", url: "https://www.instagram.com/zaborns" }
+    { platform: "linkedin", url: "https://www.linkedin.com/company/zain/posts/?feedView=all" },
+    { platform: "twitter", url: "https://x.com/Zain" },
+    { platform: "instagram", url: "https://www.instagram.com/zaingroup/" }
   ],
   zainLinks: [
     { label: "Visit Zain Group", url: "https://www.zain.com" }
@@ -588,6 +590,7 @@ export function LandingPage({
   sectionTitles
 }: LandingPageProps) {
   const [isClient, setIsClient] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   
   const displayTeamMembers = sanityTeamMembers && sanityTeamMembers.length > 0 ? sanityTeamMembers : defaultTeamMembers
   const displayPillars = sanityPillars && sanityPillars.length > 0 
@@ -644,13 +647,37 @@ export function LandingPage({
                 <a href="#pillars" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Explore our Work</a>
                 <a href="#gallery" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Our Experiences</a>
               </div>
+              <button
+                className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={mobileMenuOpen}
+              >
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
             </div>
-            <div className="flex md:hidden items-center justify-between w-full mt-2 gap-1">
-              <a href="#about" className="text-[11px] min-[375px]:text-xs text-white/80 hover:text-[#00B5AD] active:text-[#00B5AD] transition-colors text-center px-2 py-1.5 rounded-full bg-white/10 flex-1">Home</a>
-              <a href="#team" className="text-[11px] min-[375px]:text-xs text-white/80 hover:text-[#00B5AD] active:text-[#00B5AD] transition-colors text-center px-2 py-1.5 rounded-full bg-white/10 flex-1">Team</a>
-              <a href="#pillars" className="text-[11px] min-[375px]:text-xs text-white/80 hover:text-[#00B5AD] active:text-[#00B5AD] transition-colors text-center px-2 py-1.5 rounded-full bg-white/10 flex-1">Work</a>
-              <a href="#gallery" className="text-[11px] min-[375px]:text-xs text-white/80 hover:text-[#00B5AD] active:text-[#00B5AD] transition-colors text-center px-2 py-1.5 rounded-full bg-white/10 flex-1">Gallery</a>
-            </div>
+            {mobileMenuOpen && (
+              <div className="md:hidden mt-3 overflow-hidden">
+                <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 space-y-1">
+                  {[
+                    { href: "#about", label: "Home" },
+                    { href: "#team", label: "Meet the Team" },
+                    { href: "#pillars", label: "Explore our Work" },
+                    { href: "#gallery", label: "Our Experiences" },
+                  ].map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-white/90 hover:bg-white/10 hover:text-[#00B5AD] active:bg-white/15 transition-all"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#C3D534] to-[#00B5AD] shrink-0" />
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
           </nav>
 
           <div className="relative z-10 py-8 sm:py-12 lg:py-20">

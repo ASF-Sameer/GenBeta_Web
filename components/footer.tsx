@@ -63,7 +63,7 @@ export function Footer() {
               {/* Social Media Links */}
               <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                 <a
-                  href="https://www.linkedin.com/company/zaborjar/"
+                  href="https://www.linkedin.com/company/zain/posts/?feedView=all"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:glow-turquoise transition-all focus:outline-none focus:ring-2 focus:ring-turquoise"
@@ -81,7 +81,7 @@ export function Footer() {
                   <Youtube className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
                 </a>
                 <a
-                  href="https://www.instagram.com/zaborjar/"
+                  href="https://www.instagram.com/zaingroup/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:glow-turquoise transition-all focus:outline-none focus:ring-2 focus:ring-turquoise"
@@ -90,7 +90,7 @@ export function Footer() {
                   <Instagram className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
                 </a>
                 <a
-                  href="https://x.com/Aborjar"
+                  href="https://x.com/Zain"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:glow-turquoise transition-all focus:outline-none focus:ring-2 focus:ring-turquoise"
