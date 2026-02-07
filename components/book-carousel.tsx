@@ -215,15 +215,33 @@ function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
   return (
     <article
       className={cn(
-        "bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-3 flex flex-col transition-all duration-300",
+        "bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 flex flex-col transition-all duration-300",
         isActive && book.status === "current" && "ring-1 ring-[#C3D534]"
       )}
       aria-label={`${book.title} by ${book.author}`}
     >
-      <div className="flex gap-3">
+      <div className="flex items-center gap-2 mb-3">
+        <span
+          className={cn(
+            "inline-block px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider",
+            book.badgeColor
+          )}
+        >
+          {book.status === "current" && "● "}
+          {book.status === "upcoming" && "◎ "}
+          {book.status === "future" && "○ "}
+          {book.badgeText}
+        </span>
+        <div className="flex items-center gap-1 text-[11px] text-white/50 ml-auto">
+          <Calendar className="w-3 h-3 flex-shrink-0" aria-hidden="true" />
+          <time dateTime={book.status === "current" ? "2025-02-10" : undefined}>{book.date}</time>
+        </div>
+      </div>
+
+      <div className="flex gap-4 items-start">
         <div
           className={cn(
-            "w-28 flex-shrink-0 aspect-[3/4] rounded-lg bg-gradient-to-br flex items-center justify-center relative overflow-hidden",
+            "w-24 flex-shrink-0 aspect-[3/4] rounded-lg bg-gradient-to-br flex items-center justify-center relative overflow-hidden",
             book.coverGradient
           )}
           aria-hidden="true"
@@ -234,14 +252,14 @@ function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
               alt=""
               fill
               className="object-contain p-1"
-              sizes="112px"
+              sizes="96px"
               priority
             />
           ) : (
             <div className="text-center">
               <HelpCircle
                 className={cn(
-                  "w-10 h-10 text-white/80",
+                  "w-8 h-8 text-white/80",
                   book.status === "upcoming" && "animate-pulse"
                 )}
               />
@@ -249,45 +267,27 @@ function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
           )}
         </div>
 
-        <div className="flex flex-col flex-1 min-w-0">
-          <span
-            className={cn(
-              "inline-block self-start px-2 py-0.5 rounded-full text-[9px] font-bold tracking-wider mb-1.5",
-              book.badgeColor
-            )}
-          >
-            {book.status === "current" && "● "}
-            {book.status === "upcoming" && "◎ "}
-            {book.status === "future" && "○ "}
-            {book.badgeText}
-          </span>
-
-          <h3 className="text-base font-bold text-white mb-0.5 leading-tight">{book.title}</h3>
-          <p className="text-[11px] text-white/60 mb-1">by {book.author}</p>
-
-          <div className="flex items-center gap-1 text-[11px] text-white/50 mb-1.5">
-            <Calendar className="w-3 h-3 flex-shrink-0" aria-hidden="true" />
-            <time dateTime={book.status === "current" ? "2025-02-10" : undefined}>{book.date}</time>
-          </div>
-
-          <p className="text-[11px] text-white/70 leading-relaxed line-clamp-3">
+        <div className="flex flex-col flex-1 min-w-0 justify-center">
+          <h3 className="text-lg font-bold text-white leading-tight">{book.title}</h3>
+          <p className="text-xs text-white/60 mt-0.5">by {book.author}</p>
+          <p className="text-xs text-white/70 leading-relaxed mt-2 line-clamp-3">
             {book.description}
           </p>
         </div>
       </div>
 
-      <div className="mt-3">
+      <div className="mt-4">
         {book.status === "current" ? (
           <Button
             asChild
-            className="w-full bg-gradient-to-r from-[#00B5AD] to-[#0057B8] text-white font-semibold rounded-full text-xs h-9"
+            className="w-full bg-gradient-to-r from-[#00B5AD] to-[#0057B8] text-white font-semibold rounded-full text-sm h-10"
           >
             <a href="#register">Join This Session</a>
           </Button>
         ) : (
           <Button
             variant="outline"
-            className="w-full glass-button rounded-full font-semibold bg-transparent text-xs h-9"
+            className="w-full glass-button rounded-full font-semibold bg-transparent text-sm h-10"
           >
             Get Notified
           </Button>

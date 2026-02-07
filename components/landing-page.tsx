@@ -18,19 +18,19 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
+      staggerChildren: 0.06,
+      delayChildren: 0.05,
     },
   },
 }
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 15 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.35,
       ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
@@ -660,12 +660,7 @@ export function LandingPage({
               </motion.div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="relative"
-            >
+            <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
                 <Image
                   src="/images/team/group-photo-opt.webp"
@@ -674,11 +669,13 @@ export function LandingPage({
                   height={600}
                   className="w-full h-auto"
                   priority
+                  loading="eager"
+                  fetchPriority="high"
                 />
               </div>
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-[#00B5AD]/30 rounded-full blur-xl" aria-hidden="true" />
               <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-[#F6EB69]/20 rounded-full blur-xl" aria-hidden="true" />
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>

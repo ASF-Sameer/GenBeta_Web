@@ -24,6 +24,16 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [showContent, setShowContent] = useState(true)
 
+  const forceScrollTop = useCallback(() => {
+    const lenis = typeof window !== "undefined" ? (window as any).__lenis : null
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true })
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" })
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+  }, [])
+
   const navigateTo = useCallback((href: string) => {
     if (isTransitioning) return
     
@@ -31,17 +41,22 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
     setShowContent(false)
     
     setTimeout(() => {
-      window.scrollTo(0, 0)
+      forceScrollTop()
       router.push(href)
       
+      requestAnimationFrame(() => {
+        forceScrollTop()
+      })
+      
       setTimeout(() => {
+        forceScrollTop()
         setShowContent(true)
         setTimeout(() => {
           setIsTransitioning(false)
         }, 600)
       }, 300)
     }, 500)
-  }, [router, isTransitioning])
+  }, [router, isTransitioning, forceScrollTop])
 
   return (
     <TransitionContext.Provider value={{ navigateTo, isTransitioning }}>
