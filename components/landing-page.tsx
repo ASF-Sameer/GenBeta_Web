@@ -641,16 +641,10 @@ export function LandingPage({
                   Generation Z
                 </span>
               </Link>
-              <div className="hidden md:flex items-center gap-4 lg:gap-8">
-                <a href="#about" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Home</a>
-                <a href="#team" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Meet the Team</a>
-                <a href="#pillars" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Explore our Work</a>
-                <a href="#gallery" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Our Experiences</a>
-              </div>
             </div>
           </nav>
 
-          <div className="md:hidden fixed top-4 right-4 z-50">
+          <div className="fixed top-4 right-4 sm:top-6 sm:right-6 z-50">
             <button
               className="w-11 h-11 flex items-center justify-center rounded-full bg-[#1E1A5F]/80 backdrop-blur-xl border border-white/20 text-white shadow-lg shadow-black/20 hover:bg-[#1E1A5F] transition-all"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
