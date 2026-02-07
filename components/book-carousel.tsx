@@ -136,7 +136,7 @@ export function BookCarousel() {
               {books.map((book, index) => (
                 <div
                   key={book.id}
-                  className="min-w-full px-1 flex-shrink-0"
+                  className="min-w-full px-4 flex-shrink-0"
                   role="group"
                   aria-roledescription="slide"
                   aria-label={`${index + 1} of ${books.length}: ${book.title} by ${book.author}`}
@@ -215,14 +215,14 @@ function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
   return (
     <div
       className={cn(
-        "bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-5 flex flex-col items-center transition-all duration-300 mx-2",
+        "bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 flex flex-col items-center transition-all duration-300 w-full",
         isActive && book.status === "current" && "ring-1 ring-[#C3D534]"
       )}
     >
-      <div className="flex items-center justify-between w-full mb-4">
+      <div className="flex items-center justify-between w-full mb-3">
         <span
           className={cn(
-            "px-3 py-1 rounded-full text-xs font-bold tracking-wider",
+            "px-2.5 py-1 rounded-full text-xs font-bold tracking-wider shrink-0",
             book.badgeColor
           )}
         >
@@ -231,15 +231,15 @@ function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
           {book.status === "future" && "○ "}
           {book.badgeText}
         </span>
-        <span className="text-xs text-white/50 flex items-center gap-1">
-          <Calendar className="w-3.5 h-3.5" />
+        <span className="text-xs text-white/50 flex items-center gap-1 shrink-0">
+          <Calendar className="w-3 h-3" />
           {book.date}
         </span>
       </div>
 
       <div
         className={cn(
-          "w-32 h-44 rounded-xl bg-gradient-to-br relative overflow-hidden mb-4 shadow-lg",
+          "w-1/3 max-w-[128px] aspect-[3/4] rounded-xl bg-gradient-to-br relative overflow-hidden mb-3 shadow-lg",
           book.coverGradient
         )}
       >
@@ -256,7 +256,7 @@ function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
           <div className="absolute inset-0 flex items-center justify-center">
             <HelpCircle
               className={cn(
-                "w-12 h-12 text-white/80",
+                "w-10 h-10 text-white/80",
                 book.status === "upcoming" && "animate-pulse"
               )}
             />
@@ -264,24 +264,24 @@ function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
         )}
       </div>
 
-      <h3 className="text-lg font-bold text-white text-center leading-tight">{book.title}</h3>
-      <p className="text-sm text-white/60 text-center mt-1">by {book.author}</p>
-      <p className="text-sm text-white/70 text-center leading-relaxed mt-2 line-clamp-3 px-2">
+      <h3 className="text-base font-bold text-white text-center leading-tight">{book.title}</h3>
+      <p className="text-sm text-white/60 text-center mt-0.5">by {book.author}</p>
+      <p className="text-sm text-white/70 text-center leading-relaxed mt-2 line-clamp-3">
         {book.description}
       </p>
 
-      <div className="mt-4 w-full">
+      <div className="mt-3 w-full">
         {book.status === "current" ? (
           <Button
             asChild
-            className="w-full bg-gradient-to-r from-[#00B5AD] to-[#0057B8] text-white font-semibold rounded-full text-sm h-11"
+            className="w-full bg-gradient-to-r from-[#00B5AD] to-[#0057B8] text-white font-semibold rounded-full text-sm h-10"
           >
             <a href="#register">Join This Session</a>
           </Button>
         ) : (
           <Button
             variant="outline"
-            className="w-full glass-button rounded-full font-semibold bg-transparent text-sm h-11"
+            className="w-full glass-button rounded-full font-semibold bg-transparent text-sm h-10"
           >
             Get Notified
           </Button>
