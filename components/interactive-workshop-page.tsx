@@ -288,6 +288,7 @@ function HeroSection({ badge, title, subtitle, backgroundImage }: {
             fill
             className="object-cover opacity-30"
             priority
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#1C2951]/80 via-[#1E1A5F]/90 to-[#1E1A5F]" />
         </div>
@@ -380,6 +381,7 @@ function AboutSection({ data }: { data: NonNullable<WorkshopData['aboutSection']
                 alt={data.title || "About section"}
                 fill
                 className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </motion.div>
           )}
@@ -759,6 +761,7 @@ function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilit
                       alt={facilitator.name}
                       fill
                       className="object-cover"
+                      sizes="128px"
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-[#C3D534] to-[#00B5AD] flex items-center justify-center">

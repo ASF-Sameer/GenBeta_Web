@@ -307,39 +307,40 @@ function TeamMemberCard({ name, role, email, linkedin, image }: { name: string; 
   return (
     <motion.article
       variants={itemVariants}
-      className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl p-6 text-center"
+      className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl p-4 sm:p-6 text-center"
       role="article"
       aria-labelledby={`team-${name.replace(/\s+/g, '-').toLowerCase()}`}
     >
-      <div className="flex flex-col items-center space-y-4">
-        <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-[#00B5AD]">
+      <div className="flex flex-col items-center space-y-3 sm:space-y-4">
+        <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden border-3 sm:border-4 border-[#00B5AD]">
           {image ? (
             <Image
               src={image}
               alt={`Portrait of ${name}`}
               fill
               className="object-cover"
+              sizes="(max-width: 640px) 96px, 128px"
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-[#C3D534] to-[#00B5AD] flex items-center justify-center">
-              <span className="text-4xl font-bold text-white">{name.charAt(0)}</span>
+              <span className="text-3xl sm:text-4xl font-bold text-white">{name.charAt(0)}</span>
             </div>
           )}
         </div>
         <div className="space-y-1">
           <h3 
             id={`team-${name.replace(/\s+/g, '-').toLowerCase()}`}
-            className="text-xl font-bold text-white"
+            className="text-lg sm:text-xl font-bold text-white"
           >
             {name}
           </h3>
-          <p className="text-[#C3D534] font-semibold">{role}</p>
+          <p className="text-[#C3D534] font-semibold text-sm sm:text-base">{role}</p>
         </div>
         <div className="flex flex-col items-center gap-2">
           {email && (
             <a 
               href={`mailto:${email}`}
-              className="text-white/80 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 rounded-lg px-2 py-1 text-sm"
+              className="text-white/80 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 rounded-lg px-2 py-1 text-xs sm:text-sm break-all"
               aria-label={`Send email to ${name}`}
             >
               {email}
@@ -350,7 +351,7 @@ function TeamMemberCard({ name, role, email, linkedin, image }: { name: string; 
               href={linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#00B5AD] hover:text-[#C3D534] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 rounded-lg px-2 py-1 text-sm"
+              className="text-[#00B5AD] hover:text-[#C3D534] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 rounded-lg px-2 py-1 text-xs sm:text-sm"
               aria-label={`Visit ${name}'s LinkedIn profile (opens in new tab)`}
             >
               LinkedIn Profile
@@ -441,6 +442,7 @@ function GalleryCarousel({ images }: { images?: string[] }) {
                   alt={`Gen Z Experience ${index + 1}`}
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
               </div>
             </div>
@@ -451,18 +453,18 @@ function GalleryCarousel({ images }: { images?: string[] }) {
       <button 
         onClick={handlePrev}
         disabled={currentIndex === 0}
-        className="absolute left-1 sm:left-0 top-1/2 -translate-y-1/2 md:-translate-x-4 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-[#00B5AD]"
+        className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed hover:bg-black/50 active:scale-90 transition-all focus:outline-none focus:ring-2 focus:ring-white/50"
         aria-label="Previous gallery images"
       >
-        <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-[#1E1A5F]" aria-hidden="true" />
+        <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-white" aria-hidden="true" />
       </button>
       <button 
         onClick={handleNext}
         disabled={currentIndex >= maxIndex}
-        className="absolute right-1 sm:right-0 top-1/2 -translate-y-1/2 md:translate-x-4 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-[#00B5AD]"
+        className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed hover:bg-black/50 active:scale-90 transition-all focus:outline-none focus:ring-2 focus:ring-white/50"
         aria-label="Next gallery images"
       >
-        <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-[#1E1A5F]" aria-hidden="true" />
+        <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" aria-hidden="true" />
       </button>
     </div>
   )
@@ -850,6 +852,7 @@ export function LandingPage({
                         "group-hover:scale-105 transition-transform duration-500 object-cover",
                         program.year === "2025" && "object-[center_20%]"
                       )}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1E1A5F] via-transparent to-transparent" />
                   </div>

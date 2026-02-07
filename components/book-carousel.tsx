@@ -98,12 +98,12 @@ export function BookCarousel() {
   return (
     <section
       id="books"
-      className="py-12 sm:py-20 lg:py-32 relative overflow-hidden"
+      className="py-10 sm:py-20 lg:py-32 relative overflow-hidden"
       aria-label="Book carousel section"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16 px-2">
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent mb-3 sm:mb-4">
+        <div className="text-center mb-6 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent mb-2 sm:mb-4">
             The Reading Journey
           </h2>
           <p className="text-sm sm:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
@@ -113,6 +113,7 @@ export function BookCarousel() {
           <div className="mt-3 sm:mt-4 h-1 w-16 sm:w-24 mx-auto bg-gradient-to-r from-[#C3D534] to-[#00B5AD] rounded-full" aria-hidden="true" />
         </div>
 
+        {/* Mobile: swipeable single-card carousel */}
         <div className="sm:hidden">
           <div
             className="relative overflow-hidden touch-pan-y"
@@ -127,7 +128,7 @@ export function BookCarousel() {
               Showing {books[currentIndex].title} by {books[currentIndex].author}, slide {currentIndex + 1} of {books.length}
             </div>
             <div
-              className="flex transition-transform duration-400 ease-out"
+              className="flex transition-transform duration-300 ease-out"
               style={{
                 transform: `translateX(-${currentIndex * 100}%)`,
               }}
@@ -135,27 +136,25 @@ export function BookCarousel() {
               {books.map((book, index) => (
                 <div
                   key={book.id}
-                  className="min-w-full px-2 flex-shrink-0"
+                  className="min-w-full px-1 flex-shrink-0"
                   role="group"
                   aria-roledescription="slide"
                   aria-label={`${index + 1} of ${books.length}: ${book.title} by ${book.author}`}
                 >
-                  <BookCard book={book} isActive={index === currentIndex} />
+                  <MobileBookCard book={book} isActive={index === currentIndex} />
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="flex items-center justify-center gap-3 mt-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="glass-button rounded-full w-10 h-10"
+          <div className="flex items-center justify-center gap-3 mt-3">
+            <button
               onClick={prevSlide}
+              className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center active:scale-90 transition-transform"
               aria-label="Previous book"
             >
-              <ChevronLeft className="w-5 h-5" />
-            </Button>
+              <ChevronLeft className="w-4 h-4 text-white/80" />
+            </button>
             <div className="flex gap-2" role="tablist" aria-label="Carousel navigation">
               {books.map((_, index) => (
                 <button
@@ -163,10 +162,10 @@ export function BookCarousel() {
                   type="button"
                   onClick={() => goToSlide(index)}
                   className={cn(
-                    "h-2.5 rounded-full transition-all duration-300",
+                    "h-2 rounded-full transition-all duration-300",
                     index === currentIndex
-                      ? "bg-gradient-to-r from-[#00B5AD] to-[#0057B8] w-8"
-                      : "bg-white/20 hover:bg-white/40 w-2.5"
+                      ? "bg-gradient-to-r from-[#C3D534] to-[#00B5AD] w-6"
+                      : "bg-white/25 w-2"
                   )}
                   role="tab"
                   aria-selected={index === currentIndex}
@@ -174,18 +173,17 @@ export function BookCarousel() {
                 />
               ))}
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="glass-button rounded-full w-10 h-10"
+            <button
               onClick={nextSlide}
+              className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center active:scale-90 transition-transform"
               aria-label="Next book"
             >
-              <ChevronRight className="w-5 h-5" />
-            </Button>
+              <ChevronRight className="w-4 h-4 text-white/80" />
+            </button>
           </div>
         </div>
 
+        {/* Desktop: grid layout */}
         <div className="hidden sm:block">
           <div
             className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 lg:p-10"
@@ -195,13 +193,13 @@ export function BookCarousel() {
           >
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {books.map((book, index) => (
-                <BookCard key={book.id} book={book} isActive={index === 0} />
+                <DesktopBookCard key={book.id} book={book} isActive={index === 0} />
               ))}
             </div>
           </div>
         </div>
 
-        <div className="mt-4 sm:mt-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-3 sm:p-4 lg:p-6 relative">
+        <div className="mt-3 sm:mt-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-3 sm:p-4 lg:p-6 relative">
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#C3D534] via-[#00B5AD] to-[#0057B8] -z-10 animate-pulse-glow opacity-20" aria-hidden="true" />
           <p className="text-center text-white/90 text-xs sm:text-sm lg:text-base leading-relaxed">
             Our first and flagship program in the Gen Z 2026 series. Join now to be part of a
@@ -213,19 +211,104 @@ export function BookCarousel() {
   )
 }
 
-function BookCard({ book, isActive }: { book: Book; isActive: boolean }) {
+function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
   return (
     <article
       className={cn(
-        "bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-6 h-full flex flex-col transition-all duration-300",
+        "bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-3 flex flex-col transition-all duration-300",
+        isActive && book.status === "current" && "ring-1 ring-[#C3D534]"
+      )}
+      aria-label={`${book.title} by ${book.author}`}
+    >
+      <div className="flex gap-3">
+        <div
+          className={cn(
+            "w-28 flex-shrink-0 aspect-[3/4] rounded-lg bg-gradient-to-br flex items-center justify-center relative overflow-hidden",
+            book.coverGradient
+          )}
+          aria-hidden="true"
+        >
+          {book.status === "current" && book.coverImage ? (
+            <Image
+              src={book.coverImage}
+              alt=""
+              fill
+              className="object-contain p-1"
+              sizes="112px"
+              priority
+            />
+          ) : (
+            <div className="text-center">
+              <HelpCircle
+                className={cn(
+                  "w-10 h-10 text-white/80",
+                  book.status === "upcoming" && "animate-pulse"
+                )}
+              />
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col flex-1 min-w-0">
+          <span
+            className={cn(
+              "inline-block self-start px-2 py-0.5 rounded-full text-[9px] font-bold tracking-wider mb-1.5",
+              book.badgeColor
+            )}
+          >
+            {book.status === "current" && "● "}
+            {book.status === "upcoming" && "◎ "}
+            {book.status === "future" && "○ "}
+            {book.badgeText}
+          </span>
+
+          <h3 className="text-base font-bold text-white mb-0.5 leading-tight">{book.title}</h3>
+          <p className="text-[11px] text-white/60 mb-1">by {book.author}</p>
+
+          <div className="flex items-center gap-1 text-[11px] text-white/50 mb-1.5">
+            <Calendar className="w-3 h-3 flex-shrink-0" aria-hidden="true" />
+            <time dateTime={book.status === "current" ? "2025-02-10" : undefined}>{book.date}</time>
+          </div>
+
+          <p className="text-[11px] text-white/70 leading-relaxed line-clamp-3">
+            {book.description}
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-3">
+        {book.status === "current" ? (
+          <Button
+            asChild
+            className="w-full bg-gradient-to-r from-[#00B5AD] to-[#0057B8] text-white font-semibold rounded-full text-xs h-9"
+          >
+            <a href="#register">Join This Session</a>
+          </Button>
+        ) : (
+          <Button
+            variant="outline"
+            className="w-full glass-button rounded-full font-semibold bg-transparent text-xs h-9"
+          >
+            Get Notified
+          </Button>
+        )}
+      </div>
+    </article>
+  )
+}
+
+function DesktopBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
+  return (
+    <article
+      className={cn(
+        "bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 h-full flex flex-col transition-all duration-300",
         isActive && book.status === "current" && "ring-2 ring-[#C3D534] glow-lime"
       )}
       aria-label={`${book.title} by ${book.author}`}
     >
       <div
         className={cn(
-          "aspect-[3/4] rounded-xl bg-gradient-to-br flex items-center justify-center mb-4 sm:mb-6 relative overflow-hidden",
-          "max-h-56 sm:max-h-64",
+          "aspect-[3/4] max-h-64 rounded-xl bg-gradient-to-br flex items-center justify-center mb-6 relative overflow-hidden",
           book.coverGradient
         )}
         aria-hidden="true"
@@ -236,15 +319,15 @@ function BookCard({ book, isActive }: { book: Book; isActive: boolean }) {
             alt=""
             fill
             className="object-contain p-2"
-            sizes="(max-width: 640px) 90vw, (max-width: 768px) 45vw, 30vw"
+            sizes="(max-width: 768px) 45vw, 30vw"
             priority={book.status === "current"}
           />
         ) : book.status === "current" ? (
           <div className="text-center p-4">
-            <span className="text-2xl sm:text-3xl font-black text-white drop-shadow-lg">
+            <span className="text-3xl font-black text-white drop-shadow-lg">
               {book.title}
             </span>
-            <span className="block text-xs sm:text-sm text-white/80 mt-2">
+            <span className="block text-sm text-white/80 mt-2">
               {book.author}
             </span>
           </div>
@@ -252,7 +335,7 @@ function BookCard({ book, isActive }: { book: Book; isActive: boolean }) {
           <div className="text-center">
             <HelpCircle
               className={cn(
-                "w-12 h-12 sm:w-16 sm:h-16 text-white/80",
+                "w-16 h-16 text-white/80",
                 book.status === "upcoming" && "animate-pulse"
               )}
             />
@@ -262,7 +345,7 @@ function BookCard({ book, isActive }: { book: Book; isActive: boolean }) {
 
       <span
         className={cn(
-          "inline-block self-start px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-bold tracking-wider mb-3",
+          "inline-block self-start px-2.5 py-0.5 rounded-full text-xs font-bold tracking-wider mb-3",
           book.badgeColor
         )}
         aria-label={`Status: ${book.badgeText}`}
@@ -273,15 +356,15 @@ function BookCard({ book, isActive }: { book: Book; isActive: boolean }) {
         {book.badgeText}
       </span>
 
-      <h3 className="text-lg sm:text-xl font-bold text-white mb-1">{book.title}</h3>
-      <p className="text-xs sm:text-sm text-white/60 mb-3">by {book.author}</p>
+      <h3 className="text-xl font-bold text-white mb-1">{book.title}</h3>
+      <p className="text-sm text-white/60 mb-3">by {book.author}</p>
 
-      <div className="flex items-center gap-1.5 text-xs sm:text-sm text-white/60 mb-3">
-        <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" aria-hidden="true" />
+      <div className="flex items-center gap-1.5 text-sm text-white/60 mb-3">
+        <Calendar className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
         <time dateTime={book.status === "current" ? "2025-02-10" : undefined}>{book.date}</time>
       </div>
 
-      <p className="text-xs sm:text-sm text-white/70 mb-4 flex-grow leading-relaxed">
+      <p className="text-sm text-white/70 mb-4 flex-grow leading-relaxed">
         {book.description}
       </p>
 

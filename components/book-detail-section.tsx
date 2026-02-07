@@ -113,6 +113,7 @@ export function BookDetailSection({ book, onBack, workshopTitle = "Reframe" }: B
                       alt={book.title}
                       fill
                       className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-[#C3D534] to-[#00B5AD] flex items-center justify-center">
