@@ -622,7 +622,7 @@ function ReadingJourneySection({ data, onBookSelect, selectedBookId, showEmptySt
             Click on a book to explore its details and workshop content
           </motion.p>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
             {data?.books?.map((book) => (
               <motion.div key={book._id} variants={itemVariants}>
                 <SelectableBookCard 

@@ -20,7 +20,7 @@ const facilitators: Facilitator[] = [
     name: "Abdulmohsen AlZenki",
     email: "Abdulmohsen.AlZenki@zain.com",
     linkedIn: "https://www.linkedin.com/in/abdulmohsen-alzenki",
-    image: "/images/team/abdulmohsen-alzenki.png",
+    image: "/images/team/abdulmohsen-alzenki-opt.webp",
     gradientClass: "from-[#C3D534] to-[#00B5AD]",
   },
   {
@@ -28,7 +28,7 @@ const facilitators: Facilitator[] = [
     name: "Asail AlHeis",
     email: "Asail.AlHeis@zain.com",
     linkedIn: "https://www.linkedin.com/in/asail-alheis",
-    image: "/images/team/asail-alheis.png",
+    image: "/images/team/asail-alheis-opt.webp",
     gradientClass: "from-[#00B5AD] to-[#0057B8]",
   },
   {
@@ -36,7 +36,7 @@ const facilitators: Facilitator[] = [
     name: "Ayah AlFadhli",
     email: "Ayah.AlFadhli@zain.com",
     linkedIn: "https://www.linkedin.com/in/ayah-alfadhli",
-    image: "/images/team/ayah-alfadhli.png",
+    image: "/images/team/ayah-alfadhli-opt.webp",
     gradientClass: "from-[#0057B8] to-[#9B4F96]",
   },
   {
@@ -44,7 +44,7 @@ const facilitators: Facilitator[] = [
     name: "Ahmed AlOnaizi",
     email: "Ahmed.AlOnaizi@zain.com",
     linkedIn: "https://www.linkedin.com/in/ahmed-alonaizi",
-    image: "/images/team/ahmed-alonaizi.png",
+    image: "/images/team/ahmed-alonaizi-opt.webp",
     gradientClass: "from-[#9B4F96] to-[#F4A6C9]",
   },
   {
@@ -52,7 +52,7 @@ const facilitators: Facilitator[] = [
     name: "Jana AlAbduljader",
     email: "Jana.AlAbduljader@zain.com",
     linkedIn: "https://www.linkedin.com/in/jana-alabduljader",
-    image: "/images/team/jana-alabduljader.png",
+    image: "/images/team/jana-alabduljader-opt.webp",
     gradientClass: "from-[#F4A6C9] to-[#FFF06B]",
   },
   {
@@ -60,7 +60,7 @@ const facilitators: Facilitator[] = [
     name: "Miteb AlOqab",
     email: "Miteb.AlOqab@zain.com",
     linkedIn: "https://www.linkedin.com/in/miteb-aloqab",
-    image: "/images/team/miteb-aloqab.png",
+    image: "/images/team/miteb-aloqab-opt.webp",
     gradientClass: "from-[#FFF06B] to-[#C3D534]",
   },
 ]

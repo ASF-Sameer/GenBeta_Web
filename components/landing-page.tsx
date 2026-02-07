@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
@@ -74,7 +74,7 @@ const defaultOurPrograms = [
     title: "Reframe",
     description: "A learning series empowering colleagues to rethink, reset, and drive meaningful change. Starting with Dan Heath's transformative book 'Reset'.",
     link: "/reframe",
-    image: "/images/reset-book-3d.png"
+    image: "/images/reset-book-3d-opt.webp"
   }
 ]
 
@@ -84,58 +84,58 @@ const defaultTeamMembers = [
     role: "Gen Z Graduate",
     email: "Abdulmohsen.AlZenki@zain.com",
     linkedin: "https://www.linkedin.com/in/abdulmohsen-alzenki",
-    image: "/images/team/abdulmohsen-alzenki.png"
+    image: "/images/team/abdulmohsen-alzenki-opt.webp"
   },
   {
     name: "Asail AlHeis",
     role: "Gen Z Graduate",
     email: "Asail.AlHeis@zain.com",
     linkedin: "https://www.linkedin.com/in/asail-alheis",
-    image: "/images/team/asail-alheis.png"
+    image: "/images/team/asail-alheis-opt.webp"
   },
   {
     name: "Ayah AlFadhli",
     role: "Gen Z Graduate",
     email: "Ayah.AlFadhli@zain.com",
     linkedin: "https://www.linkedin.com/in/ayah-alfadhli",
-    image: "/images/team/ayah-alfadhli.png"
+    image: "/images/team/ayah-alfadhli-opt.webp"
   },
   {
     name: "Ahmed AlOnaizi",
     role: "Gen Z Graduate",
     email: "Ahmed.AlOnaizi@zain.com",
     linkedin: "https://www.linkedin.com/in/ahmed-alonaizi",
-    image: "/images/team/ahmed-alonaizi.png"
+    image: "/images/team/ahmed-alonaizi-opt.webp"
   },
   {
     name: "Jana AlAbduljader",
     role: "Gen Z Graduate",
     email: "Jana.AlAbduljader@zain.com",
     linkedin: "https://www.linkedin.com/in/jana-alabduljader",
-    image: "/images/team/jana-alabduljader.png"
+    image: "/images/team/jana-alabduljader-opt.webp"
   },
   {
     name: "Miteb AlOqab",
     role: "Gen Z Graduate",
     email: "Miteb.AlOqab@zain.com",
     linkedin: "https://www.linkedin.com/in/miteb-aloqab",
-    image: "/images/team/miteb-aloqab.png"
+    image: "/images/team/miteb-aloqab-opt.webp"
   }
 ]
 
 const defaultGalleryImages = [
-  "/images/gallery-new/gallery-1.jpg",
-  "/images/gallery-new/gallery-2.jpg",
-  "/images/gallery-new/gallery-3.jpg",
-  "/images/gallery-new/gallery-4.jpg",
-  "/images/gallery-new/gallery-5.jpg",
-  "/images/gallery-new/gallery-6.jpg",
-  "/images/gallery-new/gallery-7.jpg",
-  "/images/gallery-new/gallery-8.jpg",
-  "/images/gallery-new/gallery-9.jpg",
-  "/images/gallery-new/gallery-10.jpg",
-  "/images/gallery-new/gallery-11.jpg",
-  "/images/gallery-new/gallery-12.jpg"
+  "/images/gallery-new/gallery-1-opt.webp",
+  "/images/gallery-new/gallery-2-opt.webp",
+  "/images/gallery-new/gallery-3-opt.webp",
+  "/images/gallery-new/gallery-4-opt.webp",
+  "/images/gallery-new/gallery-5-opt.webp",
+  "/images/gallery-new/gallery-6-opt.webp",
+  "/images/gallery-new/gallery-7-opt.webp",
+  "/images/gallery-new/gallery-8-opt.webp",
+  "/images/gallery-new/gallery-9-opt.webp",
+  "/images/gallery-new/gallery-10-opt.webp",
+  "/images/gallery-new/gallery-11-opt.webp",
+  "/images/gallery-new/gallery-12-opt.webp"
 ]
 
 const defaultPreviousGenZPrograms = [
@@ -143,62 +143,62 @@ const defaultPreviousGenZPrograms = [
     year: "2025",
     title: "Gen Z 2025",
     description: "Empowering the next generation with AI & Big Data, Resilience & Agility, Creative Thinking, Leadership, and Systems Thinking for the future of work.",
-    image: "/images/genz-2025.png",
+    image: "/images/genz-2025-opt.webp",
     link: "https://generation-z-kappa.vercel.app/"
   },
   {
     year: "2024",
     title: "Gen Z 2024",
     description: "Focused on supercharging leadership skills and training based on 4 modules: Speak Up and Pitch Up; Strategic Innovation; Green Skills; and Digital World.",
-    image: "/images/genz-2024.png"
+    image: "/images/genz-2024-opt.webp"
   },
   {
     year: "2023",
     title: "Gen Z 2023",
     description: "Focused on cultivating entrepreneurial mindset that supports Zain's 4Sight strategy.",
-    image: "/images/genz-2023.png"
+    image: "/images/genz-2023-opt.webp"
   },
   {
     year: "2022",
     title: "Gen Z 2022",
     description: "Geared towards cultivating internal entrepreneurs, innovators, and new thinkers who already possess a mindset capable of supporting Zain's strategic goals.",
-    image: "/images/genz-2022.png"
+    image: "/images/genz-2022-opt.webp"
   },
   {
     year: "2021",
     title: "Gen Z 2021",
     description: "Focused on developing digital skills for future data analysts. Addressed the topics of big data, artificial intelligence, and sustainable innovation.",
-    image: "/images/genz-2021.png"
+    image: "/images/genz-2021-opt.webp"
   },
   {
     year: "2020",
     title: "Gen Z 2020",
     description: "This cycle incorporated three themes: corporate culture, leadership styles, and future trends.",
-    image: "/images/genz-2020.png"
+    image: "/images/genz-2020-opt.webp"
   },
   {
     year: "2019",
     title: "Gen Z 2019",
     description: "Enhancing corporate culture and teamwork when managing projects were the main focus of this edition.",
-    image: "/images/genz-2019.png"
+    image: "/images/genz-2019-opt.webp"
   },
   {
     year: "2018",
     title: "Gen Z 2018",
     description: "Enhancing digital skills such as coding and agile project management in addition to a focus on self-growth and development.",
-    image: "/images/genz-2018.png"
+    image: "/images/genz-2018-opt.webp"
   },
   {
     year: "2017",
     title: "Gen Z 2017",
     description: "Centered on establishing a business, gaining entrepreneurial skills, and studying innovative trends in the market.",
-    image: "/images/genz-2017.png"
+    image: "/images/genz-2017-opt.webp"
   },
   {
     year: "2016",
     title: "Gen Z 2016",
     description: "Focused on a rotation in different departments throughout Zain Group with an emphasis on conducting research on various digital verticals.",
-    image: "/images/genz-2016.png"
+    image: "/images/genz-2016-opt.webp"
   }
 ]
 
@@ -277,6 +277,7 @@ function ProgramCard({ title, description, link, image }: { title: string; descr
                   alt={`${title} program cover`}
                   fill
                   className="object-contain drop-shadow-2xl"
+                  sizes="(max-width: 640px) 144px, 176px"
                 />
               </div>
             </div>
@@ -365,6 +366,8 @@ function GalleryCarousel({ images }: { images?: string[] }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [itemsPerView, setItemsPerView] = useState(3)
   const [shuffledImages, setShuffledImages] = useState<string[]>([])
+  const touchStartX = useRef(0)
+  const touchEndX = useRef(0)
   
   const galleryImages = images && images.length > 0 ? images : defaultGalleryImages
   
@@ -404,11 +407,24 @@ function GalleryCarousel({ images }: { images?: string[] }) {
   const handlePrev = () => setCurrentIndex(prev => Math.max(0, prev - 1))
   const handleNext = () => setCurrentIndex(prev => Math.min(maxIndex, prev + 1))
   
+  const handleTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX }
+  const handleTouchMove = (e: React.TouchEvent) => { touchEndX.current = e.touches[0].clientX }
+  const handleTouchEnd = () => {
+    const diff = touchStartX.current - touchEndX.current
+    if (diff > 50) handleNext()
+    else if (diff < -50) handlePrev()
+  }
+  
   if (shuffledImages.length === 0) return null
   
   return (
     <div className="relative">
-      <div className="overflow-hidden rounded-2xl">
+      <div
+        className="overflow-hidden rounded-2xl touch-pan-y"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <div 
           className="flex transition-transform duration-500 ease-out gap-4"
           style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView + (4 / itemsPerView))}%)` }}
@@ -650,7 +666,7 @@ export function LandingPage({
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
                 <Image
-                  src="/images/team/group-photo.jpg"
+                  src="/images/team/group-photo-opt.webp"
                   alt="Generation Z 11th Edition Team - Official Group Photo"
                   width={1200}
                   height={600}
