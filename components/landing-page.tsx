@@ -662,7 +662,7 @@ export function LandingPage({
                     className={cn(
                       "px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs lg:text-sm font-semibold transition-all duration-200 rounded whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-[#00B5AD] uppercase tracking-wide",
                       "text-white/90 hover:text-white hover:bg-white/10",
-                      index === arr.length - 1 && "bg-gradient-to-r from-[#00B5AD] to-[#C3D534] text-white hover:opacity-90 rounded-full"
+                      false
                     )}
                   >
                     {link.label}
