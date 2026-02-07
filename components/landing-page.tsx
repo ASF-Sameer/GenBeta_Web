@@ -645,11 +645,11 @@ export function LandingPage({
                 <a href="#gallery" className="text-sm lg:text-base text-white hover:text-[#00B5AD] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded px-2 py-1">Our Experiences</a>
               </div>
             </div>
-            <div className="flex md:hidden items-center gap-3 mt-2 overflow-x-auto pb-1 no-scrollbar">
-              <a href="#about" className="text-xs text-white/80 hover:text-[#00B5AD] transition-colors whitespace-nowrap px-2 py-1 rounded-full bg-white/10">Home</a>
-              <a href="#team" className="text-xs text-white/80 hover:text-[#00B5AD] transition-colors whitespace-nowrap px-2 py-1 rounded-full bg-white/10">Team</a>
-              <a href="#pillars" className="text-xs text-white/80 hover:text-[#00B5AD] transition-colors whitespace-nowrap px-2 py-1 rounded-full bg-white/10">Our Work</a>
-              <a href="#gallery" className="text-xs text-white/80 hover:text-[#00B5AD] transition-colors whitespace-nowrap px-2 py-1 rounded-full bg-white/10">Experiences</a>
+            <div className="flex md:hidden items-center justify-between w-full mt-2 gap-1">
+              <a href="#about" className="text-[11px] min-[375px]:text-xs text-white/80 hover:text-[#00B5AD] active:text-[#00B5AD] transition-colors text-center px-2 py-1.5 rounded-full bg-white/10 flex-1">Home</a>
+              <a href="#team" className="text-[11px] min-[375px]:text-xs text-white/80 hover:text-[#00B5AD] active:text-[#00B5AD] transition-colors text-center px-2 py-1.5 rounded-full bg-white/10 flex-1">Team</a>
+              <a href="#pillars" className="text-[11px] min-[375px]:text-xs text-white/80 hover:text-[#00B5AD] active:text-[#00B5AD] transition-colors text-center px-2 py-1.5 rounded-full bg-white/10 flex-1">Work</a>
+              <a href="#gallery" className="text-[11px] min-[375px]:text-xs text-white/80 hover:text-[#00B5AD] active:text-[#00B5AD] transition-colors text-center px-2 py-1.5 rounded-full bg-white/10 flex-1">Gallery</a>
             </div>
           </nav>
 
