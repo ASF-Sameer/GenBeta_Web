@@ -1,7 +1,7 @@
 "use client"
 
 const eventInfo = [
-  { label: "Tuesday, February 11th, 2025" },
+  { label: "Tuesday, February 10th, 2025" },
   { label: "2:00 PM - 3:30 PM (Kuwait)" },
   { label: "ZINC - Innovation Campus" },
   { label: "Facilitated by Gen Z Team" },
