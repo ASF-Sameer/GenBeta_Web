@@ -42,7 +42,7 @@ const attendees = [
 ]
 
 const workshopDetails = [
-  { label: "Monday, Feb 10" },
+  { label: "Tuesday, Feb 11" },
   { label: "2:00 - 3:30 PM" },
   { label: "ZINC" },
   { label: "Gen Z Team" },
