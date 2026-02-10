@@ -153,6 +153,14 @@ Change the `formEmbedUrl` field in the CMS to swap embedded registration forms (
 - Start command: `npm run start`
 
 ## Recent Changes
+- 2026-02-10: Full WCAG 2.1 AA Accessibility Compliance
+  - **Color Contrast**: Bumped all low-opacity text (white/30, /40, /50) to white/60 minimum for 4.5:1 contrast ratio against navy backgrounds
+  - **Reduced Motion**: Added `useReducedMotion` from framer-motion to all animated components (landing-page, interactive-workshop-page, genz-landing, book-detail-section, book-popup-modal, selectable-book-card). Lenis smooth scroll disabled when user prefers reduced motion. CSS animations fully covered in globals.css `prefers-reduced-motion` media query
+  - **Focus Indicators**: Consistent `focus:ring-2 focus:ring-[#00B5AD]` added to ALL interactive elements across all components
+  - **Screen Reader Support**: All decorative elements hidden with aria-hidden, proper landmark roles and aria-labelledby on all sections, descriptive alt text on images, dialog roles on menu overlays, aria-pressed on book cards
+  - **Skip Navigation**: Skip-to-content link targets #main-content on all pages
+  - **Keyboard Navigation**: All interactive elements reachable via Tab key with visible focus indicators
+
 - 2026-02-04: CMS-Editable Theme (Fonts & Colors)
   - Added `theme` settings to siteSettings schema with:
     - **Colors**: Primary (lime), Secondary (yellow), Accent (turquoise), Navy Dark, Navy Light, Blue
