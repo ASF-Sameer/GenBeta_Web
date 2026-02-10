@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { 
   ArrowRight, 
   ChevronLeft,
@@ -223,9 +223,11 @@ function PillarCard({ title, description, gradientClass, glowClass, linkUrl }: {
   glowClass: string;
   linkUrl?: string;
 }) {
+  const prefersReducedMotion = useReducedMotion()
+  const activeItemVariants = prefersReducedMotion ? { hidden: { opacity: 1, y: 0 }, visible: { opacity: 1, y: 0 } } : itemVariants
   const content = (
     <motion.article
-      variants={itemVariants}
+      variants={activeItemVariants}
       className={cn(
         "relative rounded-2xl p-6 text-white h-full overflow-hidden backdrop-blur-md",
         "bg-[#1E1A5F]/80 border border-white/30 hover:bg-[#1E1A5F]/90 transition-all duration-300",
@@ -233,7 +235,7 @@ function PillarCard({ title, description, gradientClass, glowClass, linkUrl }: {
       )}
       role="article"
       aria-labelledby={`pillar-${title.replace(/\s+/g, '-').toLowerCase()}`}
-      whileHover={{ scale: 1.02 }}
+      whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
     >
       <div className={cn("absolute inset-0 opacity-40 bg-gradient-to-br", gradientClass)} aria-hidden="true" />
       <div className="relative z-10 flex flex-col items-start text-left space-y-3">
@@ -262,10 +264,12 @@ function PillarCard({ title, description, gradientClass, glowClass, linkUrl }: {
 }
 
 function ProgramCard({ title, description, link, image }: { title: string; description: string; link: string; image?: string }) {
+  const prefersReducedMotion = useReducedMotion()
+  const activeItemVariants = prefersReducedMotion ? { hidden: { opacity: 1, y: 0 }, visible: { opacity: 1, y: 0 } } : itemVariants
   return (
     <TransitionLink href={link} className="block group focus:outline-none focus:ring-2 focus:ring-[#00B5AD] rounded-2xl">
       <motion.article
-        variants={itemVariants}
+        variants={activeItemVariants}
         className="relative bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl text-white hover:bg-[#1E1A5F]/90 transition-all duration-300"
         role="article"
         aria-labelledby={`program-${title.replace(/\s+/g, '-').toLowerCase()}`}
@@ -306,9 +310,11 @@ function ProgramCard({ title, description, link, image }: { title: string; descr
 }
 
 function TeamMemberCard({ name, role, email, linkedin, image }: { name: string; role: string; email?: string; linkedin?: string; image?: string }) {
+  const prefersReducedMotion = useReducedMotion()
+  const activeItemVariants = prefersReducedMotion ? { hidden: { opacity: 1, y: 0 }, visible: { opacity: 1, y: 0 } } : itemVariants
   return (
     <motion.article
-      variants={itemVariants}
+      variants={activeItemVariants}
       className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl p-4 sm:p-6 text-center"
       role="article"
       aria-labelledby={`team-${name.replace(/\s+/g, '-').toLowerCase()}`}
@@ -591,7 +597,21 @@ export function LandingPage({
 }: LandingPageProps) {
   const [isClient, setIsClient] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  
+  const prefersReducedMotion = useReducedMotion()
+
+  const reducedContainerVariants = {
+    hidden: { opacity: 1 },
+    visible: { opacity: 1 },
+  }
+
+  const reducedItemVariants = {
+    hidden: { opacity: 1, y: 0 },
+    visible: { opacity: 1, y: 0 },
+  }
+
+  const activeContainerVariants = prefersReducedMotion ? reducedContainerVariants : containerVariants
+  const activeItemVariants = prefersReducedMotion ? reducedItemVariants : itemVariants
+
   const displayTeamMembers = sanityTeamMembers && sanityTeamMembers.length > 0 ? sanityTeamMembers : defaultTeamMembers
   const displayPillars = sanityPillars && sanityPillars.length > 0 
     ? sanityPillars.map((p, i) => ({
@@ -655,7 +675,7 @@ export function LandingPage({
             <div className="absolute inset-0 bg-black/60 backdrop-blur-md" />
             <div className="relative z-10 w-[85vw] max-w-sm" onClick={(e) => e.stopPropagation()}>
               <div className="bg-gradient-to-b from-[#1E1A5F] to-[#0057B8]/90 backdrop-blur-2xl border border-white/15 rounded-3xl p-6 shadow-2xl shadow-black/40">
-                <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/40 mb-4 px-2">Navigation</p>
+                <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/60 mb-4 px-2">Navigation</p>
                 <div className="space-y-1">
                   {[
                     { href: "#about", label: "About" },
@@ -676,7 +696,7 @@ export function LandingPage({
                   ))}
                 </div>
                 <div className="mt-5 pt-4 border-t border-white/10 px-2">
-                  <p className="text-xs text-white/30 text-center">Generation Z &middot; 11th Edition</p>
+                  <p className="text-xs text-white/60 text-center">Generation Z &middot; 11th Edition</p>
                 </div>
               </div>
             </div>
@@ -693,15 +713,15 @@ export function LandingPage({
             <motion.div
               initial="hidden"
               animate="visible"
-              variants={containerVariants}
+              variants={activeContainerVariants}
               className="space-y-6"
             >
-              <motion.p variants={itemVariants} className="text-white/80 text-lg">
+              <motion.p variants={activeItemVariants} className="text-white/80 text-lg">
                 {hero.welcomeText || "Welcome to"}
               </motion.p>
               <motion.h1 
                 id="hero-heading"
-                variants={itemVariants} 
+                variants={activeItemVariants} 
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
               >
                 <span className="bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent">{hero.title || "The 11th Edition of"}</span>
@@ -710,10 +730,10 @@ export function LandingPage({
                 <br />
                 <span className="text-white">{hero.byLine || "by Zain"}</span>
               </motion.h1>
-              <motion.p variants={itemVariants} className="text-white/80 text-base sm:text-lg max-w-lg leading-relaxed">
+              <motion.p variants={activeItemVariants} className="text-white/80 text-base sm:text-lg max-w-lg leading-relaxed">
                 {hero.description || "Generation Z is Zain Group's flagship graduate development program, designed to cultivate the next wave of leaders through five transformative pillars: AI & Big Data, Creative Thinking, Resilience & Agility, Leadership & Social Influence, and Systems Thinking."}
               </motion.p>
-              <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
+              <motion.div variants={activeItemVariants} className="flex flex-wrap gap-4">
                 <TransitionLink href={hero.ctaLink || "/reframe"}>
                   <Button 
                     size="lg" 
@@ -755,17 +775,17 @@ export function LandingPage({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          variants={activeContainerVariants}
           className="max-w-4xl mx-auto"
         >
           <motion.h2 
             id="about-heading"
-            variants={itemVariants} 
+            variants={activeItemVariants} 
             className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent mb-8"
           >
             {about.title || "About the Gen Z Program"}
           </motion.h2>
-          <motion.p variants={itemVariants} className="text-white text-base sm:text-lg leading-relaxed">
+          <motion.p variants={activeItemVariants} className="text-white text-base sm:text-lg leading-relaxed">
             {about.description || "Since 2016, Zain has continuously supported youth development and shaped future leaders, an effort that gave rise to the Generation Z program. It is a development program aimed at identifying and assessing young graduates who innately possess leadership skills. This year marks the 11th anniversary of the program, and as part of Zain's wider 4WARD strategy, the program positions 6 high-potential young talents at the center of digital transformation efforts, developing critical capabilities in product innovation, agile delivery, leadership, and customer experience."}
           </motion.p>
         </motion.div>
@@ -801,16 +821,16 @@ export function LandingPage({
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
+            variants={activeContainerVariants}
           >
             <motion.h2 
               id="pillars-heading"
-              variants={itemVariants} 
+              variants={activeItemVariants} 
               className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               {sections.pillarsTitle || "11th Edition Program Theme"}
             </motion.h2>
-            <motion.p variants={itemVariants} className="text-white/70 text-center mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
+            <motion.p variants={activeItemVariants} className="text-white/70 text-center mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
               {sections.pillarsSubtitle || "Our comprehensive development framework designed to cultivate future-ready leaders"}
             </motion.p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -831,16 +851,16 @@ export function LandingPage({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          variants={activeContainerVariants}
         >
           <motion.h2 
             id="programs-heading"
-            variants={itemVariants} 
+            variants={activeItemVariants} 
             className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
           >
             {sections.programsTitle || "Our Programs"}
           </motion.h2>
-          <motion.p variants={itemVariants} className="text-white/70 text-center mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
+          <motion.p variants={activeItemVariants} className="text-white/70 text-center mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
             {sections.programsSubtitle || "Initiatives designed to foster growth, learning, and meaningful impact"}
           </motion.p>
           <div className="max-w-2xl mx-auto space-y-6">
@@ -860,16 +880,16 @@ export function LandingPage({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          variants={activeContainerVariants}
         >
           <motion.h2 
             id="team-heading"
-            variants={itemVariants} 
+            variants={activeItemVariants} 
             className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
           >
             {sections.teamTitle || "Gen Z 2026"}
           </motion.h2>
-          <motion.p variants={itemVariants} className="text-white/70 text-center mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
+          <motion.p variants={activeItemVariants} className="text-white/70 text-center mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
             {sections.teamSubtitle || "Meet the talented individuals driving innovation and leadership in the 11th Edition"}
           </motion.p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
@@ -889,16 +909,16 @@ export function LandingPage({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          variants={activeContainerVariants}
         >
           <motion.h2 
             id="previous-programs-heading"
-            variants={itemVariants} 
+            variants={activeItemVariants} 
             className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
           >
             {sections.previousTitle || "The Previous Gen Zs"}
           </motion.h2>
-          <motion.p variants={itemVariants} className="text-white/70 text-center mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
+          <motion.p variants={activeItemVariants} className="text-white/70 text-center mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
             {sections.previousSubtitle || "Discover the legacy of innovation and leadership across all editions"}
           </motion.p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -946,7 +966,7 @@ export function LandingPage({
                   href={program.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  variants={itemVariants}
+                  variants={activeItemVariants}
                   aria-label={`Visit ${program.title} website (opens in new tab)`}
                   className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl overflow-hidden hover:bg-[#1E1A5F]/90 transition-all duration-300 group block"
                 >
@@ -955,7 +975,7 @@ export function LandingPage({
               ) : (
                 <motion.article
                   key={program.year}
-                  variants={itemVariants}
+                  variants={activeItemVariants}
                   className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl overflow-hidden hover:bg-[#1E1A5F]/90 transition-all duration-300 group"
                 >
                   {CardContent}
@@ -975,16 +995,16 @@ export function LandingPage({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          variants={activeContainerVariants}
         >
           <motion.h2 
             id="gallery-heading"
-            variants={itemVariants} 
+            variants={activeItemVariants} 
             className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
           >
             {sections.galleryTitle || "Gallery"}
           </motion.h2>
-          <motion.div variants={itemVariants}>
+          <motion.div variants={activeItemVariants}>
             <GalleryCarousel images={sanityGalleryImages} />
           </motion.div>
         </motion.div>

@@ -603,7 +603,7 @@ function SessionFlowSection({ data }: { data: NonNullable<WorkshopData['sessionF
                           <span className="text-[#C3D534] font-mono text-sm">{session.time}</span>
                         )}
                         {session.duration && (
-                          <span className="text-white/50 text-sm">({session.duration})</span>
+                          <span className="text-white/60 text-sm">({session.duration})</span>
                         )}
                       </div>
                       {session.title && (
@@ -696,7 +696,7 @@ function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilit
                   {facilitator.email && (
                     <a
                       href={`mailto:${facilitator.email}`}
-                      className="text-white/60 hover:text-white transition-colors text-sm"
+                      className="text-white/60 hover:text-white transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded"
                       aria-label={`Send email to ${facilitator.name}`}
                     >
                       Email
@@ -707,7 +707,7 @@ function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilit
                       href={facilitator.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#00B5AD] hover:text-[#C3D534] transition-colors text-sm"
+                      className="text-[#00B5AD] hover:text-[#C3D534] transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded"
                       aria-label={`Visit ${facilitator.name}'s LinkedIn profile (opens in new tab)`}
                     >
                       LinkedIn
@@ -757,7 +757,7 @@ function ReserveSpotSection({ data }: { data: NonNullable<WorkshopData['reserveS
           )}
           
           <motion.div variants={itemVariants}>
-            <a href="#registration">
+            <a href="#registration" className="focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded-lg">
               <Button 
                 size="lg" 
                 className="bg-gradient-to-r from-[#C3D534] to-[#00B5AD] hover:from-[#00B5AD] hover:to-[#C3D534] text-[#1E1A5F] font-bold px-8 py-6 text-lg"

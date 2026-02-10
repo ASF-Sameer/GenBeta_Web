@@ -465,8 +465,17 @@
     .animate-pulse-glow,
     .animate-bubble-float,
     .animate-bubble-float-alt,
-    .animate-bubble-drift {
-      animation: none;
+    .animate-bubble-drift,
+    .animate-pulse-slow,
+    .animate-shimmer,
+    .animate-gradient-shift {
+      animation: none !important;
+    }
+    
+    * {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
     }
   }
   

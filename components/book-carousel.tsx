@@ -150,7 +150,7 @@ export function BookCarousel() {
           <div className="flex items-center justify-center gap-3 mt-4">
             <button
               onClick={prevSlide}
-              className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center active:scale-90 transition-transform"
+              className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center active:scale-90 transition-transform focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
               aria-label="Previous book"
             >
               <ChevronLeft className="w-4 h-4 text-white/80" />
@@ -162,7 +162,7 @@ export function BookCarousel() {
                   type="button"
                   onClick={() => goToSlide(index)}
                   className={cn(
-                    "h-2 rounded-full transition-all duration-300",
+                    "h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]",
                     index === currentIndex
                       ? "bg-gradient-to-r from-[#C3D534] to-[#00B5AD] w-6"
                       : "bg-white/25 w-2"
@@ -175,7 +175,7 @@ export function BookCarousel() {
             </div>
             <button
               onClick={nextSlide}
-              className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center active:scale-90 transition-transform"
+              className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center active:scale-90 transition-transform focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
               aria-label="Next book"
             >
               <ChevronRight className="w-4 h-4 text-white/80" />
@@ -231,7 +231,7 @@ function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
           {book.status === "future" && "○ "}
           {book.badgeText}
         </span>
-        <span className="text-xs text-white/50 flex items-center gap-1">
+        <span className="text-xs text-white/60 flex items-center gap-1">
           <Calendar className="w-3 h-3" />
           {book.date}
         </span>
@@ -278,12 +278,12 @@ function MobileBookCard({ book, isActive }: { book: Book; isActive: boolean }) {
             asChild
             className="w-full bg-gradient-to-r from-[#00B5AD] to-[#0057B8] text-white font-semibold rounded-full text-sm h-10"
           >
-            <a href="#register">Join This Session</a>
+            <a href="#register" className="focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded-full">Join This Session</a>
           </Button>
         ) : (
           <Button
             variant="outline"
-            className="w-full glass-button rounded-full font-semibold bg-transparent text-sm h-10"
+            className="w-full glass-button rounded-full font-semibold bg-transparent text-sm h-10 focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
           >
             Get Notified
           </Button>

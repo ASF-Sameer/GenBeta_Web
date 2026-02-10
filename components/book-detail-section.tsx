@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import Image from "next/image"
 import { PortableText } from "@portabletext/react"
 import { ArrowLeft, Download, ExternalLink, Clock, Users, BookOpen, CheckCircle } from "lucide-react"
@@ -66,21 +66,27 @@ const itemVariants = {
   },
 }
 
+const reducedContainerVariants = { hidden: { opacity: 1 }, visible: { opacity: 1 } }
+const reducedItemVariants = { hidden: { opacity: 1, y: 0 }, visible: { opacity: 1, y: 0 } }
+
 export function BookDetailSection({ book, onBack, workshopTitle = "Reframe" }: BookDetailSectionProps) {
+  const prefersReducedMotion = useReducedMotion()
   const showPlaceholder = !book.isDecided
+  const activeContainerVariants = prefersReducedMotion ? reducedContainerVariants : containerVariants
+  const activeItemVariants = prefersReducedMotion ? reducedItemVariants : itemVariants
 
   return (
     <motion.div
       initial="hidden"
       animate="visible"
-      variants={containerVariants}
+      variants={activeContainerVariants}
       className="min-h-screen"
     >
       <div className="container mx-auto px-4 py-8">
         <motion.button
-          variants={itemVariants}
+          variants={activeItemVariants}
           onClick={onBack}
-          className="flex items-center gap-2 text-white/70 hover:text-white mb-8 transition-colors group"
+          className="flex items-center gap-2 text-white/70 hover:text-white mb-8 transition-colors group focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded-lg"
         >
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
           <span>Back to {workshopTitle} Reading Journey</span>
@@ -88,7 +94,7 @@ export function BookDetailSection({ book, onBack, workshopTitle = "Reframe" }: B
 
         {showPlaceholder ? (
           <motion.div
-            variants={itemVariants}
+            variants={activeItemVariants}
             className="max-w-2xl mx-auto text-center py-20"
           >
             <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-[#C3D534]/30 to-[#00B5AD]/30 flex items-center justify-center">
@@ -104,7 +110,7 @@ export function BookDetailSection({ book, onBack, workshopTitle = "Reframe" }: B
           </motion.div>
         ) : (
           <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
-            <motion.div variants={itemVariants} className="lg:col-span-1">
+            <motion.div variants={activeItemVariants} className="lg:col-span-1">
               <div className="sticky top-8">
                 <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mb-6 shadow-2xl">
                   {book.coverImageUrl ? (
@@ -135,7 +141,7 @@ export function BookDetailSection({ book, onBack, workshopTitle = "Reframe" }: B
 
             <div className="lg:col-span-2 space-y-8">
               {book.popupContent?.headline && (
-                <motion.div variants={itemVariants}>
+                <motion.div variants={activeItemVariants}>
                   <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent mb-4">
                     {book.popupContent.headline}
                   </h2>
@@ -144,7 +150,7 @@ export function BookDetailSection({ book, onBack, workshopTitle = "Reframe" }: B
 
               {book.popupContent?.description && (
                 <motion.div 
-                  variants={itemVariants}
+                  variants={activeItemVariants}
                   className="prose prose-invert prose-lg max-w-none"
                 >
                   <PortableText value={book.popupContent.description} />
@@ -153,7 +159,7 @@ export function BookDetailSection({ book, onBack, workshopTitle = "Reframe" }: B
 
               {(book.popupContent?.duration || book.popupContent?.format) && (
                 <motion.div 
-                  variants={itemVariants}
+                  variants={activeItemVariants}
                   className="flex flex-wrap gap-4"
                 >
                   {book.popupContent?.duration && (
@@ -173,7 +179,7 @@ export function BookDetailSection({ book, onBack, workshopTitle = "Reframe" }: B
 
               {book.popupContent?.workshopDetails && (
                 <motion.div 
-                  variants={itemVariants}
+                  variants={activeItemVariants}
                   className="bg-[#1E1A5F]/60 border border-white/20 rounded-2xl p-6"
                 >
                   <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
@@ -186,7 +192,7 @@ export function BookDetailSection({ book, onBack, workshopTitle = "Reframe" }: B
 
               {book.popupContent?.keyTakeaways && book.popupContent.keyTakeaways.length > 0 && (
                 <motion.div 
-                  variants={itemVariants}
+                  variants={activeItemVariants}
                   className="bg-gradient-to-br from-[#C3D534]/10 to-[#00B5AD]/10 border border-[#C3D534]/30 rounded-2xl p-6"
                 >
                   <h3 className="text-xl font-bold text-white mb-4">Key Takeaways</h3>
@@ -202,7 +208,7 @@ export function BookDetailSection({ book, onBack, workshopTitle = "Reframe" }: B
               )}
 
               {book.files && book.files.length > 0 && (
-                <motion.div variants={itemVariants}>
+                <motion.div variants={activeItemVariants}>
                   <h3 className="text-xl font-bold text-white mb-4">Downloadable Resources</h3>
                   <div className="space-y-3">
                     {book.files.map((file, idx) => (
@@ -210,7 +216,7 @@ export function BookDetailSection({ book, onBack, workshopTitle = "Reframe" }: B
                         key={idx}
                         href={file.fileUrl}
                         download
-                        className="flex items-center gap-4 p-4 bg-[#1E1A5F]/60 border border-white/20 rounded-xl hover:border-[#C3D534]/50 transition-colors group"
+                        className="flex items-center gap-4 p-4 bg-[#1E1A5F]/60 border border-white/20 rounded-xl hover:border-[#C3D534]/50 transition-colors group focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
                       >
                         <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#C3D534] to-[#00B5AD] flex items-center justify-center flex-shrink-0">
                           <Download className="w-6 h-6 text-[#1E1A5F]" />
@@ -220,10 +226,10 @@ export function BookDetailSection({ book, onBack, workshopTitle = "Reframe" }: B
                             {file.fileName}
                           </p>
                           {file.description && (
-                            <p className="text-white/50 text-sm truncate">{file.description}</p>
+                            <p className="text-white/60 text-sm truncate">{file.description}</p>
                           )}
                         </div>
-                        <span className="text-white/50 text-sm">Download</span>
+                        <span className="text-white/60 text-sm">Download</span>
                       </a>
                     ))}
                   </div>
@@ -231,7 +237,7 @@ export function BookDetailSection({ book, onBack, workshopTitle = "Reframe" }: B
               )}
 
               {book.links && book.links.length > 0 && (
-                <motion.div variants={itemVariants}>
+                <motion.div variants={activeItemVariants}>
                   <h3 className="text-xl font-bold text-white mb-4">Related Links</h3>
                   <div className="flex flex-wrap gap-3">
                     {book.links.map((link, idx) => (
@@ -240,7 +246,7 @@ export function BookDetailSection({ book, onBack, workshopTitle = "Reframe" }: B
                         href={link.url}
                         target={link.isExternal ? "_blank" : undefined}
                         rel={link.isExternal ? "noopener noreferrer" : undefined}
-                        className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-[#C3D534] to-[#00B5AD] text-[#1E1A5F] font-semibold rounded-xl hover:opacity-90 transition-opacity"
+                        className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-[#C3D534] to-[#00B5AD] text-[#1E1A5F] font-semibold rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
                       >
                         {link.label}
                         {link.isExternal && <ExternalLink className="w-4 h-4" />}
@@ -250,11 +256,11 @@ export function BookDetailSection({ book, onBack, workshopTitle = "Reframe" }: B
                 </motion.div>
               )}
 
-              <motion.div variants={itemVariants} className="pt-8">
+              <motion.div variants={activeItemVariants} className="pt-8">
                 <Button
                   onClick={onBack}
                   size="lg"
-                  className="bg-white/10 hover:bg-white/20 text-white border border-white/20"
+                  className="bg-white/10 hover:bg-white/20 text-white border border-white/20 focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
                 >
                   <ArrowLeft className="w-5 h-5 mr-2" />
                   Back to Reading Journey

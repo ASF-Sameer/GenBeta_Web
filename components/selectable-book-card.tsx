@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import Image from "next/image"
 import { BookOpen } from "lucide-react"
 
@@ -22,18 +22,19 @@ interface SelectableBookCardProps {
 }
 
 export function SelectableBookCard({ book, onSelect, isSelected }: SelectableBookCardProps) {
+  const prefersReducedMotion = useReducedMotion()
   const showPlaceholder = !book.isDecided
 
   return (
     <motion.button
       onClick={() => onSelect(book)}
-      className={`group relative bg-[#1E1A5F]/60 backdrop-blur-sm border rounded-2xl p-3 sm:p-4 text-left transition-all duration-300 w-full ${
+      className={`group relative bg-[#1E1A5F]/60 backdrop-blur-sm border rounded-2xl p-3 sm:p-4 text-left transition-all duration-300 w-full focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] ${
         isSelected 
           ? "border-[#C3D534] ring-2 ring-[#C3D534]/50" 
           : "border-white/20 hover:border-[#C3D534]/50"
       }`}
-      whileHover={{ scale: 1.02, y: -5 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={prefersReducedMotion ? undefined : { scale: 1.02, y: -5 }}
+      whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
       aria-pressed={isSelected}
       aria-label={`${book.title}${book.author ? ` by ${book.author}` : ''}${isSelected ? ' (selected)' : ''}`}
     >
@@ -72,7 +73,7 @@ export function SelectableBookCard({ book, onSelect, isSelected }: SelectableBoo
         <p className="text-[#C3D534] text-sm">{book.author}</p>
       )}
       {showPlaceholder && (
-        <p className="text-white/50 text-sm italic">Coming soon...</p>
+        <p className="text-white/60 text-sm italic">Coming soon...</p>
       )}
     </motion.button>
   )

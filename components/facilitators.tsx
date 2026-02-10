@@ -133,7 +133,7 @@ export function Facilitators() {
               <div className="flex flex-col items-center gap-1 sm:gap-2">
                 <a
                   href={`mailto:${facilitator.email}`}
-                  className="inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-white/70 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-turquoise focus:ring-offset-2 rounded"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-white/70 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded"
                   aria-label={`Send email to ${facilitator.name}`}
                 >
                   <Mail className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
@@ -144,7 +144,7 @@ export function Facilitators() {
                   href={facilitator.linkedIn}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 sm:gap-2 bg-white/10 hover:bg-white/20 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium text-white transition-all focus:outline-none focus:ring-2 focus:ring-turquoise focus:ring-offset-2"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 bg-white/10 hover:bg-white/20 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium text-white transition-all focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
                   aria-label={`Visit ${facilitator.name}'s LinkedIn profile (opens in new tab)`}
                 >
                   <Linkedin className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />

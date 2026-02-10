@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { X, Download, ExternalLink, Clock, Users, BookOpen } from "lucide-react"
 import Image from "next/image"
 import { PortableText } from "@portabletext/react"
@@ -48,6 +48,7 @@ interface BookPopupModalProps {
 }
 
 export function BookPopupModal({ book, isOpen, onClose, imageUrl }: BookPopupModalProps) {
+  const prefersReducedMotion = useReducedMotion()
   if (!book) return null
 
   const showPlaceholder = !book.isDecided
@@ -57,24 +58,24 @@ export function BookPopupModal({ book, isOpen, onClose, imageUrl }: BookPopupMod
       {isOpen && (
         <>
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={prefersReducedMotion ? undefined : { opacity: 0 }}
+            animate={prefersReducedMotion ? undefined : { opacity: 1 }}
+            exit={prefersReducedMotion ? undefined : { opacity: 0 }}
             className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50"
             onClick={onClose}
           />
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            initial={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.9, y: 20 }}
+            animate={prefersReducedMotion ? undefined : { opacity: 1, scale: 1, y: 0 }}
+            exit={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.9, y: 20 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { type: "spring", damping: 25, stiffness: 300 }}
             className="fixed inset-4 md:inset-8 lg:inset-16 bg-gradient-to-br from-[#1E1A5F] to-[#0D0B3E] rounded-2xl z-50 overflow-hidden flex flex-col"
           >
             <div className="flex justify-between items-center p-4 md:p-6 border-b border-white/10">
               <h2 className="text-xl md:text-2xl font-bold text-white">{book.title}</h2>
               <button
                 onClick={onClose}
-                className="p-2 hover:bg-white/10 rounded-full transition-colors"
+                className="p-2 hover:bg-white/10 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
                 aria-label="Close modal"
               >
                 <X className="w-6 h-6 text-white" />
@@ -171,13 +172,13 @@ export function BookPopupModal({ book, isOpen, onClose, imageUrl }: BookPopupMod
                               key={idx}
                               href={file.fileUrl}
                               download
-                              className="flex items-center gap-3 p-3 bg-white/5 hover:bg-white/10 rounded-lg transition-colors group"
+                              className="flex items-center gap-3 p-3 bg-white/5 hover:bg-white/10 rounded-lg transition-colors group focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
                             >
                               <Download className="w-5 h-5 text-[#C3D534] group-hover:scale-110 transition-transform" />
                               <div>
                                 <p className="text-white font-medium">{file.fileName}</p>
                                 {file.description && (
-                                  <p className="text-white/50 text-sm">{file.description}</p>
+                                  <p className="text-white/60 text-sm">{file.description}</p>
                                 )}
                               </div>
                             </a>
@@ -196,7 +197,7 @@ export function BookPopupModal({ book, isOpen, onClose, imageUrl }: BookPopupMod
                               href={link.url}
                               target={link.isExternal ? "_blank" : undefined}
                               rel={link.isExternal ? "noopener noreferrer" : undefined}
-                              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#C3D534] to-[#00B5AD] text-[#1E1A5F] font-medium rounded-lg hover:opacity-90 transition-opacity"
+                              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#C3D534] to-[#00B5AD] text-[#1E1A5F] font-medium rounded-lg hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
                             >
                               {link.label}
                               {link.isExternal && <ExternalLink className="w-4 h-4" />}
@@ -222,6 +223,7 @@ interface BookCardProps {
 }
 
 export function BookCard({ book, imageUrl }: BookCardProps) {
+  const prefersReducedMotion = useReducedMotion()
   const [isOpen, setIsOpen] = useState(false)
   const showPlaceholder = !book.isDecided
 
@@ -229,9 +231,9 @@ export function BookCard({ book, imageUrl }: BookCardProps) {
     <>
       <motion.button
         onClick={() => setIsOpen(true)}
-        className="group relative bg-[#1E1A5F]/60 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-left hover:border-[#C3D534]/50 transition-all duration-300 w-full"
-        whileHover={{ scale: 1.02, y: -5 }}
-        whileTap={{ scale: 0.98 }}
+        className="group relative bg-[#1E1A5F]/60 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-left hover:border-[#C3D534]/50 transition-all duration-300 w-full focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
+        whileHover={prefersReducedMotion ? undefined : { scale: 1.02, y: -5 }}
+        whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
       >
         <div className="relative aspect-[3/4] rounded-xl overflow-hidden mb-4">
           {imageUrl && !showPlaceholder ? (
@@ -255,7 +257,7 @@ export function BookCard({ book, imageUrl }: BookCardProps) {
           <p className="text-[#C3D534] text-sm">{book.author}</p>
         )}
         {showPlaceholder && (
-          <p className="text-white/50 text-sm italic">Coming soon...</p>
+          <p className="text-white/60 text-sm italic">Coming soon...</p>
         )}
       </motion.button>
       

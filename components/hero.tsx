@@ -72,7 +72,7 @@ export function Hero({ title = "REFRAME", subtitle }: HeroProps) {
             <Button
               asChild
               size="lg"
-              className="w-full sm:w-auto bg-gradient-to-r from-turquoise to-blue text-white font-semibold px-6 sm:px-8 py-5 sm:py-6 rounded-full text-base sm:text-lg hover:shadow-xl hover:shadow-turquoise/30 transition-all duration-300 hover:-translate-y-1 focus:ring-2 focus:ring-turquoise focus:ring-offset-2"
+              className="w-full sm:w-auto bg-gradient-to-r from-turquoise to-blue text-white font-semibold px-6 sm:px-8 py-5 sm:py-6 rounded-full text-base sm:text-lg hover:shadow-xl hover:shadow-turquoise/30 transition-all duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
             >
               <a href="#register">Register Now</a>
             </Button>

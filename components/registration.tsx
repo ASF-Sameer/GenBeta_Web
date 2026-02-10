@@ -64,7 +64,7 @@ export function Registration() {
               </p>
               <a
                 href="mailto:generationz@zain.com"
-                className="text-white text-sm sm:text-base hover:text-[#C3D534] transition-colors focus:outline-none focus:ring-2 focus:ring-[#C3D534] focus:ring-offset-2 focus:ring-offset-[#0057B8] rounded"
+                className="text-white text-sm sm:text-base hover:text-[#C3D534] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded"
               >
                 generationz@zain.com
               </a>
@@ -83,7 +83,7 @@ export function Registration() {
                 href="https://forms.office.com/Pages/ResponsePage.aspx?id=xeI9eiyCkkyHf9urffDz6r8iSFDpYhBGltmiiOk-wlVURU0xMVdCQ0FVSUowRUFaUkxaTkE5QjhRSi4u"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center bg-gradient-to-r from-[#C3D534] to-[#00B5AD] text-[#1E1A5F] font-semibold py-4 px-6 rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#C3D534] focus:ring-offset-2"
+                className="w-full flex items-center justify-center bg-gradient-to-r from-[#C3D534] to-[#00B5AD] text-[#1E1A5F] font-semibold py-4 px-6 rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
                 aria-label="Open registration form (opens in new tab)"
               >
                 Open Registration Form
@@ -112,7 +112,7 @@ export function Registration() {
                 href="https://forms.office.com/Pages/ResponsePage.aspx?id=xeI9eiyCkkyHf9urffDz6r8iSFDpYhBGltmiiOk-wlVURU0xMVdCQ0FVSUowRUFaUkxaTkE5QjhRSi4u"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-white/60 hover:text-[#C3D534] transition-colors focus:outline-none focus:ring-2 focus:ring-[#C3D534] rounded"
+                className="text-sm text-white/60 hover:text-[#C3D534] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded"
                 aria-label="Having trouble? Register on external form (opens in new tab)"
               >
                 Having trouble? Register here

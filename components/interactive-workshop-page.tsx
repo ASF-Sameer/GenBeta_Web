@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import Image from "next/image"
 import { PortableText } from "@portabletext/react"
 import { 
@@ -40,6 +40,16 @@ const itemVariants = {
       ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
+}
+
+const reducedContainerVariants = {
+  hidden: { opacity: 1 },
+  visible: { opacity: 1 },
+}
+
+const reducedItemVariants = {
+  hidden: { opacity: 1, y: 0 },
+  visible: { opacity: 1, y: 0 },
 }
 
 interface Book {
@@ -174,6 +184,7 @@ function getIcon(iconName?: string) {
 export function InteractiveWorkshopPage({ workshop }: InteractiveWorkshopPageProps) {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null)
   const [hasInitialized, setHasInitialized] = useState(false)
+  const prefersReducedMotion = useReducedMotion()
 
   // Auto-select the primary book when the page loads
   useEffect(() => {
@@ -201,10 +212,10 @@ export function InteractiveWorkshopPage({ workshop }: InteractiveWorkshopPagePro
         {selectedBook ? (
           <motion.div
             key="book-detail"
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.3 }}
+            initial={prefersReducedMotion ? undefined : { opacity: 0, x: 100 }}
+            animate={prefersReducedMotion ? undefined : { opacity: 1, x: 0 }}
+            exit={prefersReducedMotion ? undefined : { opacity: 0, x: -100 }}
+            transition={prefersReducedMotion ? undefined : { duration: 0.3 }}
           >
             <BookDetailSection 
               book={selectedBook} 
@@ -215,10 +226,10 @@ export function InteractiveWorkshopPage({ workshop }: InteractiveWorkshopPagePro
         ) : (
           <motion.div
             key="workshop-content"
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 100 }}
-            transition={{ duration: 0.3 }}
+            initial={prefersReducedMotion ? undefined : { opacity: 0, x: -100 }}
+            animate={prefersReducedMotion ? undefined : { opacity: 1, x: 0 }}
+            exit={prefersReducedMotion ? undefined : { opacity: 0, x: 100 }}
+            transition={prefersReducedMotion ? undefined : { duration: 0.3 }}
           >
             <HeroSection 
               badge={workshop.heroSection?.badge}
@@ -278,6 +289,7 @@ function HeroSection({ badge, title, subtitle, backgroundImage }: {
   subtitle?: string
   backgroundImage?: string
 }) {
+  const prefersReducedMotion = useReducedMotion()
   return (
     <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden" aria-label="Workshop hero">
       {backgroundImage && (
@@ -297,9 +309,9 @@ function HeroSection({ badge, title, subtitle, backgroundImage }: {
       <div className="relative z-10 container mx-auto px-4 py-20 text-center">
         {badge && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={prefersReducedMotion ? undefined : { opacity: 0, y: -20 }}
+            animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={prefersReducedMotion ? undefined : { duration: 0.5 }}
             className="inline-block mb-6"
           >
             <span className="px-4 py-2 bg-gradient-to-r from-[#C3D534] to-[#00B5AD] text-[#1E1A5F] font-semibold rounded-full text-sm">
@@ -309,9 +321,9 @@ function HeroSection({ badge, title, subtitle, backgroundImage }: {
         )}
         
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          initial={prefersReducedMotion ? undefined : { opacity: 0, y: 20 }}
+          animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={prefersReducedMotion ? undefined : { duration: 0.6, delay: 0.1 }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
         >
           {title}
@@ -319,9 +331,9 @@ function HeroSection({ badge, title, subtitle, backgroundImage }: {
         
         {subtitle && (
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={prefersReducedMotion ? undefined : { opacity: 0, y: 20 }}
+            animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={prefersReducedMotion ? undefined : { duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto"
           >
             {subtitle}
@@ -333,6 +345,9 @@ function HeroSection({ badge, title, subtitle, backgroundImage }: {
 }
 
 function AboutSection({ data }: { data: NonNullable<WorkshopData['aboutSection']> }) {
+  const prefersReducedMotion = useReducedMotion()
+  const activeContainerVariants = prefersReducedMotion ? reducedContainerVariants : containerVariants
+  const activeItemVariants = prefersReducedMotion ? reducedItemVariants : itemVariants
   return (
     <section className="py-16 lg:py-24" aria-labelledby="workshop-about-heading">
       <div className="container mx-auto px-4">
@@ -340,14 +355,14 @@ function AboutSection({ data }: { data: NonNullable<WorkshopData['aboutSection']
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          variants={activeContainerVariants}
           className="grid lg:grid-cols-2 gap-12 items-center"
         >
           <div>
             {data.title && (
               <motion.h2
                 id="workshop-about-heading"
-                variants={itemVariants}
+                variants={activeItemVariants}
                 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
               >
                 {data.title}
@@ -355,13 +370,13 @@ function AboutSection({ data }: { data: NonNullable<WorkshopData['aboutSection']
             )}
             
             {data.description && (
-              <motion.div variants={itemVariants} className="prose prose-invert prose-lg max-w-none mb-8">
+              <motion.div variants={activeItemVariants} className="prose prose-invert prose-lg max-w-none mb-8">
                 <PortableText value={data.description} />
               </motion.div>
             )}
             
             {data.highlights && data.highlights.length > 0 && (
-              <motion.ul variants={itemVariants} className="space-y-3">
+              <motion.ul variants={activeItemVariants} className="space-y-3">
                 {data.highlights.map((highlight, idx) => (
                   <li key={idx} className="flex items-start gap-3">
                     <span className="text-[#C3D534] mt-1" aria-hidden="true">✓</span>
@@ -374,7 +389,7 @@ function AboutSection({ data }: { data: NonNullable<WorkshopData['aboutSection']
           
           {data.imageUrl && (
             <motion.div
-              variants={itemVariants}
+              variants={activeItemVariants}
               className="relative aspect-video rounded-2xl overflow-hidden"
             >
               <Image
@@ -393,6 +408,9 @@ function AboutSection({ data }: { data: NonNullable<WorkshopData['aboutSection']
 }
 
 function BenefitsSection({ data }: { data: NonNullable<WorkshopData['benefitsSection']> }) {
+  const prefersReducedMotion = useReducedMotion()
+  const activeContainerVariants = prefersReducedMotion ? reducedContainerVariants : containerVariants
+  const activeItemVariants = prefersReducedMotion ? reducedItemVariants : itemVariants
   if (!data.benefits || data.benefits.length === 0) return null
   
   return (
@@ -402,12 +420,12 @@ function BenefitsSection({ data }: { data: NonNullable<WorkshopData['benefitsSec
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          variants={activeContainerVariants}
         >
           {data.title && (
             <motion.h2
               id="workshop-benefits-heading"
-              variants={itemVariants}
+              variants={activeItemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               {data.title}
@@ -415,7 +433,7 @@ function BenefitsSection({ data }: { data: NonNullable<WorkshopData['benefitsSec
           )}
           
           {data.subtitle && (
-            <motion.p variants={itemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
+            <motion.p variants={activeItemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
               {data.subtitle}
             </motion.p>
           )}
@@ -426,7 +444,7 @@ function BenefitsSection({ data }: { data: NonNullable<WorkshopData['benefitsSec
               return (
                 <motion.div
                   key={idx}
-                  variants={itemVariants}
+                  variants={activeItemVariants}
                   className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/20 rounded-2xl p-6"
                 >
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#C3D534] to-[#00B5AD] flex items-center justify-center mb-4">
@@ -449,6 +467,9 @@ function BenefitsSection({ data }: { data: NonNullable<WorkshopData['benefitsSec
 }
 
 function AttendeesSection({ data }: { data: NonNullable<WorkshopData['attendeesSection']> }) {
+  const prefersReducedMotion = useReducedMotion()
+  const activeContainerVariants = prefersReducedMotion ? reducedContainerVariants : containerVariants
+  const activeItemVariants = prefersReducedMotion ? reducedItemVariants : itemVariants
   if (!data.attendeeTypes || data.attendeeTypes.length === 0) return null
   
   return (
@@ -458,12 +479,12 @@ function AttendeesSection({ data }: { data: NonNullable<WorkshopData['attendeesS
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          variants={activeContainerVariants}
         >
           {data.title && (
             <motion.h2
               id="workshop-attendees-heading"
-              variants={itemVariants}
+              variants={activeItemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               {data.title}
@@ -471,7 +492,7 @@ function AttendeesSection({ data }: { data: NonNullable<WorkshopData['attendeesS
           )}
           
           {data.subtitle && (
-            <motion.p variants={itemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
+            <motion.p variants={activeItemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
               {data.subtitle}
             </motion.p>
           )}
@@ -482,7 +503,7 @@ function AttendeesSection({ data }: { data: NonNullable<WorkshopData['attendeesS
               return (
                 <motion.div
                   key={idx}
-                  variants={itemVariants}
+                  variants={activeItemVariants}
                   className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/20 rounded-2xl p-6"
                 >
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00B5AD] to-[#0057B8] flex items-center justify-center mb-4">
@@ -505,6 +526,9 @@ function AttendeesSection({ data }: { data: NonNullable<WorkshopData['attendeesS
 }
 
 function TimingSection({ data }: { data: NonNullable<WorkshopData['timingSection']> }) {
+  const prefersReducedMotion = useReducedMotion()
+  const activeContainerVariants = prefersReducedMotion ? reducedContainerVariants : containerVariants
+  const activeItemVariants = prefersReducedMotion ? reducedItemVariants : itemVariants
   if (!data.details || data.details.length === 0) return null
   
   return (
@@ -514,13 +538,13 @@ function TimingSection({ data }: { data: NonNullable<WorkshopData['timingSection
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          variants={activeContainerVariants}
           className="max-w-4xl mx-auto"
         >
           {data.title && (
             <motion.h2
               id="workshop-timing-heading"
-              variants={itemVariants}
+              variants={activeItemVariants}
               className="text-3xl md:text-4xl font-bold mb-8 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               {data.title}
@@ -533,7 +557,7 @@ function TimingSection({ data }: { data: NonNullable<WorkshopData['timingSection
               return (
                 <motion.div
                   key={idx}
-                  variants={itemVariants}
+                  variants={activeItemVariants}
                   className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/20 rounded-xl p-4 text-center"
                 >
                   <Icon className="w-8 h-8 text-[#C3D534] mx-auto mb-2" />
@@ -559,6 +583,9 @@ function ReadingJourneySection({ data, onBookSelect, selectedBookId, showEmptySt
   selectedBookId?: string
   showEmptyState?: boolean
 }) {
+  const prefersReducedMotion = useReducedMotion()
+  const activeContainerVariants = prefersReducedMotion ? reducedContainerVariants : containerVariants
+  const activeItemVariants = prefersReducedMotion ? reducedItemVariants : itemVariants
   const hasBooks = data?.books && data.books.length > 0
   
   // Show empty state message when no books available
@@ -572,18 +599,18 @@ function ReadingJourneySection({ data, onBookSelect, selectedBookId, showEmptySt
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
+            variants={activeContainerVariants}
             className="text-center"
           >
             <motion.h2
-              variants={itemVariants}
+              variants={activeItemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               {data?.title || "Your Reading Journey"}
             </motion.h2>
             
             <motion.div 
-              variants={itemVariants}
+              variants={activeItemVariants}
               className="max-w-xl mx-auto mt-8 p-8 bg-[#1E1A5F]/60 backdrop-blur-md border border-white/20 rounded-2xl"
             >
               <BookOpen className="w-16 h-16 text-[#C3D534] mx-auto mb-4" />
@@ -607,12 +634,12 @@ function ReadingJourneySection({ data, onBookSelect, selectedBookId, showEmptySt
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          variants={activeContainerVariants}
         >
           {data?.title && (
             <motion.h2
               id="workshop-reading-journey-heading"
-              variants={itemVariants}
+              variants={activeItemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               {data.title}
@@ -620,18 +647,18 @@ function ReadingJourneySection({ data, onBookSelect, selectedBookId, showEmptySt
           )}
           
           {data?.subtitle && (
-            <motion.p variants={itemVariants} className="text-white/70 text-center mb-4 max-w-2xl mx-auto">
+            <motion.p variants={activeItemVariants} className="text-white/70 text-center mb-4 max-w-2xl mx-auto">
               {data.subtitle}
             </motion.p>
           )}
           
-          <motion.p variants={itemVariants} className="text-[#C3D534] text-center mb-12 text-sm">
+          <motion.p variants={activeItemVariants} className="text-[#C3D534] text-center mb-12 text-sm">
             Click on a book to explore its details and workshop content
           </motion.p>
           
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
             {data?.books?.map((book) => (
-              <motion.div key={book._id} variants={itemVariants}>
+              <motion.div key={book._id} variants={activeItemVariants}>
                 <SelectableBookCard 
                   book={book}
                   onSelect={onBookSelect}
@@ -647,6 +674,9 @@ function ReadingJourneySection({ data, onBookSelect, selectedBookId, showEmptySt
 }
 
 function SessionFlowSection({ data }: { data: NonNullable<WorkshopData['sessionFlowSection']> }) {
+  const prefersReducedMotion = useReducedMotion()
+  const activeContainerVariants = prefersReducedMotion ? reducedContainerVariants : containerVariants
+  const activeItemVariants = prefersReducedMotion ? reducedItemVariants : itemVariants
   if (!data.sessions || data.sessions.length === 0) return null
   
   return (
@@ -656,11 +686,11 @@ function SessionFlowSection({ data }: { data: NonNullable<WorkshopData['sessionF
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          variants={activeContainerVariants}
           className="max-w-4xl mx-auto"
         >
           {data.badge && (
-            <motion.div variants={itemVariants} className="text-center mb-6">
+            <motion.div variants={activeItemVariants} className="text-center mb-6">
               <span className="inline-block px-4 py-2 bg-gradient-to-r from-[#C3D534] to-[#00B5AD] text-[#1E1A5F] font-semibold rounded-full text-sm">
                 {data.badge}
               </span>
@@ -670,7 +700,7 @@ function SessionFlowSection({ data }: { data: NonNullable<WorkshopData['sessionF
           {data.title && (
             <motion.h2
               id="workshop-session-flow-heading"
-              variants={itemVariants}
+              variants={activeItemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               {data.title}
@@ -678,7 +708,7 @@ function SessionFlowSection({ data }: { data: NonNullable<WorkshopData['sessionF
           )}
           
           {data.subtitle && (
-            <motion.p variants={itemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
+            <motion.p variants={activeItemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
               {data.subtitle}
             </motion.p>
           )}
@@ -692,7 +722,7 @@ function SessionFlowSection({ data }: { data: NonNullable<WorkshopData['sessionF
                 return (
                   <motion.div
                     key={idx}
-                    variants={itemVariants}
+                    variants={activeItemVariants}
                     className="relative pl-20"
                   >
                     <div className="absolute left-4 w-8 h-8 rounded-full bg-gradient-to-br from-[#C3D534] to-[#00B5AD] flex items-center justify-center">
@@ -705,7 +735,7 @@ function SessionFlowSection({ data }: { data: NonNullable<WorkshopData['sessionF
                           <span className="text-[#C3D534] font-mono text-sm">{session.time}</span>
                         )}
                         {session.duration && (
-                          <span className="text-white/50 text-sm">({session.duration})</span>
+                          <span className="text-white/60 text-sm">({session.duration})</span>
                         )}
                       </div>
                       {session.title && (
@@ -727,6 +757,9 @@ function SessionFlowSection({ data }: { data: NonNullable<WorkshopData['sessionF
 }
 
 function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilitatorsSection']> }) {
+  const prefersReducedMotion = useReducedMotion()
+  const activeContainerVariants = prefersReducedMotion ? reducedContainerVariants : containerVariants
+  const activeItemVariants = prefersReducedMotion ? reducedItemVariants : itemVariants
   if (!data.facilitators || data.facilitators.length === 0) return null
   
   return (
@@ -736,12 +769,12 @@ function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilit
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          variants={activeContainerVariants}
         >
           {data.title && (
             <motion.h2
               id="workshop-facilitators-heading"
-              variants={itemVariants}
+              variants={activeItemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               {data.title}
@@ -749,7 +782,7 @@ function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilit
           )}
           
           {data.subtitle && (
-            <motion.p variants={itemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
+            <motion.p variants={activeItemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
               {data.subtitle}
             </motion.p>
           )}
@@ -758,7 +791,7 @@ function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilit
             {data.facilitators.map((facilitator, idx) => (
               <motion.div
                 key={idx}
-                variants={itemVariants}
+                variants={activeItemVariants}
                 className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center"
               >
                 <div className="relative w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-[#00B5AD] mb-4">
@@ -799,7 +832,7 @@ function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilit
                   {facilitator.email && (
                     <a
                       href={`mailto:${facilitator.email}`}
-                      className="text-white/60 hover:text-white transition-colors text-sm"
+                      className="text-white/60 hover:text-white transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded"
                       aria-label={`Send email to ${facilitator.name}`}
                     >
                       Email
@@ -810,7 +843,7 @@ function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilit
                       href={facilitator.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#00B5AD] hover:text-[#C3D534] transition-colors text-sm"
+                      className="text-[#00B5AD] hover:text-[#C3D534] transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded"
                       aria-label={`Visit ${facilitator.name}'s LinkedIn profile (opens in new tab)`}
                     >
                       LinkedIn
@@ -827,6 +860,9 @@ function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilit
 }
 
 function ReserveSpotSection({ data }: { data: NonNullable<WorkshopData['reserveSpotSection']> }) {
+  const prefersReducedMotion = useReducedMotion()
+  const activeContainerVariants = prefersReducedMotion ? reducedContainerVariants : containerVariants
+  const activeItemVariants = prefersReducedMotion ? reducedItemVariants : itemVariants
   return (
     <section className="py-16 lg:py-24 bg-gradient-to-r from-[#C3D534]/20 to-[#00B5AD]/20" aria-labelledby="workshop-reserve-spot-heading">
       <div className="container mx-auto px-4">
@@ -834,13 +870,13 @@ function ReserveSpotSection({ data }: { data: NonNullable<WorkshopData['reserveS
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          variants={activeContainerVariants}
           className="text-center max-w-2xl mx-auto"
         >
           {data.title && (
             <motion.h2
               id="workshop-reserve-spot-heading"
-              variants={itemVariants}
+              variants={activeItemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               {data.title}
@@ -848,19 +884,19 @@ function ReserveSpotSection({ data }: { data: NonNullable<WorkshopData['reserveS
           )}
           
           {data.subtitle && (
-            <motion.p variants={itemVariants} className="text-white/70 mb-6">
+            <motion.p variants={activeItemVariants} className="text-white/70 mb-6">
               {data.subtitle}
             </motion.p>
           )}
           
           {data.spotsText && (
-            <motion.p variants={itemVariants} className="text-[#C3D534] font-semibold mb-6">
+            <motion.p variants={activeItemVariants} className="text-[#C3D534] font-semibold mb-6">
               {data.spotsText}
             </motion.p>
           )}
           
-          <motion.div variants={itemVariants}>
-            <a href="#registration">
+          <motion.div variants={activeItemVariants}>
+            <a href="#registration" className="focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded-lg">
               <Button 
                 size="lg" 
                 className="bg-gradient-to-r from-[#C3D534] to-[#00B5AD] hover:from-[#00B5AD] hover:to-[#C3D534] text-[#1E1A5F] font-bold px-8 py-6 text-lg"
@@ -877,6 +913,9 @@ function ReserveSpotSection({ data }: { data: NonNullable<WorkshopData['reserveS
 }
 
 function RegistrationSection({ data }: { data: NonNullable<WorkshopData['registrationSection']> }) {
+  const prefersReducedMotion = useReducedMotion()
+  const activeContainerVariants = prefersReducedMotion ? reducedContainerVariants : containerVariants
+  const activeItemVariants = prefersReducedMotion ? reducedItemVariants : itemVariants
   return (
     <section id="registration" className="py-16 lg:py-24" aria-labelledby="workshop-registration-heading">
       <div className="container mx-auto px-4">
@@ -884,12 +923,12 @@ function RegistrationSection({ data }: { data: NonNullable<WorkshopData['registr
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          variants={activeContainerVariants}
         >
           {data.title && (
             <motion.h2
               id="workshop-registration-heading"
-              variants={itemVariants}
+              variants={activeItemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               {data.title}
@@ -897,13 +936,13 @@ function RegistrationSection({ data }: { data: NonNullable<WorkshopData['registr
           )}
           
           {data.subtitle && (
-            <motion.p variants={itemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
+            <motion.p variants={activeItemVariants} className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
               {data.subtitle}
             </motion.p>
           )}
           
           <motion.div 
-            variants={itemVariants}
+            variants={activeItemVariants}
             className="max-w-4xl mx-auto bg-[#1E1A5F]/80 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden"
           >
             {data.formEmbedUrl ? (

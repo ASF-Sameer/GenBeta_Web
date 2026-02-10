@@ -29,6 +29,10 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
 
   useEffect(() => {
     const initLenis = async () => {
+      if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return
+      }
+
       const Lenis = (await import("lenis")).default
       
       lenisRef.current = new Lenis({

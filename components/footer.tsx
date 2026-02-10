@@ -55,7 +55,7 @@ export function Footer() {
                 Questions? Reach out to{" "}
                 <a
                   href="mailto:generationz@zain.com"
-                  className="text-turquoise hover:underline break-all"
+                  className="text-turquoise hover:underline break-all focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded"
                 >
                   generationz@zain.com
                 </a>
@@ -103,7 +103,7 @@ export function Footer() {
                 href="https://www.linkedin.com/sharing/share-offsite/?url=https://reframe.zain.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-white hover:bg-white/20 hover:glow-turquoise transition-all"
+                className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-white hover:bg-white/20 hover:glow-turquoise transition-all focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
                 aria-label="Share on LinkedIn (opens in new tab)"
               >
                 <Linkedin className="w-3.5 h-3.5 sm:w-4 sm:h-4" aria-hidden="true" />
@@ -163,7 +163,7 @@ export function Footer() {
 
           {/* Bottom Bar */}
           <div className="pt-6 sm:pt-8 border-t border-white/10">
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-xs sm:text-sm text-white/50">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-xs sm:text-sm text-white/60">
               <p>© 2025 All rights reserved.</p>
               <span className="text-white/70">Part of the Gen Z 2026 Program</span>
             </div>

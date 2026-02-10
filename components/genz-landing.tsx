@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { ArrowRight, BookOpen, Users, Lightbulb, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -56,8 +56,17 @@ const cardVariants = {
   },
 }
 
+const reducedContainerVariants = { hidden: { opacity: 1 }, visible: { opacity: 1 } }
+const reducedItemVariants = { hidden: { opacity: 1, y: 0 }, visible: { opacity: 1, y: 0 } }
+const reducedCardVariants = { hidden: { opacity: 1, scale: 1 }, visible: { opacity: 1, scale: 1 } }
+
 export function GenZLanding() {
   const [isClient, setIsClient] = useState(false)
+  const prefersReducedMotion = useReducedMotion()
+
+  const activeContainerVariants = prefersReducedMotion ? reducedContainerVariants : containerVariants
+  const activeItemVariants = prefersReducedMotion ? reducedItemVariants : itemVariants
+  const activeCardVariants = prefersReducedMotion ? reducedCardVariants : cardVariants
 
   useEffect(() => {
     setIsClient(true)
@@ -77,11 +86,11 @@ export function GenZLanding() {
         {/* Gradient Orbs */}
         <motion.div 
           className="absolute top-20 right-10 w-96 h-96 bg-[#C3D534]/20 rounded-full blur-3xl"
-          animate={{ 
+          animate={prefersReducedMotion ? undefined : { 
             scale: [1, 1.1, 1],
             opacity: [0.2, 0.3, 0.2],
           }}
-          transition={{ 
+          transition={prefersReducedMotion ? { duration: 0 } : { 
             duration: 8, 
             repeat: Infinity, 
             ease: "easeInOut" 
@@ -89,11 +98,11 @@ export function GenZLanding() {
         />
         <motion.div 
           className="absolute bottom-20 left-10 w-80 h-80 bg-[#F7E73F]/20 rounded-full blur-3xl"
-          animate={{ 
+          animate={prefersReducedMotion ? undefined : { 
             scale: [1, 1.15, 1],
             opacity: [0.2, 0.25, 0.2],
           }}
-          transition={{ 
+          transition={prefersReducedMotion ? { duration: 0 } : { 
             duration: 10, 
             repeat: Infinity, 
             ease: "easeInOut",
@@ -125,7 +134,7 @@ export function GenZLanding() {
       {/* Content */}
       <motion.div 
         className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-24"
-        variants={containerVariants}
+        variants={activeContainerVariants}
         initial="hidden"
         animate="visible"
       >
@@ -133,21 +142,21 @@ export function GenZLanding() {
           {/* Hero Section */}
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <motion.h1
-              variants={itemVariants}
+              variants={activeItemVariants}
               className="text-4xl sm:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
               Generation Z
             </motion.h1>
 
             <motion.p
-              variants={itemVariants}
+              variants={activeItemVariants}
               className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#C3D534] mb-4 sm:mb-6"
             >
               11th Edition | 2026
             </motion.p>
 
             <motion.p
-              variants={itemVariants}
+              variants={activeItemVariants}
               className="text-base sm:text-lg lg:text-xl text-white/90 max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2"
             >
               Empowering the next generation of leaders at Zain through hands-on experience in leadership, innovation, and continuous learning.
@@ -155,7 +164,7 @@ export function GenZLanding() {
           </div>
 
           {/* Program Card with 3D Cube */}
-          <motion.div variants={cardVariants}>
+          <motion.div variants={activeCardVariants}>
             <div className="glass-card bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 hover:bg-white/15 transition-all duration-300 group">
               <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
                 {/* 3D Floating Cube - Interactive Element */}
@@ -195,7 +204,7 @@ export function GenZLanding() {
                       size="lg"
                       className="w-full sm:w-auto bg-gradient-to-r from-[#C3D534] to-[#00B5AD] text-[#1E1A5F] font-semibold px-5 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6 rounded-full text-sm sm:text-base lg:text-lg hover:shadow-xl hover:shadow-[#C3D534]/30 transition-all duration-300 hover:-translate-y-1 hover:scale-105"
                     >
-                      <Link href="/reframe" className="inline-flex items-center justify-center gap-2">
+                      <Link href="/reframe" className="inline-flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded-full">
                         Explore Reframe
                         <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                       </Link>
@@ -206,7 +215,7 @@ export function GenZLanding() {
                       size="lg"
                       className="w-full sm:w-auto glass-button border-white/30 text-white bg-transparent hover:bg-white/10 px-5 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6 rounded-full text-sm sm:text-base lg:text-lg font-semibold"
                     >
-                      <Link href="/reframe#register">Register Now</Link>
+                      <Link href="/reframe#register" className="focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded-full">Register Now</Link>
                     </Button>
                   </div>
                 </div>
@@ -216,7 +225,7 @@ export function GenZLanding() {
 
           {/* Additional Info Section */}
           <motion.div
-            variants={containerVariants}
+            variants={activeContainerVariants}
             className="mt-12 sm:mt-16 lg:mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
           >
             {[
@@ -242,9 +251,9 @@ export function GenZLanding() {
             ].map((item) => (
               <motion.div
                 key={item.title}
-                variants={cardVariants}
-                whileHover={{ scale: 1.02, y: -4 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                variants={activeCardVariants}
+                whileHover={prefersReducedMotion ? undefined : { scale: 1.02, y: -4 }}
+                transition={prefersReducedMotion ? { duration: 0 } : { type: "spring", stiffness: 300 }}
                 className={cn(
                   "glass-card bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center cursor-default",
                   item.extraClass
@@ -259,10 +268,10 @@ export function GenZLanding() {
 
           {/* Zain Branding */}
           <motion.div
-            variants={itemVariants}
+            variants={activeItemVariants}
             className="mt-12 sm:mt-16 lg:mt-20 flex flex-col items-center"
           >
-            <p className="text-xs sm:text-sm text-white/50 mb-3 sm:mb-4">Powered by</p>
+            <p className="text-xs sm:text-sm text-white/60 mb-3 sm:mb-4">Powered by</p>
             <Image
               src="/images/zain-logo-white.png"
               alt="Zain"
@@ -274,14 +283,14 @@ export function GenZLanding() {
 
           {/* Contact Section */}
           <motion.div
-            variants={itemVariants}
+            variants={activeItemVariants}
             className="mt-12 sm:mt-16 text-center"
           >
             <p className="text-xs sm:text-sm lg:text-base text-white/70">
               Questions about the Gen Z Program?{" "}
               <a
                 href="mailto:generationz@zain.com"
-                className="text-[#C3D534] hover:text-[#F7E73F] underline underline-offset-2 transition-colors duration-300"
+                className="text-[#C3D534] hover:text-[#F7E73F] underline underline-offset-2 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded"
               >
                 generationz@zain.com
               </a>
