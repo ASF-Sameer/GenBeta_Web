@@ -76,7 +76,7 @@ export function FloatingCube({
   className = "",
 }: FloatingCubeProps) {
   return (
-    <div className={`relative h-[280px] sm:h-[320px] lg:h-[360px] ${className}`}>
+    <div className={`relative h-[280px] sm:h-[320px] lg:h-[360px] ${className}`} aria-hidden="true">
       <Canvas
         style={{ position: "absolute", inset: 0 }}
         shadows

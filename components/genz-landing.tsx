@@ -102,7 +102,7 @@ export function GenZLanding() {
         />
         
         {/* Zain Pattern */}
-        <div className="absolute -right-10 sm:-right-20 -top-10 sm:-top-20 w-[200px] sm:w-[350px] lg:w-[500px] h-[200px] sm:h-[350px] lg:h-[500px] opacity-20">
+        <div className="absolute -right-10 sm:-right-20 -top-10 sm:-top-20 w-[200px] sm:w-[350px] lg:w-[500px] h-[200px] sm:h-[350px] lg:h-[500px] opacity-20" aria-hidden="true">
           <Image
             src="/images/zain-pattern-bubbles.svg"
             alt=""
@@ -112,8 +112,7 @@ export function GenZLanding() {
           />
         </div>
 
-        {/* Bottom Left Pattern */}
-        <div className="absolute -left-10 sm:-left-20 -bottom-10 sm:-bottom-20 w-[150px] sm:w-[250px] lg:w-[400px] h-[150px] sm:h-[250px] lg:h-[400px] opacity-10 rotate-180">
+        <div className="absolute -left-10 sm:-left-20 -bottom-10 sm:-bottom-20 w-[150px] sm:w-[250px] lg:w-[400px] h-[150px] sm:h-[250px] lg:h-[400px] opacity-10 rotate-180" aria-hidden="true">
           <Image
             src="/images/zain-pattern-bubbles.svg"
             alt=""

@@ -83,7 +83,7 @@ export function Navbar() {
       </header>
 
       {menuOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center" onClick={() => setMenuOpen(false)}>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center" role="dialog" aria-label="Site navigation menu" aria-modal="true" onClick={() => setMenuOpen(false)}>
           <div className="absolute inset-0 bg-black/60 backdrop-blur-md" />
           <div className="relative z-10 w-[85vw] max-w-sm" onClick={(e) => e.stopPropagation()}>
             <div className="bg-gradient-to-b from-[#1E1A5F] to-[#0057B8]/90 backdrop-blur-2xl border border-white/15 rounded-3xl p-6 shadow-2xl shadow-black/40">
@@ -96,7 +96,7 @@ export function Navbar() {
                     onClick={() => setMenuOpen(false)}
                     className="flex items-center gap-4 px-4 py-4 rounded-2xl text-base font-medium text-white hover:bg-white/10 hover:text-[#00B5AD] active:bg-white/15 transition-all"
                   >
-                    <span className="w-2 h-2 rounded-full bg-gradient-to-r from-[#C3D534] to-[#00B5AD] shrink-0" />
+                    <span className="w-2 h-2 rounded-full bg-gradient-to-r from-[#C3D534] to-[#00B5AD] shrink-0" aria-hidden="true" />
                     {link.label}
                   </a>
                 ))}

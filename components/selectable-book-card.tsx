@@ -34,6 +34,8 @@ export function SelectableBookCard({ book, onSelect, isSelected }: SelectableBoo
       }`}
       whileHover={{ scale: 1.02, y: -5 }}
       whileTap={{ scale: 0.98 }}
+      aria-pressed={isSelected}
+      aria-label={`${book.title}${book.author ? ` by ${book.author}` : ''}${isSelected ? ' (selected)' : ''}`}
     >
       <div className="relative aspect-[3/4] max-h-48 sm:max-h-64 rounded-xl overflow-hidden mb-3 sm:mb-4">
         {book.coverImageUrl && !showPlaceholder ? (

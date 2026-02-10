@@ -62,7 +62,7 @@ export function ParticleField({
   color = "#ffffff" 
 }: ParticleFieldProps) {
   return (
-    <div className={`absolute inset-0 pointer-events-none ${className}`}>
+    <div className={`absolute inset-0 pointer-events-none ${className}`} aria-hidden="true">
       <Canvas
         camera={{ position: [0, 0, 8], fov: 60 }}
         gl={{ antialias: true, alpha: true }}

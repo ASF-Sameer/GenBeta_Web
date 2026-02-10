@@ -196,7 +196,7 @@ export function InteractiveWorkshopPage({ workshop }: InteractiveWorkshopPagePro
   }
 
   return (
-    <div className="relative">
+    <div id="main-content" role="main" className="relative">
       <AnimatePresence mode="wait">
         {selectedBook ? (
           <motion.div
@@ -279,9 +279,9 @@ function HeroSection({ badge, title, subtitle, backgroundImage }: {
   backgroundImage?: string
 }) {
   return (
-    <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden" aria-label="Workshop hero">
       {backgroundImage && (
-        <div className="absolute inset-0">
+        <div className="absolute inset-0" aria-hidden="true">
           <Image
             src={backgroundImage}
             alt=""
@@ -334,7 +334,7 @@ function HeroSection({ badge, title, subtitle, backgroundImage }: {
 
 function AboutSection({ data }: { data: NonNullable<WorkshopData['aboutSection']> }) {
   return (
-    <section className="py-16 lg:py-24">
+    <section className="py-16 lg:py-24" aria-labelledby="workshop-about-heading">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -346,6 +346,7 @@ function AboutSection({ data }: { data: NonNullable<WorkshopData['aboutSection']
           <div>
             {data.title && (
               <motion.h2
+                id="workshop-about-heading"
                 variants={itemVariants}
                 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
               >
@@ -363,8 +364,8 @@ function AboutSection({ data }: { data: NonNullable<WorkshopData['aboutSection']
               <motion.ul variants={itemVariants} className="space-y-3">
                 {data.highlights.map((highlight, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <span className="text-[#C3D534] mt-1">✓</span>
-                    <span className="text-white/80">{highlight}</span>
+                    <span className="text-[#C3D534] mt-1" aria-hidden="true">✓</span>
+                    <span className="text-white/80"><span className="sr-only">Included: </span>{highlight}</span>
                   </li>
                 ))}
               </motion.ul>
@@ -395,7 +396,7 @@ function BenefitsSection({ data }: { data: NonNullable<WorkshopData['benefitsSec
   if (!data.benefits || data.benefits.length === 0) return null
   
   return (
-    <section className="py-16 lg:py-24 bg-[#1E1A5F]/30">
+    <section className="py-16 lg:py-24 bg-[#1E1A5F]/30" aria-labelledby="workshop-benefits-heading">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -405,6 +406,7 @@ function BenefitsSection({ data }: { data: NonNullable<WorkshopData['benefitsSec
         >
           {data.title && (
             <motion.h2
+              id="workshop-benefits-heading"
               variants={itemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
@@ -450,7 +452,7 @@ function AttendeesSection({ data }: { data: NonNullable<WorkshopData['attendeesS
   if (!data.attendeeTypes || data.attendeeTypes.length === 0) return null
   
   return (
-    <section className="py-16 lg:py-24">
+    <section className="py-16 lg:py-24" aria-labelledby="workshop-attendees-heading">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -460,6 +462,7 @@ function AttendeesSection({ data }: { data: NonNullable<WorkshopData['attendeesS
         >
           {data.title && (
             <motion.h2
+              id="workshop-attendees-heading"
               variants={itemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
@@ -505,7 +508,7 @@ function TimingSection({ data }: { data: NonNullable<WorkshopData['timingSection
   if (!data.details || data.details.length === 0) return null
   
   return (
-    <section className="py-16 lg:py-24 bg-[#1E1A5F]/30">
+    <section className="py-16 lg:py-24 bg-[#1E1A5F]/30" aria-labelledby="workshop-timing-heading">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -516,6 +519,7 @@ function TimingSection({ data }: { data: NonNullable<WorkshopData['timingSection
         >
           {data.title && (
             <motion.h2
+              id="workshop-timing-heading"
               variants={itemVariants}
               className="text-3xl md:text-4xl font-bold mb-8 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
@@ -597,7 +601,7 @@ function ReadingJourneySection({ data, onBookSelect, selectedBookId, showEmptySt
   }
   
   return (
-    <section className="py-16 lg:py-24">
+    <section className="py-16 lg:py-24" aria-labelledby="workshop-reading-journey-heading">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -607,6 +611,7 @@ function ReadingJourneySection({ data, onBookSelect, selectedBookId, showEmptySt
         >
           {data?.title && (
             <motion.h2
+              id="workshop-reading-journey-heading"
               variants={itemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
@@ -645,7 +650,7 @@ function SessionFlowSection({ data }: { data: NonNullable<WorkshopData['sessionF
   if (!data.sessions || data.sessions.length === 0) return null
   
   return (
-    <section className="py-16 lg:py-24 bg-[#1E1A5F]/30">
+    <section className="py-16 lg:py-24 bg-[#1E1A5F]/30" aria-labelledby="workshop-session-flow-heading">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -664,6 +669,7 @@ function SessionFlowSection({ data }: { data: NonNullable<WorkshopData['sessionF
           
           {data.title && (
             <motion.h2
+              id="workshop-session-flow-heading"
               variants={itemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
@@ -724,7 +730,7 @@ function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilit
   if (!data.facilitators || data.facilitators.length === 0) return null
   
   return (
-    <section className="py-16 lg:py-24">
+    <section className="py-16 lg:py-24" aria-labelledby="workshop-facilitators-heading">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -734,6 +740,7 @@ function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilit
         >
           {data.title && (
             <motion.h2
+              id="workshop-facilitators-heading"
               variants={itemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
@@ -758,7 +765,7 @@ function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilit
                   {facilitator.imageUrl ? (
                     <Image
                       src={facilitator.imageUrl}
-                      alt={facilitator.name}
+                      alt={`Portrait of ${facilitator.name}`}
                       fill
                       className="object-cover"
                       sizes="128px"
@@ -793,6 +800,7 @@ function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilit
                     <a
                       href={`mailto:${facilitator.email}`}
                       className="text-white/60 hover:text-white transition-colors text-sm"
+                      aria-label={`Send email to ${facilitator.name}`}
                     >
                       Email
                     </a>
@@ -803,6 +811,7 @@ function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilit
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#00B5AD] hover:text-[#C3D534] transition-colors text-sm"
+                      aria-label={`Visit ${facilitator.name}'s LinkedIn profile (opens in new tab)`}
                     >
                       LinkedIn
                     </a>
@@ -819,7 +828,7 @@ function FacilitatorsSection({ data }: { data: NonNullable<WorkshopData['facilit
 
 function ReserveSpotSection({ data }: { data: NonNullable<WorkshopData['reserveSpotSection']> }) {
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-r from-[#C3D534]/20 to-[#00B5AD]/20">
+    <section className="py-16 lg:py-24 bg-gradient-to-r from-[#C3D534]/20 to-[#00B5AD]/20" aria-labelledby="workshop-reserve-spot-heading">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -830,6 +839,7 @@ function ReserveSpotSection({ data }: { data: NonNullable<WorkshopData['reserveS
         >
           {data.title && (
             <motion.h2
+              id="workshop-reserve-spot-heading"
               variants={itemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
@@ -868,7 +878,7 @@ function ReserveSpotSection({ data }: { data: NonNullable<WorkshopData['reserveS
 
 function RegistrationSection({ data }: { data: NonNullable<WorkshopData['registrationSection']> }) {
   return (
-    <section id="registration" className="py-16 lg:py-24">
+    <section id="registration" className="py-16 lg:py-24" aria-labelledby="workshop-registration-heading">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -878,6 +888,7 @@ function RegistrationSection({ data }: { data: NonNullable<WorkshopData['registr
         >
           {data.title && (
             <motion.h2
+              id="workshop-registration-heading"
               variants={itemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
@@ -903,7 +914,7 @@ function RegistrationSection({ data }: { data: NonNullable<WorkshopData['registr
                 frameBorder="0"
                 allowFullScreen
                 className="w-full"
-                title="Registration Form"
+                title="Registration form"
               />
             ) : (
               <div className="p-12 text-center">

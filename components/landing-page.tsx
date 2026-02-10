@@ -627,7 +627,7 @@ export function LandingPage({
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#1C2951] via-[#1E1A5F] via-[#0057B8] via-[#1E1A5F] to-[#1C2951]">
+    <div id="main-content" role="main" className="min-h-screen bg-gradient-to-b from-[#1C2951] via-[#1E1A5F] via-[#0057B8] via-[#1E1A5F] to-[#1C2951]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         
         <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#1C2951] via-[#1E1A5F] to-[#0057B8] shadow-lg">
@@ -651,7 +651,7 @@ export function LandingPage({
         </header>
 
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-[60] flex items-center justify-center" onClick={() => setMobileMenuOpen(false)}>
+          <div className="fixed inset-0 z-[60] flex items-center justify-center" role="dialog" aria-label="Site navigation menu" aria-modal="true" onClick={() => setMobileMenuOpen(false)}>
             <div className="absolute inset-0 bg-black/60 backdrop-blur-md" />
             <div className="relative z-10 w-[85vw] max-w-sm" onClick={(e) => e.stopPropagation()}>
               <div className="bg-gradient-to-b from-[#1E1A5F] to-[#0057B8]/90 backdrop-blur-2xl border border-white/15 rounded-3xl p-6 shadow-2xl shadow-black/40">
@@ -670,7 +670,7 @@ export function LandingPage({
                       onClick={() => setMobileMenuOpen(false)}
                       className="flex items-center gap-4 px-4 py-4 rounded-2xl text-base font-medium text-white hover:bg-white/10 hover:text-[#00B5AD] active:bg-white/15 transition-all"
                     >
-                      <span className="w-2 h-2 rounded-full bg-gradient-to-r from-[#C3D534] to-[#00B5AD] shrink-0" />
+                      <span className="w-2 h-2 rounded-full bg-gradient-to-r from-[#C3D534] to-[#00B5AD] shrink-0" aria-hidden="true" />
                       {link.label}
                     </a>
                   ))}
@@ -933,7 +933,7 @@ export function LandingPage({
                     </p>
                     {program.link && (
                       <span className="inline-flex items-center gap-2 text-[#C3D534] group-hover:text-[#F7E73F] transition-colors font-semibold text-sm">
-                        Visit Website <ArrowRight className="w-4 h-4" />
+                        Visit Website <ArrowRight className="w-4 h-4" aria-hidden="true" />
                       </span>
                     )}
                   </div>
@@ -947,6 +947,7 @@ export function LandingPage({
                   target="_blank"
                   rel="noopener noreferrer"
                   variants={itemVariants}
+                  aria-label={`Visit ${program.title} website (opens in new tab)`}
                   className="bg-[#1E1A5F]/80 backdrop-blur-md border border-white/30 rounded-2xl overflow-hidden hover:bg-[#1E1A5F]/90 transition-all duration-300 group block"
                 >
                   {CardContent}
