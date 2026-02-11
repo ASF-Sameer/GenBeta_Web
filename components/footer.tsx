@@ -41,13 +41,6 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 mb-6 sm:mb-8">
             {/* Column 1 - Brand */}
             <div>
-              <Image
-                src="/images/zain-logo-white.png"
-                alt="Zain Logo"
-                width={140}
-                height={50}
-                className="h-10 sm:h-14 w-auto mb-3 sm:mb-4"
-              />
               <p className="text-white/70 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">
                 REFRAME is brought to you by the Gen Z 2026 Program.
               </p>
