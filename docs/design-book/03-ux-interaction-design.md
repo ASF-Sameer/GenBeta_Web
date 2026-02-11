@@ -16,6 +16,7 @@
 6. [WCAG 2.1 AA Accessibility Compliance](#6-wcag-21-aa-accessibility-compliance)
 7. [Error & Loading States](#7-error--loading-states)
 8. [Mobile-Specific UX](#8-mobile-specific-ux)
+9. [Verbal Identity](#9-verbal-identity)
 
 ---
 
@@ -263,6 +264,28 @@ Navigation links are configurable through the Sanity `siteSettings` schema, enab
 - Update link labels and target section IDs
 - Modify the Register CTA text and destination
 
+### 3.6 Research-Backed Navigation Limit
+
+The primary navigation should contain no more than **five items** — research consistently shows that seven is already too many for quick comprehension.
+
+**Recommended Navigation Structure:**
+
+| Nav item | Content |
+|----------|---------|
+| Program | Overview, rotation structure, timeline, how to apply |
+| Stories | Blog posts, rotation diaries, team profiles |
+| REFRAME | Workshop overview, toolkit, recaps, resources |
+| Community | Current cohort, alumni, team directory |
+| About | Zain Group context, program history, FAQ |
+
+### 3.7 Mobile Navigation Philosophy
+
+Mobile navigation should use a full-screen overlay (not a hamburger dropdown) — the dark background becomes the canvas for large, tappable navigation items with the swirl motif as a subtle background element. This is an opportunity for brand expression, not just functional wayfinding.
+
+### 3.8 Secondary Navigation
+
+Within each section, use horizontal tabs (desktop) or scrollable pill bar (mobile). REFRAME's internal navigation: Overview, Activities, Toolkit, Recaps, Schedule. Each tab maps to a Sanity content type.
+
 ---
 
 ## 4. Scroll & Motion Design
@@ -420,7 +443,20 @@ Cards across the site share a consistent hover interaction language:
 
 The turquoise ring color (`#00B5AD`) was chosen to be visible against both the dark navy backgrounds and white section backgrounds while maintaining brand consistency.
 
-### 5.5 Book Selection Interaction
+### 5.5 Refined Interaction Specifications
+
+**Card Hover (refined):**
+`translateY(-4px)` with box-shadow deepening over 300ms using `cubic-bezier(0.4, 0, 0.2, 1)`. On dark surfaces, use surface brightness increase combined with brand-color border-bottom accent fading in at 200ms. Content responds to attention, not just highlights mechanically.
+
+**Button Three-State Pattern:**
+1. Hover: Scale 1.03× with brand glow (`box-shadow: 0 0 24px rgba(brand-color, 0.4)`)
+2. Active/Pressed: Compress 0.97× over 80ms for tactile feedback
+3. Focus: 2px brand-color outline offset 3px for keyboard visibility
+
+**Scroll-Triggered Reveals:**
+`IntersectionObserver` with 0.15 threshold. `translateY(24px→0)` and `opacity(0→1)` over 500ms. Only animate `transform` and `opacity` (GPU-accelerated, 60fps). Always respect `prefers-reduced-motion`.
+
+### 5.6 Book Selection Interaction
 
 The book selection pattern is a core interaction on the workshop page. It uses a **full-page transition** rather than a popup modal.
 
@@ -446,7 +482,7 @@ The book selection pattern is a core interaction on the workshop page. It uses a
 - It supports the progressive disclosure principle — users commit to viewing a book
 - The smooth AnimatePresence transition maintains spatial context
 
-### 5.6 Gallery Interaction
+### 5.7 Gallery Interaction
 
 | Feature | Behavior |
 |---------|----------|
@@ -610,6 +646,17 @@ A skip-to-content link is provided at the top of every page:
 
 All interactive elements meet the **minimum 44×44px touch target** size requirement, ensuring usability for both touch and keyboard users.
 
+### 6.8 Bilingual Arabic-English Accessibility
+
+Bilingual support for Arabic and English is a core accessibility requirement for a Kuwait-based program:
+
+- Use CSS logical properties exclusively: `margin-inline-start` instead of `margin-left`, `text-align: start` instead of `text-align: left`
+- The `dir="rtl"` attribute on root `<html>` element flips the entire layout
+- Directional icons (arrows, chevrons) flip with `transform: scaleX(-1)` in RTL
+- Logos, clocks, and media controls do NOT flip
+- Arabic link styling: replace underlines with `box-shadow: inset 0 -2px 0 rgba(187, 134, 252, 0.4)` — Arabic letterform dots get obscured by underlines
+- All alt text must be authored in both languages through CMS schema validation
+
 ---
 
 ## 7. Error & Loading States
@@ -682,6 +729,14 @@ The application implements a robust fallback strategy ensuring the site is alway
 
 ## 8. Mobile-Specific UX
 
+### 8.0 Mobile-First as Default (Jony Ive's Philosophy)
+
+Design all components at 375px first, then enhance for wider viewports — never the reverse. This is a genuine design philosophy, not just a responsive technique. The constraint of a small viewport forces clarity of hierarchy and purpose.
+
+- Touch targets: 44×44px minimum (WCAG 2.5.8) — critical for Arabic interface where dense text can fall below threshold
+- Scrolling: Vertical scrolling only — avoid horizontal carousels on mobile as they create interaction cost. Use vertically stacked cards or tap-to-expand patterns.
+- Typography: 16px minimum base size to prevent iOS zoom-on-focus behavior
+
 ### 8.1 Touch-Friendly Targets
 
 All interactive elements meet or exceed the **44×44px minimum touch target** size recommended by WCAG 2.1 and Apple's Human Interface Guidelines:
@@ -742,6 +797,66 @@ Implementation uses `onTouchStart`, `onTouchMove`, and `onTouchEnd` event handle
 | Dismiss method | — | Tap outside overlay or close button |
 | Gallery dots | Hidden (`sm:hidden` inverted — dots shown only on mobile) | Visible below carousel |
 | Back button | Pill with text | Compact pill with smaller text |
+
+---
+
+## 9. Verbal Identity
+
+### 9.1 Voice Spectrum — "Serious, Never Solemn"
+
+Paula Scher draws a crucial distinction between "serious" and "solemn." Serious design is instinctive, bold, meaningful. Solemn design is overthought, bureaucratic, dead. The Generation Z platform voice must be serious about substance and never solemn in expression.
+
+**Voice Spectrum Positioning:**
+
+| Dimension | Position |
+|-----------|----------|
+| Formality | Professional-casual — the smart colleague, not the CEO memo |
+| Humor | Wry, observational — Scher's "serious play," never forced |
+| Authority | Guiding, not lecturing — "here's what we've found" over "you must" |
+| Energy | Confident and warm — not the corporate enthusiasm of exclamation marks |
+| Complexity | Plain language with precision — Ogilvy's "use their language" |
+
+Zain's stated tone — inspirational, engaging, optimistic — translates to the web through concrete actions, not abstract declarations. "Inspirational" means showing real stories of graduates who rotated through the Data Office and shipped a product. "Engaging" means interactive content, not just prose. "Optimistic" means honest about challenges while maintaining forward momentum.
+
+### 9.2 Copy Principles with Examples
+
+**Headlines** should follow McKinsey's model — metaphorical, provocative, human:
+
+- "Where Zain's future is being built" (concrete, active)
+- "Seven graduates. Twelve months. Every department." (specific, dramatic)
+- "Your first rotation starts before your first day" (intriguing, program-specific)
+- ~~"Empowering the next generation of leaders"~~ (generic, could be any company)
+- ~~"Your journey starts here"~~ (vapid, overused)
+- ~~"Welcome to our world-class program"~~ (self-congratulatory)
+
+**CTAs** start with strong verbs and are specific to the action:
+
+- "Apply by March 15" (direct, time-bound)
+- "Read Yousef's rotation diary" (personal, specific)
+- "Download the REFRAME toolkit" (clear deliverable)
+- ~~"Learn more"~~ (vague)
+- ~~"Click here"~~ (meaningless)
+- ~~"Don't miss out!"~~ (manipulative urgency that Gen Z sees through instantly)
+
+### 9.3 Microcopy for States and Edges
+
+| State | Recommended Copy | Rationale |
+|-------|-----------------|-----------|
+| Empty state (no posts) | "No stories yet. Check back soon — new posts drop weekly." | Forward-looking, sets expectation |
+| Loading | "Loading your dashboard..." | Specific, purposeful |
+| Error (save failed) | "We couldn't save your progress. Your work is still here — try again." | Empathetic, reassuring, actionable |
+| Success (module complete) | "Module complete. Three down, solid momentum." | Celebratory but grounded |
+| 404 page | "This page doesn't exist yet — but neither did half of Zain's products five years ago." | On-brand humor reinforcing transformation narrative |
+
+### 9.4 Content Strategy for CMS
+
+Sanity CMS powers dynamic content with specific editorial guidelines:
+
+**Blog posts / rotation diaries:** First-person, editorial format. Personal narrative, not corporate reporting. Model: Medium-quality writing, not LinkedIn-post energy. Each post: hook headline (avoid "My First Week at Zain"), specific insight, human photograph. Recommended length: 800-1,200 words.
+
+**Workshop recaps (REFRAME):** Follow Attract-Engage-Farewell structure. Open with key takeaway (BLUF), include 2-3 participant quotes, embed photography, close with "what's next."
+
+**Team profiles:** Include portrait photo (editorial, environmental — not headshot), name, cohort year, current rotation, one-paragraph bio in third person, personal quote about experience.
 
 ---
 

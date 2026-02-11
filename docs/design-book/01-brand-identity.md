@@ -14,6 +14,7 @@
 4. [Logo Usage](#4-logo-usage)
 5. [Brand Voice & Tone](#5-brand-voice--tone)
 6. [Photography & Imagery Style](#6-photography--imagery-style)
+7. [Iconography, the Swirl, and Arabesque Patterns](#7-iconography-the-swirl-and-arabesque-patterns)
 
 ---
 
@@ -63,7 +64,36 @@ Zain Group (Parent Brand)
 - **No competing logos:** The Zain corporate logo is intentionally not displayed on the Gen Z website (removed from footer by design decision), allowing the Gen Z identity to stand on its own while remaining clearly part of the Zain ecosystem
 - **Shared DNA:** Color palette, typography philosophy, and motion design all trace back to Zain's brand guidelines, even when expressed in a more youthful register
 
-### 1.5 Brand Compliance Strategy
+#### Brand Architecture: The Sub-Endorsed Model
+
+Zain operates a **branded house** model with a constellation of sub-brands:
+- **Fintech:** Tamam, Bede, Zain Cash
+- **Digital operators:** Yaqoot, oodi
+- **Infrastructure:** TASC Towers
+- **Enterprise:** ZainTECH
+- **Innovation:** ZINC, Zain Great Idea
+
+The naming convention reveals a strategic pattern: enterprise and financial products carry the "Zain" prefix for trust, while consumer-facing youth brands receive distinct names (Yaqoot, oodi, Dizlee) to signal independence. The Generation Z program and REFRAME occupy a third category — **internal-facing talent brands** that must feel like Zain while speaking a younger, bolder dialect.
+
+The recommended brand architecture is a **sub-endorsed model**. The unified platform carries its own identity but is clearly nested under Zain Group. Think of how Vodafone's "Discover" graduate programme owns its personality while remaining unmistakably Vodafone. The Zain logo appears in navigation context; the program identity owns the hero, the content, the emotional experience.
+
+**Three-Tier Naming Hierarchy:**
+- **Tier 1 (Endorser):** Zain Group
+- **Tier 2 (Platform):** Generation Z — the digital home for Zain's graduate development ecosystem
+- **Tier 3 (Program):** REFRAME: Reset Your Approach to Change — a workshop program within Generation Z
+
+This structure is extensible. Future programs — technical bootcamps, leadership workshops, cross-departmental rotations — slot naturally into the Generation Z platform without requiring new brand architectures.
+
+### 1.5 Supporting the Telco-to-Techco Narrative
+
+Zain's **4WARD strategy** ("Progress with Purpose") explicitly aims to reposition from "predominantly mobile-centric operator" to "purpose-driven TechCo conglomerate." CEO Bader Al-Kharafi has stated the company is "actively exploring avenues to reposition the Zain brand." The Generation Z platform is a strategic proof point for this transformation. Every graduate rotating through NQOC, the Data Office, or Baims EdTech startup embodies the techco narrative in human form. The platform makes this visible — not through corporate messaging, but through showing the work. The personality communicated: builders. People making the techco transformation real, from the inside.
+
+Paul Rand wrote that "design is the silent ambassador of your brand." This platform speaks for Zain's talent brand 24 hours a day. It must communicate three things instantly:
+1. That Zain is the most human brand in telecom
+2. That it is becoming a technology company
+3. That the people who join this program will shape that transformation
+
+### 1.6 Brand Compliance Strategy
 
 The website maintains brand compliance through the following mechanisms:
 
@@ -171,7 +201,18 @@ The Gen Z website uses **Zain**, a custom Arabic-Latin typeface, as its primary 
 | **Fallback Stack** | `'Zain', system-ui, sans-serif` |
 | **Monospace** | `'Geist Mono', 'Geist Mono Fallback', monospace` |
 
-### 3.2 CMS-Configurable Alternatives
+### 3.2 Font Loading Strategy
+
+To ensure optimal performance while preserving the proprietary typeface experience:
+
+- Self-host in WOFF2 format (30% better compression than WOFF)
+- Preload only two weights above the fold: Regular and Bold
+- Use `font-display: swap` for body text (instant render with fallback, swap when loaded)
+- Use `font-display: optional` for display sizes (no layout shift; uses font only if already cached)
+- Subset by unicode range — separate Latin (`U+0000-00FF`) and Arabic (`U+0600-06FF`) files to reduce initial payload by up to 70%
+- Fallback stack: `'ZainFont', system-ui, -apple-system, BlinkMacSystemFont, sans-serif`
+
+### 3.3 CMS-Configurable Alternatives
 
 Through the Sanity CMS, brand administrators can swap the primary typeface to any of the following pre-approved alternatives. This enables edition-specific customization without code changes:
 
@@ -187,7 +228,9 @@ Through the Sanity CMS, brand administrators can swap the primary typeface to an
 | **Source Sans** | Sans-serif | Neutral, enterprise contexts |
 | **Roboto** | Sans-serif | Material Design alignment |
 
-### 3.3 Type Scale
+### 3.4 Type Scale
+
+#### Implementation Type Scale
 
 | Element | Desktop Size | Mobile Size | Weight | Usage |
 |---------|-------------|-------------|--------|-------|
@@ -197,7 +240,22 @@ Through the Sanity CMS, brand administrators can swap the primary typeface to an
 | **Body** | `1rem` / 16px | `0.875rem` / 14px | 400 (Regular) | Paragraph text, descriptions, card body content |
 | **Caption** | `0.875rem` / 14px | `0.75rem` / 12px | 500 (Medium) | Labels, metadata, email addresses, supplementary information |
 
-### 3.4 Weight Usage
+#### Brand System Type Scale — Perfect Fourth Ratio (1.333 desktop, 1.250 mobile)
+
+The underlying type scale follows a Perfect Fourth ratio (1.333) on desktop and Major Third (1.250) on mobile, implemented through CSS `clamp()` for fluid scaling:
+
+| Token | Desktop | Mobile | Weight | Use |
+|-------|---------|--------|--------|-----|
+| Display | 57px | 36px | 700 | Hero headlines |
+| H1 | 32px | 24px | 700 | Page titles |
+| H2 | 24px | 20px | 600 | Section headers |
+| H3 | 20px | 18px | 600 | Subsection headers |
+| Body large | 20px | 18px | 400 | Lead paragraphs |
+| Body | 18px | 16px | 400 | Standard content |
+| Caption | 14px | 13px | 400 | Metadata, timestamps |
+| Micro | 12px | 11px | 500 | Labels, tags |
+
+### 3.5 Weight Usage
 
 | Weight | Value | Application |
 |--------|-------|-------------|
@@ -206,7 +264,7 @@ Through the Sanity CMS, brand administrators can swap the primary typeface to an
 | **Medium** | 500 | Captions, labels, secondary emphasis text |
 | **Regular** | 400 | Body paragraphs, descriptions, form inputs |
 
-### 3.5 Special Typographic Treatments
+### 3.6 Special Typographic Treatments
 
 | Treatment | CSS | Usage |
 |-----------|-----|-------|
@@ -214,13 +272,32 @@ Through the Sanity CMS, brand administrators can swap the primary typeface to an
 | **Uppercase navigation** | `text-transform: uppercase; letter-spacing: expanded` | Navbar links use uppercase with expanded letter-spacing for a structured, editorial feel |
 | **Text balance** | `text-wrap: balance` | Applied via `.text-balance` utility to prevent orphaned words in headings |
 
-### 3.6 Line Height & Readability
+### 3.7 Typographic Energy for Young Audiences
+
+Creating typographic energy for a young audience without breaking brand rules requires using scale, weight contrast, and spatial drama rather than trendy typeface choices:
+
+- Hero headlines at **57px** with **-0.02em tracking** for compressed power
+- Extreme weight contrast between 700-weight headlines and 400-weight body text
+- Generous line-height: **1.6** for body text, **1.15** for display
+- The font should command attention through confidence, not decoration
+- As Vignelli said: "In a world where everybody screams, silence is noticeable."
+
+### 3.8 Line Height & Readability
 
 Line heights are optimized for readability on dark backgrounds, where eye strain is a consideration:
 
 - **Headings:** Tight line height (1.1–1.2) for visual density and impact
 - **Body text:** Relaxed line height (1.5–1.7) via `leading-relaxed` class for comfortable reading
 - **Cards:** Body text within glass cards uses `text-sm leading-relaxed` for optimal density at smaller sizes
+
+### 3.9 Arabic Typography Adjustments
+
+Arabic typography adjustments are critical for a Kuwait-based program:
+
+- Arabic text renders **2-3px larger** than Latin at equivalent hierarchy levels
+- Since Arabic has no uppercase, replace `text-transform: uppercase` emphasis with a **10% size increase**
+- Do **NOT** underline Arabic links — the dots below Arabic letterforms become obscured. Use `box-shadow: inset 0 -2px 0 rgba(187, 134, 252, 0.4)` instead
+- Ensure the proprietary font's Arabic character set is complete; supplement with **Noto Sans Arabic** or **Tajawal** if needed — both are clean, screen-optimized faces that complement geometric sans-serif primaries
 
 ---
 
@@ -278,7 +355,11 @@ Zain Group Corporate Identity
 
 ## 5. Brand Voice & Tone
 
-### 5.1 Voice Characteristics
+### 5.1 Voice Philosophy: Serious, Never Solemn
+
+Paula Scher draws a crucial distinction between "serious" and "solemn." Serious design is instinctive, bold, meaningful. Solemn design is overthought, bureaucratic, dead. The Gen Z platform voice is serious about substance and never solemn in expression. This means: no "leveraging synergies," no "best-in-class talent pipelines," no "empowering the next generation of thought leaders." These phrases are, in Ogilvy's framework, an insult to the intelligence of the audience.
+
+### 5.2 Voice Characteristics
 
 The Gen Z website voice sits at the intersection of **professional authority** and **youthful energy**. It speaks to early-career professionals at Zain who are ambitious, digitally native, and eager to grow.
 
@@ -290,7 +371,19 @@ The Gen Z website voice sits at the intersection of **professional authority** a
 | **Inclusive** | Welcoming, collaborative, team-oriented | Team-first language, group photos, shared achievements |
 | **Aspirational** | Forward-looking, ambitious, possibility-focused | "Rethink, reset, and drive meaningful change" |
 
-### 5.2 Power Words
+### 5.3 Voice Spectrum Positioning
+
+| Dimension | Position |
+|-----------|----------|
+| Formality | Professional-casual — the smart colleague, not the CEO memo |
+| Humor | Wry, observational — Scher's "serious play," never forced |
+| Authority | Guiding, not lecturing — "here's what we've found" over "you must" |
+| Energy | Confident and warm — not the corporate enthusiasm of exclamation marks |
+| Complexity | Plain language with precision — Ogilvy's "use their language" |
+
+Zain's stated tone — **inspirational, engaging, optimistic** — translates to the web through concrete actions, not abstract declarations. "Inspirational" means showing real stories of graduates who rotated through the Data Office and shipped a product. "Engaging" means interactive content, not just prose. "Optimistic" means honest about challenges while maintaining forward momentum — "this rotation was hard, and here's what I learned" rather than "everything is amazing."
+
+### 5.4 Power Words
 
 The following vocabulary is consistently used across the website to reinforce the brand voice:
 
@@ -302,7 +395,7 @@ The following vocabulary is consistently used across the website to reinforce th
 | **Action** | Drive, Lead, Build, Create, Deliver |
 | **Community** | Collaborate, Connect, Together, Cohort, Generation |
 
-### 5.3 Program Pillars as Voice Anchors
+### 5.5 Program Pillars as Voice Anchors
 
 Each of the five program pillars reinforces a facet of the brand voice:
 
@@ -314,9 +407,20 @@ Each of the five program pillars reinforces a facet of the brand voice:
 | **Leadership & Social Influence** | Authority, interpersonal skills | "Effective Negotiation & Communication Skills, Curiosity & Lifelong Learning, Self-awareness & Motivation" |
 | **Systems Thinking** | Strategic perspective | "Lean Six Sigma, Big Picture Thinking, Systems Mapping & Visualization" |
 
-### 5.4 Call-to-Action Language
+### 5.6 Headline Principles
 
-CTAs use action-oriented, direct language that reflects confidence and momentum:
+Headlines should follow the McKinsey model — metaphorical, provocative, human:
+
+- ✅ "Where Zain's future is being built" (concrete, active)
+- ✅ "Seven graduates. Twelve months. Every department." (specific, dramatic)
+- ✅ "Your first rotation starts before your first day" (intriguing, program-specific)
+- ❌ "Empowering the next generation of leaders" (generic, could be any company)
+- ❌ "Your journey starts here" (vapid, overused)
+- ❌ "Welcome to our world-class program" (self-congratulatory)
+
+### 5.7 Call-to-Action Language
+
+CTAs use action-oriented, direct language that reflects confidence and momentum. Start with strong verbs and be specific to the action:
 
 | CTA Text | Context | Tone |
 |----------|---------|------|
@@ -326,7 +430,26 @@ CTAs use action-oriented, direct language that reflects confidence and momentum:
 | **"Visit Zain Group"** | Footer external link | Professional, directional |
 | **"LinkedIn Profile"** | Team member social links | Connective, networking |
 
-### 5.5 Tone Guidelines
+**CTA Best Practices:**
+
+- ✅ "Apply by March 15" (direct, time-bound)
+- ✅ "Read Yousef's rotation diary" (personal, specific)
+- ✅ "Download the REFRAME toolkit" (clear deliverable)
+- ❌ "Learn more" (vague)
+- ❌ "Click here" (meaningless)
+- ❌ "Don't miss out!" (manipulative urgency that the target audience sees through instantly)
+
+### 5.8 Microcopy for Edge States
+
+| State | Copy | Rationale |
+|-------|------|-----------|
+| Empty state | "No stories yet. Check back soon — new posts drop weekly." | Forward-looking, sets expectation |
+| Loading | "Loading your dashboard..." | Specific, purposeful |
+| Error | "We couldn't save your progress. Your work is still here — try again." | Empathetic, reassuring, actionable |
+| Success | "Module complete. Three down, solid momentum." | Celebratory but grounded |
+| 404 | "This page doesn't exist yet — but neither did half of Zain's products five years ago." | On-brand humor reinforcing transformation narrative |
+
+### 5.9 Tone Guidelines
 
 | Situation | Tone | Example |
 |-----------|------|---------|
@@ -341,7 +464,18 @@ CTAs use action-oriented, direct language that reflects confidence and momentum:
 
 ## 6. Photography & Imagery Style
 
-### 6.1 Image Categories
+### 6.1 Photography Philosophy: "Humans First, Always"
+
+Zain defines itself as the "most human and emotional brand in telco." The photography direction — **human-centered, editorial style** — is the single most important visual differentiator. In the competitive set, STC uses generic stock, Etisalat's graduate page has sparse imagery, and even Ericsson mixes authentic shots with stock-leaning photos. Only McKinsey and BCG consistently achieve editorial-quality photography on their graduate pages. The Generation Z platform should match or exceed that standard.
+
+### 6.2 Editorial Photography Principles
+
+1. Shoot **candid-adjacent** — real moments with cinematic composition. Not grip-and-grin poses, not stock-style "diverse people laughing at a laptop." Think editorial photojournalism: a graduate deep in conversation at a whiteboard, hands mid-gesture. A team at the ZINC innovation space, post-its blurred in the foreground, focus on faces.
+2. **Lighting:** Natural and warm. Prefer window light over strobe. This creates intimacy. In darker environments, embrace available light — resulting grain adds authenticity, not noise.
+3. **Environment context matters.** Show Zain's actual spaces — offices, ZINC labs, training rooms. Adapt BCG's model: every team profile includes graduate's name, cohort year, and current rotation department. This personalization creates the human connection that distinguishes editorial photography from corporate photography.
+4. **Diversity representation** reflects the actual program cohort. Photograph participants in actual work contexts, not staged diversity moments. Authenticity is the baseline expectation — according to the Edelman Trust Barometer, 88% of the target generation considers trust a deal-breaker.
+
+### 6.3 Image Categories
 
 The website uses five distinct categories of photography, each serving a specific narrative purpose:
 
@@ -391,7 +525,7 @@ The website uses five distinct categories of photography, each serving a specifi
 | `zain-logo-white.png` / `.svg` | Zain corporate logo (available but not displayed on site) |
 | `zain-pattern-bubbles.svg` | Decorative pattern asset for backgrounds |
 
-### 6.2 Photography Style Guide
+### 6.4 Photography Style Guide
 
 | Attribute | Guideline |
 |-----------|-----------|
@@ -402,7 +536,7 @@ The website uses five distinct categories of photography, each serving a specifi
 | **Diversity** | Photos should reflect the inclusive, multi-national nature of Zain's workforce |
 | **Quality** | High resolution source files. All images delivered with optimized WebP variants for web performance |
 
-### 6.3 Image Technical Standards
+### 6.5 Image Technical Standards
 
 | Standard | Specification |
 |----------|---------------|
@@ -414,7 +548,7 @@ The website uses five distinct categories of photography, each serving a specifi
 | **Loading strategy** | Critical images (hero, above-fold) loaded eagerly; gallery and below-fold images use lazy loading with fade-in transitions |
 | **Alt text** | All images carry descriptive alt text (e.g., "Portrait of Abdulmohsen AlZenki", "Gen Z Experience 1") for accessibility |
 
-### 6.4 CMS Image Management
+### 6.6 CMS Image Management
 
 Gallery and team images are managed through the Sanity CMS, enabling the Gen Z program team to update visual content without developer intervention:
 
@@ -424,6 +558,26 @@ Gallery and team images are managed through the Sanity CMS, enabling the Gen Z p
 | `teamMember` | Team portrait | Name, role, photo, email, LinkedIn URL |
 | `previousEdition` | Historical cohort | Year, title, description, cohort photo, link |
 | `siteSettings` | Global configuration | Theme colors, fonts, hero content, section titles |
+
+---
+
+## 7. Iconography, the Swirl, and Arabesque Patterns
+
+### 7.1 The Zain Swirl
+
+The swirl — representing "an aura, something important to human life echoing growth, progression and diversity" — functions as an environmental element, never decoration. Use it as background texture at low opacity (5-8% on dark surfaces), with varying stroke thickness as the brand guidelines allow. The swirl can anchor section transitions, appearing as a subtle watermark that reinforces brand presence without competing with content. As Vignelli said about grids: "like underwear, you wear it but it's not to be exposed."
+
+### 7.2 Arabesque Patterns
+
+Follow the brand's high-energy vs. low-energy framework. For Gen Z, the high-energy treatment is appropriate — youth audience, transformation program, space for ambition. Apply as header patterns, divider motifs, or background treatments on feature cards. Always at sufficient contrast against text — decorative patterns must never compromise readability.
+
+### 7.3 Icon Style
+
+- Monoline, matching body text weight (approx 1.5-2px stroke)
+- 24×24px grid with 2px padding for touch targets
+- Geometric and precise — aligned with the swirl's clean curves
+- Functional icons (navigation, actions) use silver/white
+- Accent icons (features, benefits) can use purple or turquoise
 
 ---
 

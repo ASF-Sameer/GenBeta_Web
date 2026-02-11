@@ -9,12 +9,12 @@
 ## Table of Contents
 
 1. [Design Philosophy](#1-design-philosophy)
-2. [Glassmorphism Design Tokens](#2-glassmorphism-design-tokens)
-3. [Gradient System](#3-gradient-system)
+2. [Glassmorphism Design Tokens](#2-glassmorphism-design-tokens) (includes Dark Mode Surface Elevation System)
+3. [Gradient System](#3-gradient-system) (includes The 60-30-10 Rule)
 4. [Animation System](#4-animation-system)
-5. [Layout Grid & Spacing](#5-layout-grid--spacing)
+5. [Layout Grid & Spacing](#5-layout-grid--spacing) (includes 8-Point Grid System)
 6. [Responsive Breakpoints](#6-responsive-breakpoints)
-7. [Shadow & Elevation System](#7-shadow--elevation-system)
+7. [Shadow & Elevation System](#7-shadow--elevation-system) (includes Interaction Patterns)
 8. [Icon System](#8-icon-system)
 
 ---
@@ -33,6 +33,10 @@ The Gen Z 11th Edition website embraces a **dark-mode-first** design language bu
 | **Brand color impact** | Zain's vibrant palette — Lime `#C3D534`, Turquoise `#00B5AD`, Yellow `#F7E73F` — achieves maximum luminance contrast against dark backgrounds. Colors literally *glow* rather than compete with a white canvas. |
 | **Modern digital-native feel** | Gen Z audiences overwhelmingly prefer dark UIs. This choice signals that the program speaks their visual language. |
 | **Reduced visual fatigue** | Long reading sessions during workshop prep and book summaries are easier on the eyes with reduced overall brightness. |
+
+#### Competitive Differentiation Through Darkness
+
+Zain's brand palette — black (primary), silver (secondary), purple (accent) — is already optimized for dark-mode digital experience. Where most graduate programs default to white backgrounds with corporate blue (McKinsey, BCG, Deloitte, Ericsson), Zain's dark foundation creates immediate differentiation. As Dieter Rams said, good design is innovative — and in the graduate program competitive set, a dark-first design language is genuinely distinctive. Only T-Mobile's magenta-dominant approach achieves comparable visual differentiation.
 
 #### Glassmorphism as the Primary UI Pattern
 
@@ -202,6 +206,31 @@ Interactive glass treatment for primary and secondary action buttons.
 | `--glass-btn-hover` | `background` | `rgba(255, 255, 255, 0.35)` | Button hover state |
 | `--glass-btn-blur` | `backdrop-filter` | `blur(8px)` | Button blur depth |
 
+### Dark Mode Surface Elevation System
+
+Uses Material Design's overlay principle, where lighter surfaces indicate higher elevation:
+
+| Surface | Hex value | Usage |
+|---------|-----------|-------|
+| Base canvas | `#0A0A0A` | Page background (avoids pure black halation) |
+| Elevated surface | `#121212` | Cards, content containers |
+| Secondary surface | `#1A1A1A` | Navigation, sidebars |
+| Tertiary surface | `#242424` | Hover states, active surfaces |
+| Accent surface | `rgba(187, 134, 252, 0.08)` | Purple-tinted highlight areas |
+
+> **Note:** The current implementation uses navy-family colors (`#1E1A5F`, `#1C2951`) which serve the same elevation principle with brand-specific warmth. The Material Design overlay values above represent the recommended reference standard.
+
+#### Text Hierarchy on Dark Surfaces
+
+Verified WCAG 2.2 AA contrast ratios:
+
+| Token | Hex | Contrast on `#121212` | Usage |
+|-------|-----|----------------------|-------|
+| Primary text | `#F5F5F5` | 17.4:1 (AAA) | Headlines, body copy |
+| Secondary text | `#E0E0E0` | 14.3:1 (AAA) | Subheadings, metadata |
+| Tertiary text | `#C0C0C0` | 9.7:1 (AAA) | Captions, timestamps |
+| Disabled text | `#A0A0A0` | 6.5:1 (AA) | Placeholder, disabled states |
+
 ---
 
 ## 3. Gradient System
@@ -328,6 +357,20 @@ shadow-[0_0_30px_rgba(0,181,173,0.3)]     /* Turquoise pillar */
 shadow-[0_0_30px_rgba(155,79,150,0.3)]    /* Purple pillar */
 shadow-[0_0_30px_rgba(247,231,63,0.3)]    /* Yellow pillar */
 ```
+
+### 3.6 The 60-30-10 Rule
+
+Purple accent deployment follows the 60-30-10 rule:
+
+- **60% neutral darks** for backgrounds (navy/dark surfaces)
+- **30% silver/white** for text and structural elements
+- **10% brand accent** (turquoise, lime, purple) for action and emphasis
+
+The accent purple should be slightly desaturated for dark mode to prevent eye strain — `#BB86FC` rather than the more saturated brand purple. This desaturated variant passes AA contrast at 6.8:1 against `#121212`.
+
+#### Youth Energy Through Controlled Color Bursts
+
+To differentiate the graduate program sub-brand from Zain's corporate palette without violating brand guidelines, introduce Zain's 11-color illustration system as accent moments — not as permanent UI colors, but as dynamic, contextual splashes. Workshop cards might carry a warm coral accent; rotation diary entries might use teal. Each color occupies no more than **5% of any given screen** — just enough to create energy, never enough to compete with the primary palette.
 
 ---
 
@@ -552,6 +595,29 @@ Both 3D elements are conditionally rendered based on device capability (disabled
 
 ## 5. Layout Grid & Spacing
 
+### 8-Point Grid System
+
+The **8-point grid system** provides the spatial foundation, with all spacing in multiples of 8px. This is Rams in practice — "thorough down to the last detail." Nothing arbitrary, nothing left to chance.
+
+#### Responsive Grid Specification
+
+| Breakpoint | Width | Columns | Gutter | Max content |
+|-----------|-------|---------|--------|-------------|
+| Mobile | 0–599px | 4 | 16px | Fluid |
+| Tablet | 600–1023px | 8 | 24px | Fluid |
+| Desktop | 1024–1439px | 12 | 24px | 1152px |
+| Wide | ≥1440px | 12 | 24px | 1280px |
+
+**Article body text** constrained to max width of 640px (~60 characters per line) for optimal readability — supported by Baymard Institute research. Full-bleed images and media extend to 740px or full viewport. Content-plus-sidebar layouts use 8/3 column split with 1-column gap.
+
+#### Section Spacing Philosophy
+
+- 80-120px between major sections on desktop (48-64px mobile)
+- 24-40px between components
+- Rule: **internal padding ≤ external margin**
+- Gestalt proximity principles ensure related elements cluster visually while distinct sections breathe
+- White space is not emptiness — it is the result of understanding the content well enough to give each piece the space it deserves (Ive)
+
 ### 5.1 Spacing Scale
 
 The design system uses a **4px base unit** with the following scale:
@@ -737,9 +803,37 @@ box-shadow:
   0 5px 15px rgba(0, 0, 0, 0.2);
 ```
 
+### Interaction Patterns
+
+#### Card Hover States (Refined Specification)
+
+Subtle lift — `translateY(-4px)` with box-shadow deepening over 300ms using `cubic-bezier(0.4, 0, 0.2, 1)`. On dark surfaces, shadows deepen rather than appearing. Use surface brightness increase from `#121212` to `#1E1E1E` combined with a purple/turquoise border-bottom accent that fades in at 200ms.
+
+#### Button Three-State Pattern
+
+1. **Hover:** Subtle scale (1.03×) with brand color glow (`box-shadow: 0 0 24px rgba(brand-color, 0.4)`)
+2. **Active/Pressed:** Compress (0.97×) over 80ms for tactile feedback
+3. **Focus:** 2px brand-color outline offset by 3px for keyboard navigation visibility
+
+#### Page Transitions
+
+Crossfade with content sliding up 24px (`translateY` 24px→0, `opacity` 0→1) over 500ms with staggered 100ms delays between sibling elements. Creates cascade effect — content arriving, not just appearing.
+
+#### Scroll-Triggered Reveals
+
+`IntersectionObserver` with 0.15 threshold. Elements fade up with `translateY(24px→0)` and `opacity(0→1)` over 500ms. Only animate `transform` and `opacity` (GPU-accelerated, maintain 60fps). Always respect `prefers-reduced-motion`.
+
+#### Loading State Shimmer
+
+Skeleton screens with animated shimmer (gradient pulse from `#1A1A1A` → `#242424` → `#1A1A1A`) matching layout structure of final content. Shimmer runs at 1.5-2 second cycles with ease-in-out timing.
+
 ---
 
 ## 8. Icon System
+
+### Design Philosophy
+
+Icon style should be monoline, matching body text weight (~1.5-2px stroke). Icons within 24×24px grid with 2px padding for touch targets. Style: geometric and precise — aligned with the swirl's clean curves. Functional icons (navigation, actions) use silver/white; accent icons (features, benefits, status indicators) can use purple or turquoise.
 
 ### Library
 
