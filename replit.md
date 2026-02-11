@@ -153,6 +153,17 @@ Change the `formEmbedUrl` field in the CMS to swap embedded registration forms (
 - Start command: `npm run start`
 
 ## Recent Changes
+- 2026-02-11: Comprehensive Design Book Documentation
+  - Created `docs/design-book/` folder with 8 stakeholder-ready documents
+  - 01: Brand Identity (Zain alignment, colors, typography, logo, voice, photography)
+  - 02: Visual Design System (glassmorphism, gradients, animations, layout, responsive)
+  - 03: UX & Interaction Design (user flows, navigation, accessibility, mobile UX)
+  - 04: Information Architecture (sitemap, CMS content model, data flow, SEO)
+  - 05: Technical Architecture (tech stack, Sanity CMS migration, deployment)
+  - 06: Design Decisions & Research (rejected approaches, research justification, brand compliance)
+  - 07: Component Library (all components with props, behavior, accessibility)
+  - 08: Stakeholder Guide (executive summary for media/branding teams)
+
 - 2026-02-10: Full WCAG 2.1 AA Accessibility Compliance
   - **Color Contrast**: Bumped all low-opacity text (white/30, /40, /50) to white/60 minimum for 4.5:1 contrast ratio against navy backgrounds
   - **Reduced Motion**: Added `useReducedMotion` from framer-motion to all animated components (landing-page, interactive-workshop-page, genz-landing, book-detail-section, book-popup-modal, selectable-book-card). Lenis smooth scroll disabled when user prefers reduced motion. CSS animations fully covered in globals.css `prefers-reduced-motion` media query
