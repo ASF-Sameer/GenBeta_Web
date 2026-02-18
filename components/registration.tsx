@@ -14,7 +14,7 @@ const feedbackFormEmbedUrl = `${feedbackFormUrl}&embed=true`
 
 const resourceCards = [
   {
-    title: "REFRAME Toolkit",
+    title: "Reset Toolkit",
     description: "From our Reset workshop by Dan Heath — your complete guide to applying the frameworks, exercises, and reflection prompts covered in the session.",
     url: "https://qr-codes.io/JSgFT6",
     Icon: FileText,
@@ -160,16 +160,16 @@ export function Registration() {
                 className="group glass-dark rounded-xl sm:rounded-2xl p-6 lg:p-8 border border-white/20 hover:border-[#C3D534]/50 transition-all hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
                 aria-label={`${card.title} — ${card.description} (opens in new tab)`}
               >
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#C3D534] to-[#00B5AD] flex items-center justify-center mb-5">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#C3D534] to-[#00B5AD] flex items-center justify-center mb-5" aria-hidden="true">
                   <card.Icon className="w-7 h-7 text-[#1E1A5F]" />
                 </div>
                 <h4 className="text-xl font-bold text-white mb-2 group-hover:text-[#C3D534] transition-colors">
                   {card.title}
                 </h4>
-                <p className="text-white/60 text-sm mb-4">
+                <p className="text-white/80 text-sm mb-4">
                   {card.description}
                 </p>
-                <span className="inline-flex items-center gap-2 text-[#C3D534] text-sm font-semibold">
+                <span className="inline-flex items-center gap-2 text-[#C3D534] text-sm font-semibold" aria-hidden="true">
                   Open Resource
                   <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>

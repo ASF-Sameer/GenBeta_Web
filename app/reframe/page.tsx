@@ -105,7 +105,7 @@ export default async function ReframePage() {
 
   const reframeResourceCards = [
     {
-      title: "REFRAME Toolkit",
+      title: "Reset Toolkit",
       description: "From our Reset workshop by Dan Heath — your complete guide to applying the frameworks, exercises, and reflection prompts covered in the session.",
       url: "https://qr-codes.io/JSgFT6",
       icon: "file",

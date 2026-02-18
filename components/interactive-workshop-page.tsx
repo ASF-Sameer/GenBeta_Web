@@ -443,16 +443,16 @@ function AboutSection({ data }: { data: NonNullable<WorkshopData['aboutSection']
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-[#C3D534]/5 to-[#00B5AD]/5 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
                     <div className="relative">
-                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#C3D534] to-[#00B5AD] flex items-center justify-center mb-5">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#C3D534] to-[#00B5AD] flex items-center justify-center mb-5" aria-hidden="true">
                         <CardIcon className="w-7 h-7 text-[#1E1A5F]" />
                       </div>
                       <h4 className="text-xl font-bold text-white mb-2 group-hover:text-[#C3D534] transition-colors">
                         {card.title}
                       </h4>
-                      <p className="text-white/60 text-sm mb-4">
+                      <p className="text-white/80 text-sm mb-4">
                         {card.description}
                       </p>
-                      <span className="inline-flex items-center gap-2 text-[#C3D534] text-sm font-semibold">
+                      <span className="inline-flex items-center gap-2 text-[#C3D534] text-sm font-semibold" aria-hidden="true">
                         Open Resource
                         <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </span>
