@@ -13,7 +13,10 @@ import {
   Target,
   Zap,
   BookOpen,
-  ArrowRight
+  ArrowRight,
+  ExternalLink,
+  FileText,
+  CheckCircle2
 } from "lucide-react"
 import { SelectableBookCard } from "@/components/selectable-book-card"
 import { BookDetailSection } from "@/components/book-detail-section"
@@ -97,6 +100,12 @@ interface WorkshopData {
     description?: unknown[]
     highlights?: string[]
     imageUrl?: string
+    resourceCards?: Array<{
+      title: string
+      description: string
+      url: string
+      icon?: string
+    }>
   }
   benefitsSection?: {
     title?: string
@@ -402,6 +411,58 @@ function AboutSection({ data }: { data: NonNullable<WorkshopData['aboutSection']
             </motion.div>
           )}
         </motion.div>
+
+        {data.resourceCards && data.resourceCards.length > 0 && (
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={activeContainerVariants}
+            className="mt-12 lg:mt-16"
+          >
+            <motion.h3
+              variants={activeItemVariants}
+              className="text-2xl md:text-3xl font-bold mb-8 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
+            >
+              REFRAME Resources
+            </motion.h3>
+            <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+              {data.resourceCards.map((card, idx) => {
+                const CardIcon = card.icon === 'filecalendar' ? Calendar : FileText
+                return (
+                  <motion.a
+                    key={idx}
+                    href={card.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variants={activeItemVariants}
+                    whileHover={prefersReducedMotion ? undefined : { scale: 1.03, y: -4 }}
+                    whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
+                    className="group relative bg-[#1E1A5F]/80 backdrop-blur-md border border-white/20 rounded-2xl p-6 lg:p-8 overflow-hidden transition-colors hover:border-[#C3D534]/50 focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F]"
+                    aria-label={`${card.title} — ${card.description} (opens in new tab)`}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#C3D534]/5 to-[#00B5AD]/5 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
+                    <div className="relative">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#C3D534] to-[#00B5AD] flex items-center justify-center mb-5">
+                        <CardIcon className="w-7 h-7 text-[#1E1A5F]" />
+                      </div>
+                      <h4 className="text-xl font-bold text-white mb-2 group-hover:text-[#C3D534] transition-colors">
+                        {card.title}
+                      </h4>
+                      <p className="text-white/60 text-sm mb-4">
+                        {card.description}
+                      </p>
+                      <span className="inline-flex items-center gap-2 text-[#C3D534] text-sm font-semibold">
+                        Open Resource
+                        <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
+                  </motion.a>
+                )
+              })}
+            </div>
+          </motion.div>
+        )}
       </div>
     </section>
   )
@@ -873,6 +934,11 @@ function ReserveSpotSection({ data }: { data: NonNullable<WorkshopData['reserveS
           variants={activeContainerVariants}
           className="text-center max-w-2xl mx-auto"
         >
+          <motion.div variants={activeItemVariants} className="flex items-center justify-center gap-3 mb-6">
+            <CheckCircle2 className="w-8 h-8 text-[#C3D534]" />
+            <span className="text-[#C3D534] font-semibold text-lg tracking-wider uppercase">Workshop Completed</span>
+          </motion.div>
+
           {data.title && (
             <motion.h2
               id="workshop-reserve-spot-heading"
@@ -896,12 +962,12 @@ function ReserveSpotSection({ data }: { data: NonNullable<WorkshopData['reserveS
           )}
           
           <motion.div variants={activeItemVariants}>
-            <a href="#registration" className="focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded-lg">
+            <a href="#feedback" className="focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:ring-offset-2 focus:ring-offset-[#1E1A5F] rounded-lg">
               <Button 
                 size="lg" 
                 className="bg-gradient-to-r from-[#C3D534] to-[#00B5AD] hover:from-[#00B5AD] hover:to-[#C3D534] text-[#1E1A5F] font-bold px-8 py-6 text-lg"
               >
-                {data.ctaText || "Register Now"}
+                {data.ctaText || "Share Your Feedback"}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </a>
@@ -917,7 +983,7 @@ function RegistrationSection({ data }: { data: NonNullable<WorkshopData['registr
   const activeContainerVariants = prefersReducedMotion ? reducedContainerVariants : containerVariants
   const activeItemVariants = prefersReducedMotion ? reducedItemVariants : itemVariants
   return (
-    <section id="registration" className="py-16 lg:py-24" aria-labelledby="workshop-registration-heading">
+    <section id="feedback" className="py-16 lg:py-24" aria-labelledby="workshop-feedback-heading">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -927,7 +993,7 @@ function RegistrationSection({ data }: { data: NonNullable<WorkshopData['registr
         >
           {data.title && (
             <motion.h2
-              id="workshop-registration-heading"
+              id="workshop-feedback-heading"
               variants={activeItemVariants}
               className="text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-[#C3D534] via-[#F7E73F] to-[#00B5AD] bg-clip-text text-transparent"
             >
@@ -953,12 +1019,13 @@ function RegistrationSection({ data }: { data: NonNullable<WorkshopData['registr
                 frameBorder="0"
                 allowFullScreen
                 className="w-full"
-                title="Registration form"
+                title="Post-workshop feedback form"
+                style={{ border: "none", maxWidth: "100%", maxHeight: "100vh" }}
               />
             ) : (
               <div className="p-12 text-center">
                 <p className="text-white/70">
-                  {data.alternativeText || "Registration form will be available soon."}
+                  {data.alternativeText || "Feedback form will be available soon."}
                 </p>
               </div>
             )}

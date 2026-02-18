@@ -103,13 +103,66 @@ export default async function ReframePage() {
     console.error("Error fetching Reframe workshop from Sanity:", error)
   }
 
+  const reframeResourceCards = [
+    {
+      title: "REFRAME Toolkit",
+      description: "Your complete guide to applying REFRAME principles — frameworks, exercises, and reflection prompts to keep the momentum going.",
+      url: "https://qr-codes.io/JSgFT6",
+      icon: "file",
+    },
+    {
+      title: "Burst Planner",
+      description: "Plan focused bursts of change using the Reset methodology. Map your upstream interventions and track your progress.",
+      url: "https://qr-codes.io/KMRMfC",
+      icon: "filecalendar",
+    },
+  ]
+
+  const feedbackFormUrl = "https://forms.office.com/Pages/ResponsePage.aspx?id=xeI9eiyCkkyHf9urffDz6r8iSFDpYhBGltmiiOk-wlVUOU41U0Q5NjkzUkFMTU5aSEZLSFNFSDZLSC4u&embed=true"
+
   if (useCmsData && workshop) {
+    const enhancedWorkshop = {
+      ...workshop,
+      heroSection: workshop.heroSection ? {
+        ...workshop.heroSection,
+        badge: workshop.heroSection.badge || "Workshop Completed",
+      } : { badge: "Workshop Completed" },
+      aboutSection: workshop.aboutSection ? {
+        ...workshop.aboutSection,
+        resourceCards: workshop.aboutSection.resourceCards || reframeResourceCards,
+      } : {
+        title: "About REFRAME",
+        resourceCards: reframeResourceCards,
+      },
+      reserveSpotSection: workshop.reserveSpotSection ? {
+        ...workshop.reserveSpotSection,
+        title: workshop.reserveSpotSection.title || "The First Chapter Is Written",
+        subtitle: workshop.reserveSpotSection.subtitle || "REFRAME Session #1: Reset has concluded. The insights gathered are shaping what comes next — stay tuned for the next chapter.",
+        spotsText: "Next session details — Coming Soon",
+        ctaText: "Share Your Feedback",
+      } : undefined,
+      timingSection: workshop.timingSection ? {
+        ...workshop.timingSection,
+        title: workshop.timingSection.title || "Workshop Timeline",
+        details: workshop.timingSection.details?.map((d: { icon?: string; label?: string; value?: string }) => ({
+          ...d,
+          value: d.label === "Date" ? "Completed" : d.label === "Status" ? "Session Ended" : d.value,
+        })),
+      } : undefined,
+      registrationSection: {
+        title: workshop.registrationSection?.title || "Share Your Experience",
+        subtitle: workshop.registrationSection?.subtitle || "Your voice matters. Help us shape the future of REFRAME by sharing your thoughts on Session #1.",
+        formEmbedUrl: feedbackFormUrl,
+        formHeight: 600,
+      },
+    }
+
     return (
       <div className="min-h-screen bg-gradient-to-b from-[#1C2951] via-[#1E1A5F] via-[#0057B8] via-[#1E1A5F] to-[#1C2951]">
         <Navbar />
         <main id="main-content">
           <PageTransition>
-            <InteractiveWorkshopPage workshop={workshop} />
+            <InteractiveWorkshopPage workshop={enhancedWorkshop} />
           </PageTransition>
         </main>
         <Footer />
