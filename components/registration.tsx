@@ -15,13 +15,13 @@ const feedbackFormEmbedUrl = `${feedbackFormUrl}&embed=true`
 const resourceCards = [
   {
     title: "Reset Toolkit",
-    description: "From our Reset workshop by Dan Heath — your complete guide to applying the frameworks, exercises, and reflection prompts covered in the session.",
+    description: "From our Reset workshop by Dan Heath. Your complete guide to applying the frameworks, exercises, and reflection prompts covered in the session.",
     url: "https://qr-codes.io/JSgFT6",
     Icon: FileText,
   },
   {
     title: "Burst Planner",
-    description: "From our Reset workshop by Dan Heath — plan focused bursts of change using upstream interventions and track your progress.",
+    description: "From our Reset workshop by Dan Heath. Plan focused bursts of change using upstream interventions and track your progress.",
     url: "https://qr-codes.io/KMRMfC",
     Icon: Calendar,
   },
