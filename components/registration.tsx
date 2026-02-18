@@ -21,7 +21,7 @@ const resourceCards = [
   },
   {
     title: "Burst Planner",
-    description: "From our Reset workshop by Dan Heath. Plan focused bursts of change using upstream interventions and track your progress.",
+    description: "From our Reset workshop by Dan Heath. A guided planner to identify what feels stuck, find the real bottleneck, spot bright spots, and design a 30–90 minute BURST action to unlock progress.",
     url: "https://qr-codes.io/KMRMfC",
     Icon: Calendar,
   },
